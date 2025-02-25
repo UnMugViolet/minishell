@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/02/25 15:31:38 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/02/25 15:38:49 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct sigaction t_sigaction;
 
 #define CLR_RESET "\033[0m"
 #define CLR_BLUE "\033[34m"
+
+void	display_usage();
 
 int		ft_key_press(int keycode);
 void	ft_handle_input();

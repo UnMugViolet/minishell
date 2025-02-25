@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/02/25 15:31:38 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/02/25 15:43:23 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	ft_start_minishell(void)
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac;
+	if (ac != 1)
+		return(display_usage(), EXIT_FAILURE);
 	(void)av;
 	(void)env;
 	ft_setup_signals();
