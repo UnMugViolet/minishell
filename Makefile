@@ -6,7 +6,7 @@
 #    By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/02/24 13:47:38 by unmugviolet      ###   ########.fr        #
+#    Updated: 2025/02/25 15:33:00 by unmugviolet      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ all: $(NAME)
 $(NAME) : $(OBJ)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME) -l readline
 
 $(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"

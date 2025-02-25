@@ -1,3 +1,6 @@
 # Programs
-./minishell
+minishell
 .vscode/*
+
+# Object files
+*.o

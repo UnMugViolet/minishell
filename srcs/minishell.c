@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/02/24 14:31:26 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/02/25 15:31:38 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 
 void	ft_start_minishell(void)
 {
-	int		run;
-	char	*str;
+	char	*line;
 
-	run = 1;
-	while (run)
+	while (true)
 	{
-		str = readline("$");
-		if (str && *str == '\0')
+		line = readline(CLR_BLUE "minishell> " CLR_RESET);
+		if (line && *line == '\0')
 			continue ;
-		else if (str)
+		else if (line)
 		{
-			ft_printf("You entered: %s\n", str);
-			add_history(str);
+			ft_printf("You entered: %s\n", line);
+			add_history(line);
 		}
 		else
-			run = 0;
-		free(str);
+			break ;
+		free(line);
 	}
-	ft_exit_clean(str);
+	ft_exit_clean(line);
 }
 
 int	main(int ac, char **av, char **env)
