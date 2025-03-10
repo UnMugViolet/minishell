@@ -3,43 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/02/25 15:43:23 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/10 18:32:24 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_start_minishell(void)
+void	ft_get_metachar(t_data *data)
 {
-	char	*line;
+	char const	*metachar = "< > << >> | || & && \" \' $";
 
+	data->metachar = ft_split(metachar, ' ');
+}
+
+void	ft_start_minishell(t_data *data)
+{
+	ft_get_metachar(data);
+	for (int i = 0; data->metachar[i]; i++)
+		ft_printf("%s\n", data->metachar[i]);
 	while (true)
 	{
-		line = readline(CLR_BLUE "minishell> " CLR_RESET);
-		if (line && *line == '\0')
+		data->input = readline(CLR_BLUE "minishell> " CLR_RESET);
+		if (data->input && *data->input == '\0')
 			continue ;
-		else if (line)
+		else if (data->input)
 		{
-			ft_printf("You entered: %s\n", line);
-			add_history(line);
+			ft_printf("You entered: %s\n", data->input);
+			add_history(data->input);
 		}
 		else
 			break ;
-		free(line);
+		free(data->input);
 	}
-	ft_exit_clean(line);
+	ft_exit_clean(data);
 }
 
 int	main(int ac, char **av, char **env)
 {
+	t_data	data;
+
 	if (ac != 1)
-		return(display_usage(), EXIT_FAILURE);
+		return (display_usage(), EXIT_FAILURE);
 	(void)av;
 	(void)env;
 	ft_setup_signals();
-	ft_start_minishell();
+	ft_start_minishell(&data);
 	return (EXIT_SUCCESS);
 }
