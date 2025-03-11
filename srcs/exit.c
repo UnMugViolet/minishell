@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void	ft_exit_clean(char *prompt)
 {
@@ -20,7 +20,7 @@ void	ft_exit_clean(char *prompt)
 	exit(EXIT_SUCCESS);
 }
 
-void	display_usage()
+void	display_usage(void)
 {
 	ft_printf("Usage: ./minishell\n");
 }

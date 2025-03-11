@@ -13,28 +13,27 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
 # include "ft_printf.h"
+# include "libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
-
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <signal.h>
-# include <termios.h> 
 # include <stdio.h>
 # include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include <termios.h>
 
-typedef struct sigaction t_sigaction;
+typedef struct sigaction	t_sigaction;
 
-#define CLR_RESET "\033[0m"
-#define CLR_BLUE "\033[34m"
+# define CLR_RESET "\033[0m"
+# define CLR_BLUE "\033[34m"
 
-void	display_usage();
+void						display_usage(void);
 
-int		ft_key_press(int keycode);
-void	ft_handle_input();
-void	ft_exit_clean(char *prompt);
-void	ft_setup_signals();
+int							ft_key_press(int keycode);
+void						ft_handle_input(void);
+void						ft_exit_clean(char *prompt);
+void						ft_setup_signals(void);
 
 #endif

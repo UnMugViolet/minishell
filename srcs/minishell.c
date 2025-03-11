@@ -36,7 +36,7 @@ void	ft_start_minishell(void)
 int	main(int ac, char **av, char **env)
 {
 	if (ac != 1)
-		return(display_usage(), EXIT_FAILURE);
+		return (display_usage(), EXIT_FAILURE);
 	(void)av;
 	(void)env;
 	ft_setup_signals();
