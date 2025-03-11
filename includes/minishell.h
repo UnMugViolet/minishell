@@ -6,7 +6,7 @@
 /*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/10 18:27:57 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:19:43 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "ft_printf.h"
+# include "ft_fprintf.h"
 # include "libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -45,10 +46,12 @@ typedef struct sigaction	t_sigaction;
 # define CLR_BLUE "\033[34m"
 
 void						ft_get_metachar(t_data *data);
+char						*ft_get_env_variable(char **env, char *variable);
 void						display_usage(void);
 
 void						ft_handle_input(void);
 void						ft_exit_clean(t_data *data);
 void						ft_setup_signals(void);
+int 						ft_is_closed_quotes(char *input);
 
 #endif
