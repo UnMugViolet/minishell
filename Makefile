@@ -6,7 +6,7 @@
 #    By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/11 16:37:59 by fureimu          ###   ########.fr        #
+#    Updated: 2025/03/11 17:41:37 by fureimu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_DIR = ./srcs/
 OBJ_DIR = ./objects/
 INC_DIR = ./includes/
 
-FILES = minishell.c parsing.c events.c exit.c check.c env.c
+FILES = minishell.c parsing.c events.c exit.c check.c env.c init.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 

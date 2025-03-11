@@ -6,38 +6,29 @@
 /*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/11 17:20:26 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:53:06 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_get_metachar(t_data *data)
-{
-	char const	*metachar = "< > << >> | || & && \" \' $";
-
-	data->metachar = ft_split(metachar, ' ');
-}
-
 void	ft_start_minishell(t_data *data)
 {
+	char *line;
+
 	ft_get_metachar(data);
 	while (true)
 	{
-		data->input = readline(CLR_BLUE "minishell> " CLR_RESET);
-		if (data->input && *data->input == '\0')
+		line = readline(CLR_BLUE "minishell> " CLR_RESET);
+		if (line && *line == '\0')
 			continue ;
-		else if (data->input)
+		else if (line)
 		{
-			add_history(data->input);
-			if (!ft_is_closed_quotes(data->input))
+			add_history(line);
+			if (!ft_is_closed_quotes(line))
 				ft_fprintf(2, "Missing closing quote.\n");
 			else
-			{
-				if (data->input[0] == '$')
-					data->input = ft_get_env_variable(data->env, data->input);
-				ft_printf("You entered: %s\n", data->input);
-			}
+				ft_handle_input(line, data);
 		}
 		else
 			break ;
