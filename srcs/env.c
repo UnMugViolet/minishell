@@ -28,7 +28,7 @@ char	*ft_get_env_variable(char **env, char *variable)
 		{
 			res = ft_strdup(env[i] + size + 1);
 			return (free(variable), res);
-		}	
+		}
 		i++;
 	}
 	res = ft_strdup("");

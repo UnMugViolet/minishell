@@ -38,7 +38,7 @@ int	ft_is_closed_quotes(char *input)
 
 int	ft_is_token(char *str, t_data *data)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (data->metachar[i])

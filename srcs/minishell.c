@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/11 17:53:06 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/11 18:20:08 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	ft_start_minishell(t_data *data)
 {
-	char *line;
+	char	*line;
 
-	ft_get_metachar(data);
 	while (true)
 	{
 		line = readline(CLR_BLUE "minishell> " CLR_RESET);
@@ -46,6 +45,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	data.env = env;
 	ft_setup_signals();
+	ft_get_metachar(&data);
 	ft_start_minishell(&data);
 	return (EXIT_SUCCESS);
 }

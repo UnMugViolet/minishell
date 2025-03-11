@@ -13,8 +13,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "ft_printf.h"
 # include "ft_fprintf.h"
+# include "ft_printf.h"
 # include "libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -44,7 +44,8 @@ typedef struct sigaction	t_sigaction;
 
 # define CLR_RESET "\033[0m"
 # define CLR_BLUE "\033[34m"
-# define DEFAULT_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:\
+# define DEFAULT_PATH \
+	"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:\
 /sbin:/bin"
 # define METACHAR "< > << >> | || & && \" \' $"
 
@@ -57,6 +58,5 @@ void						ft_exit_clean(t_data *data);
 void						ft_setup_signals(void);
 int							ft_is_closed_quotes(char *input);
 void						ft_get_metachar(t_data *data);
-
 
 #endif
