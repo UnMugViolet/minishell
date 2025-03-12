@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/12 11:11:48 by unmugviolet      ###   ########.fr       */
+/*   Created: 2025/03/12 09:03:08 by unmugviolet       #+#    #+#             */
+/*   Updated: 2025/03/12 12:51:35 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit_clean(t_data *data)
+/*	That function take the data struct and populate the chained list lex.
+	The struct contain the `content` `type` `size`
+	@param t_data data
+	@return void
+*/
+void	ft_init_lex_prompt(t_data *data)
 {
-	if (data->prompt)
-		free(data->prompt);
-	if (data->metachar)
-		ft_free_array_str(data->metachar);
-	rl_clear_history();
-	write(1, "exit\n", 5);
-	exit(EXIT_SUCCESS);
-}
-
-void	display_usage(void)
-{
-	ft_printf("Usage: ./minishell\n");
+	(void)data;
+	/* 	int	i;
+		i = 0;
+		while (data->prompt[i])
+		{
+		}
+		data->lex_size = ft_lstsize(data->lex); */
 }

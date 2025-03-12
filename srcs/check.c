@@ -3,49 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:24:10 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/11 17:58:18 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/12 11:19:15 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_is_closed_quotes(char *input)
+bool	ft_is_closed_quotes(char *prompt)
 {
 	bool	in_single_quote;
 	bool	in_double_quote;
 	int		i;
 
-	i = 0;
+	i = -1;
 	in_single_quote = false;
 	in_double_quote = false;
-	while (input[i])
+	while (prompt[++i])
 	{
-		if (input[i] == '\'' && !in_double_quote)
-		{
+		if (prompt[i] == '\'' && !in_double_quote)
 			in_single_quote = !in_single_quote;
-		}
-		if (input[i] == '\"' && !in_single_quote)
-		{
+		if (prompt[i] == '\"' && !in_single_quote)
 			in_double_quote = !in_double_quote;
-		}
-		i++;
 	}
 	return (!(in_single_quote || in_double_quote));
 }
 
-int	ft_is_token(char *str, t_data *data)
+bool	ft_is_token(char *str, t_data *data)
 {
-	int i;
+	int	i;
 
-	i = 0;
-	while (data->metachar[i])
-	{
+	i = -1;
+	while (data->metachar[++i])
 		if (ft_strncmp(str, data->metachar[i], ft_strlen(data->metachar[i])))
-			return (1);
-		i++;
-	}
-	return (0);
+			return (true);
+	return (false);
 }

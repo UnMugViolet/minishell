@@ -6,32 +6,37 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/11 18:20:08 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/12 14:57:56 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_start_minishell(t_data *data)
+static void	ft_resolve(t_data *data)
 {
-	char	*line;
+	ft_init_lex_prompt(data);
+	// ft_parse_prompt(data);
+	// ft_execute_prompt(data);
+}
 
+static void	ft_start_minishell(t_data *data)
+{
+	ft_printf("DATA QUOTES: %c\n", data->quotes.dbl);
 	while (true)
 	{
-		line = readline(CLR_BLUE "minishell> " CLR_RESET);
-		if (line && *line == '\0')
+		if (data->prompt && *data->prompt == 0)
 			continue ;
-		else if (line)
+		else if (data->prompt)
 		{
-			add_history(line);
-			if (!ft_is_closed_quotes(line))
+			add_history(data->prompt);
+			if (!ft_is_closed_quotes(data->prompt))
 				ft_fprintf(2, "Missing closing quote.\n");
 			else
-				ft_handle_input(line, data);
+				ft_resolve(data);
 		}
 		else
 			break ;
-		free(data->input);
+		free(data->prompt);
 	}
 	ft_exit_clean(data);
 }
@@ -45,7 +50,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	data.env = env;
 	ft_setup_signals();
-	ft_get_metachar(&data);
+	ft_init_data_struct(&data);
 	ft_start_minishell(&data);
 	return (EXIT_SUCCESS);
 }
