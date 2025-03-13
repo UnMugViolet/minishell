@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/13 15:40:12 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 18:35:50 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	data.env = env;
 	ft_setup_signals();
-	ft_init_data_struct(&data);
+	ft_init_data_struct(&data, env);
 	ft_start_minishell(&data);
 	return (EXIT_SUCCESS);
 }

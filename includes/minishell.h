@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/13 18:28:29 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 18:35:55 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct sigaction	t_sigaction;
 
 /* ---------------------------------INIT-------------------------------- */
 
-void						ft_init_data_struct(t_data *data);
+void						ft_init_data_struct(t_data *data, char **env);
 
 /* -------------------------------SIGNALS------------------------------- */
 

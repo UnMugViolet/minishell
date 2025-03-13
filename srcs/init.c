@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/13 17:14:13 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 18:35:33 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ static char	**ft_get_path_from_env(t_data *data)
 	return (paths);
 }
 
-void	ft_init_data_struct(t_data *data)
+void	ft_init_data_struct(t_data *data, char **env)
 {
-	data->env = ft_get_path_from_env(data);
+	data->env = env;
+	data->paths = ft_get_path_from_env(data);
 	data->prompt = NULL;
 	data->lex = NULL;
 	data->metachar = ft_split(METACHAR, ' ');

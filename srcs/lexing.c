@@ -6,12 +6,17 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 09:03:08 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/13 18:26:45 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 18:33:11 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* 
+	Correspondancy tree of the metacharacters
+	@param char *str
+	@return size_t
+ */
 static size_t	ft_get_type(char *str)
 {
 	if (!ft_strncmp(str, "<<", 3))
@@ -35,8 +40,9 @@ static size_t	ft_get_type(char *str)
 	return (WORD);
 }
 
-/*	That function take the data struct and populate the chained list lex.
-	The struct contain the `content` `type` `size`
+/*	
+	That function take the data struct and populate the chained list lex.
+	The struct contain the `content` `type` and `next` of the lexeme.
 	@param t_data data
 	@return void
 */
