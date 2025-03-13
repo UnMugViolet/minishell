@@ -16,7 +16,7 @@
 	Disable the echo of CTRL command in the terminal
 	by setting the ECHOCTL flag to 0
 	@param void
-	@return void 
+	@return void
 */
 static void	ft_disable_echoctl(void)
 {
@@ -29,7 +29,7 @@ static void	ft_disable_echoctl(void)
 	}
 }
 
-/*	
+/*
 	Handle the type of signal received and act accordingly
 	@param int signal
 	@return void
