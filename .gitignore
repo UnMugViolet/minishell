@@ -4,3 +4,4 @@ minishell
 
 # Object files
 *.o
+libft
