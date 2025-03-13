@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/12 14:57:56 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 15:40:12 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 static void	ft_resolve(t_data *data)
 {
 	ft_init_lex_prompt(data);
-	// ft_parse_prompt(data);
+	ft_parse_prompt(data);
 	// ft_execute_prompt(data);
 }
 
 static void	ft_start_minishell(t_data *data)
 {
-	ft_printf("DATA QUOTES: %c\n", data->quotes.dbl);
 	while (true)
 	{
+		data->prompt = readline(CYN "minishell> "BLK);
 		if (data->prompt && *data->prompt == 0)
 			continue ;
 		else if (data->prompt)
