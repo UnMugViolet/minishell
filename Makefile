@@ -6,7 +6,7 @@
 #    By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/12 09:03:24 by unmugviolet      ###   ########.fr        #
+#    Updated: 2025/03/13 18:04:58 by unmugviolet      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_DIR = ./srcs/
 OBJ_DIR = ./objects/
 INC_DIR = ./includes/
 
-FILES = minishell.c lexing.c parsing.c events.c exit.c check.c env.c init.c
+FILES = minishell.c lexing.c parsing.c signals.c exit.c check.c env.c init.c lst_utils.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
@@ -69,7 +69,7 @@ go: all
 	@rm -rf $(NAME)
 
 gov: all
-	@valgrind --leak-check=full ./$(NAME)
+	@valgrind --suppressions=valgrind-readline.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
 	@rm -rf $(NAME)
 
 # Specify that these are not files to compile (just for safety)
