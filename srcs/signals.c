@@ -6,17 +6,17 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:52:21 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/13 10:48:44 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 18:10:33 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	
+/*
 	Disable the echo of CTRL command in the terminal
 	by setting the ECHOCTL flag to 0
 	@param void
-	@return void
+	@return void 
 */
 static void	ft_disable_echoctl(void)
 {
@@ -28,6 +28,7 @@ static void	ft_disable_echoctl(void)
 		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	}
 }
+
 /*	
 	Handle the type of signal received and act accordingly
 	@param int signal
@@ -45,6 +46,7 @@ static void	ft_handle_signal(int signal)
 	else if (signal == SIGTERM)
 		ft_exit_clean(NULL);
 }
+
 /*
 	Setup the signals to be handled by the shell,
 	use the `sa` structure to set the flags and the handler

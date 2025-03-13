@@ -23,7 +23,7 @@ static void	ft_start_minishell(t_data *data)
 {
 	while (true)
 	{
-		data->prompt = readline(CYN "minishell> "BLK);
+		data->prompt = readline(CYN "minishell> " BLK);
 		if (data->prompt && *data->prompt == 0)
 			continue ;
 		else if (data->prompt)

@@ -20,16 +20,16 @@
 
 /*-------------------------------OPERATORS------------------------------------*/
 
-# define WORD 					0
-# define PIPE 					1
-# define DOUBLE_PIPE			2
-# define AMPERSAND				3
-# define DOUBLE_AMPERSAND		4
-# define LEFT_BRACKET			5
-# define DOUBLE_LEFT_BRACKET	6
-# define RIGHT_BRACKET			7
-# define DOUBLE_RIGHT_BRACKET	8
-# define DOLLAR					9
+# define WORD 0
+# define PIPE 1
+# define DOUBLE_PIPE 2
+# define AMPERSAND 3
+# define DOUBLE_AMPERSAND 4
+# define LEFT_BRACKET 5
+# define DOUBLE_LEFT_BRACKET 6
+# define RIGHT_BRACKET 7
+# define DOUBLE_RIGHT_BRACKET 8
+# define DOLLAR 9
 
 /*---------------------------------TOKEN--------------------------------------*/
 

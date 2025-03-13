@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/13 18:00:58 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 18:10:56 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 t_lex	*ft_lexnew(size_t type, void *data)
 {
-    t_lex	*new_element;
+	t_lex	*new_element;
 
-    new_element = (t_lex *)ft_calloc(1, sizeof(t_lex));
-    if (!new_element)
-        return (NULL);
-    new_element->data = data;
-    new_element->type = type;
-    new_element->next = NULL;
-    return (new_element);
+	new_element = (t_lex *)ft_calloc(1, sizeof(t_lex));
+	if (!new_element)
+		return (NULL);
+	new_element->data = data;
+	new_element->type = type;
+	new_element->next = NULL;
+	return (new_element);
 }
+
 static t_lex	*ft_lex_last(t_lex *lex)
 {
 	if (!lex)

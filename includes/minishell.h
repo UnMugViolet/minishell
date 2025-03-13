@@ -17,7 +17,6 @@
 # include "ft_fprintf.h"
 # include "ft_printf.h"
 # include "libft.h"
-
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <readline/history.h>

@@ -42,24 +42,24 @@ static size_t	ft_get_type(char *str)
 */
 void	ft_init_lex_prompt(t_data *data)
 {
-    int		i;
-    size_t	type;
-    char	**array;
-    t_lex	*new_lex;
+	int		i;
+	size_t	type;
+	char	**array;
+	t_lex	*new_lex;
 
-    i = 0;
-    array = ft_split_strset_quote(data->prompt, data->metachar);
-    while (array[i])
-    {
-        type = ft_get_type(array[i]);
-        new_lex = ft_lexnew(type, ft_strdup(array[i]));
-        if (!data->lex)
-            data->lex = new_lex;
-        else
-            ft_lexadd_back(&data->lex, new_lex);
-        i++;
-    }
-    ft_print_lex(data->lex);
-    free(array);
-    data->lex_size = ft_lexsize(data->lex);
+	i = 0;
+	array = ft_split_strset_quote(data->prompt, data->metachar);
+	while (array[i])
+	{
+		type = ft_get_type(array[i]);
+		new_lex = ft_lexnew(type, ft_strdup(array[i]));
+		if (!data->lex)
+			data->lex = new_lex;
+		else
+			ft_lexadd_back(&data->lex, new_lex);
+		i++;
+	}
+	ft_print_lex(data->lex);
+	free(array);
+	data->lex_size = ft_lexsize(data->lex);
 }
