@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   lex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/13 18:10:56 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 18:25:03 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ size_t	ft_lexsize(t_lex *lex)
 	return (i);
 }
 
+// TODO: remove for final version debug only
 void	ft_print_lex(t_lex *lex)
 {
 	while (lex)
@@ -78,6 +79,7 @@ void	ft_free_lex(t_lex *lex)
 	while (lex)
 	{
 		tmp = lex->next;
+		free(lex->data);
 		free(lex);
 		lex = tmp;
 	}
