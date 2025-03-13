@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/13 18:35:50 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 18:49:25 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	ft_resolve(t_data *data)
 	ft_init_lex_prompt(data);
 	ft_parse_prompt(data);
 	// ft_execute_prompt(data);
+	ft_free_lex(data->lex);
+	data->lex = NULL;
 }
 
 static void	ft_start_minishell(t_data *data)
