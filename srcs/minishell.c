@@ -6,40 +6,53 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/02/25 15:43:23 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/13 18:49:25 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_start_minishell(void)
+static void	ft_resolve(t_data *data)
 {
-	char	*line;
+	ft_init_lex_prompt(data);
+	ft_parse_prompt(data);
+	// ft_execute_prompt(data);
+	ft_free_lex(data->lex);
+	data->lex = NULL;
+}
 
+static void	ft_start_minishell(t_data *data)
+{
 	while (true)
 	{
-		line = readline(CLR_BLUE "minishell> " CLR_RESET);
-		if (line && *line == '\0')
+		data->prompt = readline(CYN "minishell> " BLK);
+		if (data->prompt && *data->prompt == 0)
 			continue ;
-		else if (line)
+		else if (data->prompt)
 		{
-			ft_printf("You entered: %s\n", line);
-			add_history(line);
+			add_history(data->prompt);
+			if (!ft_is_closed_quotes(data->prompt))
+				ft_fprintf(2, "Missing closing quote.\n");
+			else
+				ft_resolve(data);
 		}
 		else
 			break ;
-		free(line);
+		free(data->prompt);
 	}
-	ft_exit_clean(line);
+	ft_exit_clean(data);
 }
 
 int	main(int ac, char **av, char **env)
 {
+	t_data	data;
+
 	if (ac != 1)
 		return (display_usage(), EXIT_FAILURE);
 	(void)av;
-	(void)env;
+	data.env = env;
 	ft_setup_signals();
-	ft_start_minishell();
+	ft_init_data_struct(&data, env);
+	ft_start_minishell(&data);
 	return (EXIT_SUCCESS);
 }
