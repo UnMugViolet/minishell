@@ -6,7 +6,7 @@
 #    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/17 11:01:00 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/03/17 12:32:30 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ OBJ_DIR = ./objects/
 INC_DIR = ./includes/
 UTILS_DIR = ./srcs/utils/
 
-FILES = minishell.c lexing.c parsing.c signals.c exit.c check.c env.c init.c 
+FILES = minishell.c lexing.c init.c parsing.c signals.c exit.c check.c env.c exec.c
 
-UTILS_FILES = lex_utils.c
+UTILS_FILES = lex_utils.c exec_utils.c
 
 OBJ =	$(addprefix $(OBJ_DIR), $(FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o))

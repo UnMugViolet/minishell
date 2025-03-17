@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/13 18:49:25 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/17 12:16:45 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_resolve(t_data *data)
 {
 	ft_init_lex_prompt(data);
 	ft_parse_prompt(data);
-	// ft_execute_prompt(data);
+	ft_execute_prompt(data);
 	ft_free_lex(data->lex);
 	data->lex = NULL;
 }

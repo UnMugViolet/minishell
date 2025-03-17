@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/17 12:14:57 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/17 12:30:59 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ t_lex						*ft_lexnew(size_t type, void *data);
 void						ft_lexadd_back(t_lex **lex, t_lex *new);
 size_t						ft_lexsize(t_lex *lex);
 void						ft_free_lex(t_lex *lex);
-
 void						ft_exit_clean(t_data *data);
 void						display_usage(void);
 
@@ -79,5 +78,10 @@ void						display_usage(void);
 
 bool						ft_is_closed_quotes(char *prompt);
 bool						ft_is_token(char *str, t_data *data);
+
+/* ---------------------------------EXEC--------------------------------- */
+
+void						ft_execute_prompt(t_data *data);
+void						ft_get_first_command(t_data *data, int *i);
 
 #endif
