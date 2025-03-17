@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/17 11:03:36 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/17 12:15:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,5 @@ void	ft_free_lex(t_lex *lex)
 		free(lex->data);
 		free(lex);
 		lex = tmp;
-	}
-}
-
-// TODO: remove for final version debug only
-void	ft_print_lex(t_lex *lex)
-{
-	while (lex)
-	{
-		printf("type: %zu data: %s\n", lex->type, (char *)lex->data);
-		lex = lex->next;
 	}
 }
