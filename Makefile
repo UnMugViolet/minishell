@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+         #
+#    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/13 18:16:37 by unmugviolet      ###   ########.fr        #
+#    Updated: 2025/03/17 11:01:00 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,14 @@ LIBFT_DIR = ./libft
 SRC_DIR = ./srcs/
 OBJ_DIR = ./objects/
 INC_DIR = ./includes/
+UTILS_DIR = ./srcs/utils/
 
-FILES = minishell.c lexing.c parsing.c signals.c exit.c check.c env.c init.c lex_utils.c
+FILES = minishell.c lexing.c parsing.c signals.c exit.c check.c env.c init.c 
 
-OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
+UTILS_FILES = lex_utils.c
+
+OBJ =	$(addprefix $(OBJ_DIR), $(FILES:.c=.o)) \
+		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o))
 
 CC = cc
 MAKE = make
@@ -41,6 +45,10 @@ $(NAME) : $(OBJ)
 	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME) -l readline
 
 $(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
+	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(UTILS_DIR)%.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
 

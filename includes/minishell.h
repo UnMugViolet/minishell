@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/13 18:35:55 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/17 11:04:00 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ void						ft_init_lex_prompt(t_data *data);
 t_lex						*ft_lexnew(size_t type, void *data);
 void						ft_lexadd_back(t_lex **lex, t_lex *new);
 size_t						ft_lexsize(t_lex *lex);
+
 // TODO: remove for final version debug only
-void						ft_print_lex(t_lex *lex); 
+void						ft_print_lex(t_lex *lex);
 void						ft_free_lex(t_lex *lex);
 
 void						ft_exit_clean(t_data *data);

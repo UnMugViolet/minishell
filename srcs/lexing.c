@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-/* 
+/*
 	Correspondancy tree of the metacharacters
 	@param char *str
 	@return size_t
@@ -40,7 +40,7 @@ static size_t	ft_get_type(char *str)
 	return (WORD);
 }
 
-/*	
+/*
 	That function take the data struct and populate the chained list lex.
 	The struct contain the `content` `type` and `next` of the lexeme.
 	@param t_data data

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/13 18:49:00 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/17 11:03:36 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,6 @@ size_t	ft_lexsize(t_lex *lex)
 	return (i);
 }
 
-// TODO: remove for final version debug only
-void	ft_print_lex(t_lex *lex)
-{
-	while (lex)
-	{
-		printf("type: %zu data: %s\n", lex->type, (char *)lex->data);
-		lex = lex->next;
-	}
-}
-
 void	ft_free_lex(t_lex *lex)
 {
 	t_lex	*tmp;
@@ -82,5 +72,15 @@ void	ft_free_lex(t_lex *lex)
 		free(lex->data);
 		free(lex);
 		lex = tmp;
+	}
+}
+
+// TODO: remove for final version debug only
+void	ft_print_lex(t_lex *lex)
+{
+	while (lex)
+	{
+		printf("type: %zu data: %s\n", lex->type, (char *)lex->data);
+		lex = lex->next;
 	}
 }
