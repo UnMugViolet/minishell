@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dictionnary.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/13 16:52:32 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/17 11:18:19 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 # define DOUBLE_LEFT_BRACKET 6
 # define RIGHT_BRACKET 7
 # define DOUBLE_RIGHT_BRACKET 8
-# define DOLLAR 9
+# define ENV_VAR 9
 
 /*---------------------------------TOKEN--------------------------------------*/
 
-# define METACHAR "<< >> < > || | && & $"
+# define METACHAR "<< >> < > || | && &"
 
 /*------------------------------- DEFAULT-------------------------------------*/
 

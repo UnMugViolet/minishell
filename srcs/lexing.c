@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 09:03:08 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/13 18:33:11 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/17 11:18:14 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static size_t	ft_get_type(char *str)
 		return (DOUBLE_AMPERSAND);
 	if (!ft_strncmp(str, "&", 2))
 		return (AMPERSAND);
-	if (!ft_strncmp(str, "$", 2))
-		return (DOLLAR);
+	if (!ft_strncmp(str, "\"$", 2) || !ft_strncmp(str, "$", 1))
+		return (ENV_VAR);
 	return (WORD);
 }
 
