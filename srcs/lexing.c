@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 09:03:08 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/17 11:18:14 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/17 13:07:21 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static size_t	ft_get_type(char *str)
 		return (DOUBLE_AMPERSAND);
 	if (!ft_strncmp(str, "&", 2))
 		return (AMPERSAND);
-	if (!ft_strncmp(str, "\"$", 2) || !ft_strncmp(str, "$", 1))
-		return (ENV_VAR);
 	return (WORD);
 }
 
@@ -65,7 +63,6 @@ void	ft_init_lex_prompt(t_data *data)
 			ft_lexadd_back(&data->lex, new_lex);
 		i++;
 	}
-	ft_print_lex(data->lex);
 	ft_free_array_str(array);
 	data->lex_size = ft_lexsize(data->lex);
 }

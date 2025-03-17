@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/17 13:31:12 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/17 17:17:58 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 typedef struct s_lex
 {
 	size_t					type;
-	char					*data;
+	char					*content;
 	struct s_lex			*next;
 }							t_lex;
 
@@ -55,7 +55,10 @@ void						ft_setup_signals(void);
 
 /* ---------------------------------ENV--------------------------------- */
 
-char						*ft_get_env_variable(char **env, char *variable);
+void						ft_replace_env_variable(t_data *data);
+char						*ft_get_env_var_name(char *str);
+char						*ft_get_associated_env_value(char **env, char *variable);
+
 
 /* -------------------------------PARSING------------------------------- */
 
@@ -67,9 +70,10 @@ void						ft_init_lex_prompt(t_data *data);
 
 /* --------------------------------UTILS-------------------------------- */
 
-t_lex						*ft_lexnew(size_t type, void *data);
+t_lex						*ft_lexnew(size_t type, char *content);
 void						ft_lexadd_back(t_lex **lex, t_lex *new);
 size_t						ft_lexsize(t_lex *lex);
+char						*ft_str_substitute(char *str, char **env);
 
 // TODO: remove for final version debug only
 void						ft_print_lex(t_lex *lex);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
+#    By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/17 11:01:00 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/03/17 17:11:09 by yguinio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ UTILS_DIR = ./srcs/utils/
 
 FILES = minishell.c lexing.c parsing.c signals.c exit.c check.c env.c init.c 
 
-UTILS_FILES = lex_utils.c
+UTILS_FILES = lex_utils.c ft_str_substitute.c
 
 OBJ =	$(addprefix $(OBJ_DIR), $(FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:08:53 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/17 11:56:27 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/17 12:39:13 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@
 */
 void	ft_parse_prompt(t_data *data)
 {
-	if (!ft_strncmp(data->prompt, "exit", 5))
-		ft_exit_clean(data);
+	ft_replace_env_variable(data);
 }

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   lex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/17 13:31:40 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/17 17:09:58 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lex	*ft_lexnew(size_t type, void *data)
+t_lex	*ft_lexnew(size_t type, char *content)
 {
 	t_lex	*new_element;
 
 	new_element = (t_lex *)ft_calloc(1, sizeof(t_lex));
 	if (!new_element)
 		return (NULL);
-	new_element->data = data;
+	new_element->content = content;
 	new_element->type = type;
 	new_element->next = NULL;
 	return (new_element);
@@ -69,7 +69,7 @@ void	ft_free_lex(t_lex *lex)
 	while (lex)
 	{
 		tmp = lex->next;
-		free(lex->data);
+		free(lex->content);
 		free(lex);
 		lex = tmp;
 	}
@@ -80,7 +80,7 @@ void	ft_print_lex(t_lex *lex)
 {
 	while (lex)
 	{
-		printf("type: %zu data: %s\n", lex->type, lex->data);
+		printf("type: %zu data: %s\n", lex->type, lex->content);
 		lex = lex->next;
 	}
 }
