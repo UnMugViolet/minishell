@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/17 11:03:36 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/17 13:31:40 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_print_lex(t_lex *lex)
 {
 	while (lex)
 	{
-		printf("type: %zu data: %s\n", lex->type, (char *)lex->data);
+		printf("type: %zu data: %s\n", lex->type, lex->data);
 		lex = lex->next;
 	}
 }
