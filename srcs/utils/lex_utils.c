@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/17 17:09:58 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/18 17:17:50 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_print_lex(t_lex *lex)
 {
 	while (lex)
 	{
-		printf("type: %zu data: %s\n", lex->type, lex->content);
+		printf("type: %zu content: %s\n", lex->type, lex->content);
 		lex = lex->next;
 	}
 }
