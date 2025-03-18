@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_substitute.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:16:17 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/17 17:32:07 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/18 10:28:31 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*ft_concat_until_next_dollar(char *src, char *dest)
+{
+	int		i;
+	char	*res;
+	char	*temp;
+
+	i = 0;
+	if (!*dest || !dest)
+		return (src);
+	temp = ft_substr(src, 0, (ft_strchr(src, '$') - src));
+	res = ft_strjoin(dest, temp);
+	free(dest);
+	free(temp);
+	return (res);
+}
 
 char	*ft_str_substitute(char *str, char **env)
 {
@@ -31,8 +47,10 @@ char	*ft_str_substitute(char *str, char **env)
 		env_value = ft_get_associated_env_value(env, var_name);
 		res = ft_strjoin_free(res, env_value);
 		str = ft_strchr(str, '$') + var_size;
-		res = ft_strjoin_free(res, str);
-		var_name = ft_get_env_var_name(str + ft_strlen(var_name + 1));
+		res = ft_concat_until_next_dollar(str, res);
+		free(var_name);
+		free(env_value);
+		var_name = ft_get_env_var_name(str);
 	}
 	free(start);
 	return (res);

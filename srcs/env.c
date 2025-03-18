@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:29:05 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/17 17:29:11 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/18 10:48:20 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*ft_get_env_var_name(char *str)
 	str = ft_strchr(str, '$');
 	if (!str)
 		return (NULL);
+	str++;
 	while (*str && ft_isalnum(*str))
 	{
 		size++;
@@ -47,10 +48,12 @@ char	*ft_get_associated_env_value(char **env, char *variable)
 	i = 0;
 	if (!env || !variable)
 		return (ft_strdup(""));
-	size = ft_strlen(variable) - 1;
+	if (!(*variable))
+		return (ft_strdup("$"));
+	size = ft_strlen(variable);
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], variable + 1, size) == 0 && env[i][size] == '=')
+		if (ft_strncmp(env[i], variable, size) == 0 && env[i][size] == '=')
 		{
 			res = ft_strdup(env[i] + size + 1);
 			return (res);
