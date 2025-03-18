@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/18 16:43:21 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/18 17:13:07 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_start_minishell(t_data *data)
 {
 	while (true)
 	{
-		data->prompt = readline(CYN "minishell> " BLK);
+		data->prompt = readline(CYN "minischnell> " BLK);
 		if (data->prompt && *data->prompt == 0)
 			continue ;
 		else if (data->prompt)
