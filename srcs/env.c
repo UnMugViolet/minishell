@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:29:05 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/18 10:48:20 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/18 16:40:08 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*ft_get_associated_env_value(char **env, char *variable)
 {
 	int		i;
 	size_t	size;
-	char	*res;
 
 	i = 0;
 	if (!env || !variable)
@@ -54,14 +53,10 @@ char	*ft_get_associated_env_value(char **env, char *variable)
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], variable, size) == 0 && env[i][size] == '=')
-		{
-			res = ft_strdup(env[i] + size + 1);
-			return (res);
-		}
+			return (ft_strdup(env[i] + size + 1));
 		i++;
 	}
-	res = ft_strdup("");
-	return (res);
+	return (ft_strdup(""));
 }
 
 /*
