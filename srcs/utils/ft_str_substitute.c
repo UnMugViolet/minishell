@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_substitute.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:16:17 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/18 17:09:36 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/19 10:40:23 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+	Concatenate the `src` string until it finds a `$` to the `dest` string.
+	@param char*src
+	@param char*dest
+	@return char*
+*/
 static char	*ft_concat_until_next_dollar(char *src, char *dest)
 {
 	int		i;
@@ -28,7 +34,14 @@ static char	*ft_concat_until_next_dollar(char *src, char *dest)
 	return (res);
 }
 
-char	*ft_str_substitute(char *str, char **env)
+/*
+	Substitute the `$variable` by their value inside the `env` array
+	in the string `str`
+ 	@param char*str
+	@param t_data*data
+	@return char*
+*/
+char	*ft_str_substitute(char *str, t_data *data)
 {
 	char	*var_name;
 	char	*env_value;
@@ -44,7 +57,7 @@ char	*ft_str_substitute(char *str, char **env)
 	while (var_name)
 	{
 		var_size = ft_strlen(var_name) + 1;
-		env_value = ft_get_associated_env_value(env, var_name);
+		env_value = ft_get_associated_env_value(data, var_name);
 		res = ft_strjoin_free(res, env_value);
 		str = ft_strchr(str, '$') + var_size;
 		res = ft_concat_until_next_dollar(str, res);

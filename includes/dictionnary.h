@@ -6,7 +6,7 @@
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/17 13:02:08 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/19 12:18:12 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@
 /*------------------------------- DEFAULT-------------------------------------*/
 
 # define DEF_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+# define DEF_SHLVL "SHLVL=0"
+# define DEF_LAST_ARG "_="
 
 #endif

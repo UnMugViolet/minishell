@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/18 17:17:50 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/19 13:49:21 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_lex	*ft_lexnew(size_t type, char *content)
 	return (new_element);
 }
 
-static t_lex	*ft_lex_last(t_lex *lex)
+t_lex	*ft_lex_last(t_lex *lex)
 {
 	if (!lex)
 		return (NULL);

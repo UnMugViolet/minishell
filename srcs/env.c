@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:29:05 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/18 16:40:08 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/19 17:11:06 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+	Returns the name of the first `$variable` in the string `str`
+	`NULL` if no `$variable` is found
+	@param char*str
+	@return char*
+*/
 char	*ft_get_env_var_name(char *str)
 {
 	char	*res;
@@ -22,6 +28,10 @@ char	*ft_get_env_var_name(char *str)
 	if (!str)
 		return (NULL);
 	str++;
+	if (*str == '?')
+		return (ft_strdup("?"));
+	if (*str == '_')
+		return (ft_strdup("_"));
 	while (*str && ft_isalnum(*str))
 	{
 		size++;
@@ -38,22 +48,26 @@ char	*ft_get_env_var_name(char *str)
 	Returns the value of the `variable` if found in the `env` array.
 	@param char** env
 	@param char* variable
+	@return char*
 */
-char	*ft_get_associated_env_value(char **env, char *variable)
+char	*ft_get_associated_env_value(t_data *data, char *variable)
 {
 	int		i;
 	size_t	size;
 
 	i = 0;
-	if (!env || !variable)
+	if (!data->env || !variable)
 		return (ft_strdup(""));
 	if (!(*variable))
 		return (ft_strdup("$"));
 	size = ft_strlen(variable);
-	while (env[i])
+	if (!ft_strncmp(variable, "?", 2))
+		return (ft_strdup(data->last_exit_value));
+	while (data->env[i])
 	{
-		if (ft_strncmp(env[i], variable, size) == 0 && env[i][size] == '=')
-			return (ft_strdup(env[i] + size + 1));
+		if (ft_strncmp(data->env[i], variable, size) == 0
+			&& data->env[i][size] == '=')
+			return (ft_strdup(data->env[i] + size + 1));
 		i++;
 	}
 	return (ft_strdup(""));
@@ -63,6 +77,7 @@ char	*ft_get_associated_env_value(char **env, char *variable)
 	Browses the `t_lex` list and replaces the `$` type element by their value.
 	Empty string if no env variable matches
 	@param t_data* data
+	@return void
 */
 void	ft_replace_env_variable(t_data *data)
 {
@@ -84,8 +99,9 @@ void	ft_replace_env_variable(t_data *data)
 				start = start->next;
 				continue ;
 			}
-			start->content = ft_str_substitute(start->content, data->env);
-		start = start->next;
+			temp = ft_str_substitute(start->content, data);
+			start->content = temp;
 		}
+		start = start->next;
 	}
 }

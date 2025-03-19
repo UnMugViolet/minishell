@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/18 17:17:30 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/19 11:58:24 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_start_minishell(t_data *data)
 {
 	while (true)
 	{
-		data->prompt = readline(CYN "🖨️  minitell>" BLK);
+		data->prompt = readline(CYN "minishell> " BLK);
 		if (data->prompt && *data->prompt == 0)
 			continue ;
 		else if (data->prompt)
@@ -51,7 +51,6 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		return (display_usage(), EXIT_FAILURE);
 	(void)av;
-	data.env = env;
 	ft_setup_signals();
 	ft_init_data_struct(&data, env);
 	ft_start_minishell(&data);

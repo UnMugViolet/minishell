@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:24:10 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/12 11:19:15 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/19 10:39:36 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+	Checks if the `prompt` is left with open quotes
+	@param char*prompt
+	@return bool
+*/
 bool	ft_is_closed_quotes(char *prompt)
 {
 	bool	in_single_quote;
@@ -31,6 +36,13 @@ bool	ft_is_closed_quotes(char *prompt)
 	return (!(in_single_quote || in_double_quote));
 }
 
+/*
+	Checks if the beginning of the string `str` is part of
+	the `metachar` array.
+	@param char*str
+	@param t_data*data
+	@return bool
+*/
 bool	ft_is_token(char *str, t_data *data)
 {
 	int	i;
