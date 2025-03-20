@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:02:18 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/20 10:53:48 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:25:42 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_delete_env_var(t_data *data, char *variable)
 		new_env[j] = ft_strdup(data->env[i]);
 		j++;
 	}
-	new_env[j] = NULL;
 	ft_free_array_str(data->env);
 	data->env = new_env;
 }

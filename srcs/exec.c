@@ -21,7 +21,6 @@ void	ft_execute_prompt(t_data *data)
 	ft_get_first_command(data, &i);
 	while (++i < data->lex_size)
 	{
-		
 	}
 	curr_cmd = data->lex->next;
 }

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/20 12:11:00 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:17:49 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static void	ft_resolve(t_data *data)
 {
 	ft_init_lex_prompt(data);
 	ft_parse_prompt(data);
-	ft_print_lex(data->lex);
-	// ft_execute_prompt(data);
+	ft_execute_prompt(data);
 	ft_free_lex(data->lex);
 	data->lex = NULL;
 }

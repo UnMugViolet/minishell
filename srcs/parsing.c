@@ -38,5 +38,4 @@ void	ft_parse_prompt(t_data *data)
 {
 	ft_replace_env_variable(data);
 	ft_display_butltins(data, data->lex->content);
-
 }
