@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/20 10:38:19 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:43:35 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ static void	ft_inc_shell_lvl(t_data *data)
 */
 static void	ft_default_env(t_data *data)
 {
-	char	*pwd;
+	char	*cwd;
 
-	pwd = (char *)ft_calloc(sizeof(char), 1024);
+	cwd = getcwd(NULL, 0);
 	data->env = (char **)ft_calloc(sizeof(char *), 4);
-	data->env[0] = ft_strjoin("PWD=", getcwd(pwd, 1024));
+	data->env[0] = ft_strjoin("PWD=", cwd);
 	data->env[1] = ft_strdup(DEF_SHLVL);
 	data->env[2] = ft_strdup(DEF_LAST_ARG);
+	free(cwd);
 }
 
 /*

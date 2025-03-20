@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/17 12:44:14 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:12:33 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_execute_prompt(t_data *data)
 {
-	int		i;
+	size_t	i;
 	t_lex	*curr_cmd;
 
 	curr_cmd = data->lex;

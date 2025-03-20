@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/20 12:10:46 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:14:05 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ bool		ft_is_token(char *str, t_data *data);
 /* ---------------------------------EXEC--------------------------------- */
 
 void						ft_execute_prompt(t_data *data);
-void						ft_get_first_command(t_data *data, int *i);
+void						ft_get_first_command(t_data *data, size_t *i);
 
 #endif
