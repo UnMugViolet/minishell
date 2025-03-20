@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/20 12:12:33 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 16:46:16 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	ft_execute_prompt(t_data *data)
 
 	curr_cmd = data->lex;
 	ft_get_first_command(data, &i);
-	while (++i < data->lex_size)
-	{
-	}
+
 	curr_cmd = data->lex->next;
 }

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/20 15:31:51 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 16:49:16 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 
 typedef struct s_exec
 {
-	char					*cmd;
-	char					**args;
+	char					**cmd;
 	char					*path;
+	size_t					type;
 	struct t_exec			*next;
 	struct t_exec			*prev;
 }							t_exec;
@@ -52,6 +52,7 @@ typedef struct s_data
 	t_lex					*lex;
 	size_t					lex_size;
 	char					*last_exit_value;
+	t_exec					*exec;
 }							t_data;
 
 typedef struct sigaction	t_sigaction;
