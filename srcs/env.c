@@ -6,7 +6,7 @@
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:29:05 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/19 17:11:06 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 09:33:01 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	Returns the name of the first `$variable` in the string `str`
 	`NULL` if no `$variable` is found
 	@param char*str
-	@return char*
+	@return char *
 */
 char	*ft_get_env_var_name(char *str)
 {
@@ -48,7 +48,7 @@ char	*ft_get_env_var_name(char *str)
 	Returns the value of the `variable` if found in the `env` array.
 	@param char** env
 	@param char* variable
-	@return char*
+	@return char *
 */
 char	*ft_get_associated_env_value(t_data *data, char *variable)
 {

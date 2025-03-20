@@ -6,7 +6,7 @@
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:16:17 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/19 10:40:23 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 09:33:22 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	Concatenate the `src` string until it finds a `$` to the `dest` string.
 	@param char*src
 	@param char*dest
-	@return char*
+	@return char *
 */
 static char	*ft_concat_until_next_dollar(char *src, char *dest)
 {
@@ -39,7 +39,7 @@ static char	*ft_concat_until_next_dollar(char *src, char *dest)
 	in the string `str`
  	@param char*str
 	@param t_data*data
-	@return char*
+	@return char *
 */
 char	*ft_str_substitute(char *str, t_data *data)
 {

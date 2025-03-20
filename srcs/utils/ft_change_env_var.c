@@ -6,7 +6,7 @@
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/19 17:07:14 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 09:17:41 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	@param t_data*data
 	@param char*variable
 	@param char*new_val
-	@return void	
+	@return void
 */
 void	ft_change_env_var(t_data *data, char *variable, char *new_val)
 {

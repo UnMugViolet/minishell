@@ -6,7 +6,7 @@
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:02:18 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/19 18:07:12 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 09:34:38 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ void	ft_delete_env_var(t_data *data, char *variable)
 		j++;
 	}
 	new_env[j] = NULL;
-	ft_print_array_str_fd(new_env, 1);
 	data->env = new_env;
 }

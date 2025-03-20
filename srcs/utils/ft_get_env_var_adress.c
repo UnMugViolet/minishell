@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_last_word.c                                     :+:      :+:    :+:   */
+/*   ft_get_env_var_adress.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 13:50:36 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/20 09:33:17 by yguinio          ###   ########.fr       */
+/*   Created: 2025/03/20 09:28:59 by yguinio           #+#    #+#             */
+/*   Updated: 2025/03/20 09:32:40 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-	Returns the content of the last `word` element in the `lex` linked list.
-	Returns `NULL` if no word in the `lex` linked list.
-	@param t_lex*lex
+	Returns the adress of the `variable` string inside the `env` array.
+	Returns `NULL` if not found.
+	@param t_data*data
+	@param char*variable
 	@return char *
 */
-char	*ft_last_word(t_lex *lex)
+char	*ft_get_env_var_adress(t_data *data, char *variable)
 {
-	char	*last;
+	int				i;
+	size_t const	size = ft_strlen(variable);
 
-	last = NULL;
-	while (lex)
-	{
-		if (lex->type == WORD)
-			last = lex->content;
-		lex = lex->next;
-	}
-	return (last);
+	i = -1;
+	while (data->env[++i])
+		if (ft_strncmp(data->env[i], variable, size) == 0
+			&& data->env[i][size] == '=')
+			return (data->env[i]);
+	return (NULL);
 }

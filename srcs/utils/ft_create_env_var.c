@@ -6,23 +6,22 @@
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:15:02 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/19 18:06:27 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 09:33:38 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_env_var_adress(t_data *data, char *variable)
+static bool	ft_check_env_var_format(char *str)
 {
-	int				i;
-	size_t const	size = ft_strlen(variable);
-	
-	i = -1;
-	while (data->env[++i])
-	if (ft_strncmp(data->env[i], variable, size) == 0
-			&& data->env[i][size] == '=')
-			return (data->env[i]);
-	return (NULL);
+	int	i;
+
+	i = 0;
+	while (ft_isalnum(str[i]))
+		i++;
+	if (str[i] == '=')
+		return (true);
+	return (false);
 }
 
 /*
@@ -39,6 +38,8 @@ void	ft_create_env_var(t_data *data, char *str)
 	char	*var_check;
 
 	i = 0;
+	if (!ft_check_env_var_format(str))
+		return ;
 	var_check = ft_substr(str, 0, ft_strchr(str, '=') - str);
 	if (ft_get_env_var_adress(data, var_check))
 	{

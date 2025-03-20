@@ -6,7 +6,7 @@
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/19 12:28:24 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 09:33:09 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ft_default_env(t_data *data)
 	Fetches the `$PATH` value from the `env` array.
 	If no `$PATH` is found, sets the value to `DEF_PATH`.
 	@param t_data*data
-	@return str*
+	@return char *
 */
 static char	**ft_get_path_from_env(t_data *data)
 {
