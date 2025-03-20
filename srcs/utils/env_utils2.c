@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_env_var_adress.c                            :+:      :+:    :+:   */
+/*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 09:28:59 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/20 09:32:40 by yguinio          ###   ########.fr       */
+/*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
+/*   Updated: 2025/03/20 15:43:34 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,4 @@ char	*ft_get_env_var_adress(t_data *data, char *variable)
 			return (data->env[i]);
 	return (NULL);
 }
+

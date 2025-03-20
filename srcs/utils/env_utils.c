@@ -1,16 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_env_var.c                                :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 16:15:02 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/20 11:01:17 by pjaguin          ###   ########.fr       */
+/*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
+/*   Updated: 2025/03/20 15:41:14 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+	Replace the value of the env variable `variable` by the string `new_val`
+	@param t_data*data
+	@param char*variable
+	@param char*new_val
+	@return void
+*/
+void	ft_change_env_var(t_data *data, char *variable, char *new_val)
+{
+	int				i;
+	size_t const	var_size = ft_strlen(variable);
+
+	i = -1;
+	while (data->env[++i])
+	{
+		if (!ft_strncmp(data->env[i], variable, var_size)
+			&& data->env[i][var_size] == '=')
+		{
+			free(data->env[i]);
+			data->env[i] = ft_strjoin_free(ft_strjoin(variable, "="), new_val);
+			return ;
+		}
+	}
+}
 
 static void	ft_free_all(char **new_env, char *var_check)
 {
@@ -65,3 +90,40 @@ void	ft_create_env_var(t_data *data, char *str)
 	ft_free_all(data->env, var_check);
 	data->env = new_env;
 }
+
+/*
+	Deletes the variable `variable` from the `env` array
+	in the `t_data` struct.
+	@param t_data*data
+	@param char*variable
+	@return void
+*/
+void	ft_delete_env_var(t_data *data, char *variable)
+{
+	size_t const	variable_len = ft_strlen(variable);
+	int				i;
+	int				j;
+	char			**new_env;
+
+	i = 0;
+	if (!ft_get_env_var_adress(data, variable))
+		return ;
+	while (data->env[i])
+		i++;
+	new_env = (char **)ft_calloc(sizeof(char *), i);
+	if (!new_env)
+		return ;
+	i = -1;
+	j = 0;
+	while (data->env[++i])
+	{
+		if (!ft_strncmp(data->env[i], variable, variable_len)
+			&& data->env[i][variable_len] == '=')
+			continue ;
+		new_env[j] = ft_strdup(data->env[i]);
+		j++;
+	}
+	ft_free_array_str(data->env);
+	data->env = new_env;
+}
+

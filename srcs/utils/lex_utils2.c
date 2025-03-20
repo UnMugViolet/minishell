@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_last_word.c                                 :+:      :+:    :+:   */
+/*   lex_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 13:50:36 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/20 15:26:12 by pjaguin          ###   ########.fr       */
+/*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
+/*   Updated: 2025/03/20 15:44:37 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// TODO: remove for final version debug only
+void	ft_print_lex(t_lex *lex)
+{
+	while (lex)
+	{
+		printf("type: %zu content: %s\n", lex->type, lex->content);
+		lex = lex->next;
+	}
+}
 
 /*
 	Returns the content of the last `word` element in the `lex` linked list.

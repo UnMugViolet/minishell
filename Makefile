@@ -6,7 +6,7 @@
 #    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/20 12:14:41 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/03/20 15:47:02 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,18 @@ SRC_DIR = ./srcs/
 OBJ_DIR = ./objects/
 INC_DIR = ./includes/
 UTILS_DIR = ./srcs/utils/
+INIT_DIR = ./srcs/init/
 
-FILES = minishell.c lexing.c init.c parsing.c signals.c exit.c check.c env.c exec.c
+FILES = 		minishell.c lexing.c parsing.c signals.c exit.c check.c env.c exec.c
 
-UTILS_FILES =	lex_utils.c ft_str_substitute.c ft_change_env_var.c ft_get_last_word.c ft_delete_env_var.c ft_create_env_var.c ft_get_env_var_adress.c \
-				exec_utils.c
+UTILS_FILES =	lex_utils.c lex_utils2.c env_utils.c env_utils2.c exec_utils.c \
+				ft_str_substitute.c
+
+INIT_FILES =	init_data.c init_exec.c
 
 OBJ =	$(addprefix $(OBJ_DIR), $(FILES:.c=.o)) \
-		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o))
+		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o)) \
+		$(addprefix $(OBJ_DIR), $(INIT_FILES:.c=.o)) \
 
 CC = cc
 MAKE = make
@@ -54,6 +58,10 @@ $(OBJ_DIR)%.o: $(UTILS_DIR)%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(INIT_DIR)%.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
 	
