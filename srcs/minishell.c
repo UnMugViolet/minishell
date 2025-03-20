@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/17 12:16:45 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:11:00 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static void	ft_resolve(t_data *data)
 {
 	ft_init_lex_prompt(data);
 	ft_parse_prompt(data);
-	ft_execute_prompt(data);
+	ft_print_lex(data->lex);
+	// ft_execute_prompt(data);
 	ft_free_lex(data->lex);
 	data->lex = NULL;
 }
@@ -50,7 +51,6 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		return (display_usage(), EXIT_FAILURE);
 	(void)av;
-	data.env = env;
 	ft_setup_signals();
 	ft_init_data_struct(&data, env);
 	ft_start_minishell(&data);

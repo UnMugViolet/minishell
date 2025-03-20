@@ -6,7 +6,7 @@
 #    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/17 12:32:30 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/03/20 12:10:37 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ UTILS_DIR = ./srcs/utils/
 
 FILES = minishell.c lexing.c init.c parsing.c signals.c exit.c check.c env.c exec.c
 
-UTILS_FILES = lex_utils.c exec_utils.c
+UTILS_FILES = lex_utils.c ft_str_substitute.c ft_change_env_var.c ft_get_last_word.c ft_delete_env_var.c ft_create_env_var.c ft_get_env_var_adress.c
 
 OBJ =	$(addprefix $(OBJ_DIR), $(FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o))
