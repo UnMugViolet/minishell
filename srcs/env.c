@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:29:05 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/20 09:33:01 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 10:29:14 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ void	ft_replace_env_variable(t_data *data)
 	t_lex	*start;
 
 	start = data->lex;
-	if (!ft_strncmp(data->prompt, "exit", 5))
-		ft_exit_clean(data);
 	while (start)
 	{
 		if (start->type == WORD)

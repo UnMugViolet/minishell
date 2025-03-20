@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/19 18:05:44 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 10:19:08 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		ft_lexadd_back(t_lex **lex, t_lex *new);
 size_t		ft_lexsize(t_lex *lex);
 t_lex		*ft_lex_last(t_lex *lex);
 char		*ft_str_substitute(char *str, t_data *data);
-char		*ft_last_word(t_lex *lex);
+char		*ft_get_last_word(t_lex *lex);
 
 // TODO: remove for final version debug only
 void		ft_print_lex(t_lex *lex);

@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_env_var.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:15:02 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/20 09:33:38 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 11:01:17 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_free_all(char **new_env, char *var_check)
+{
+	ft_free_array_str(new_env);
+	free(var_check);
+}
 
 static bool	ft_check_env_var_format(char *str)
 {
@@ -44,16 +50,18 @@ void	ft_create_env_var(t_data *data, char *str)
 	if (ft_get_env_var_adress(data, var_check))
 	{
 		ft_change_env_var(data, var_check, str + ft_strlen(var_check) + 1);
+		free(var_check);
 		return ;
 	}
 	while (data->env[i])
 		i++;
 	new_env = (char **)ft_calloc(sizeof(char *), i + 2);
+	if (!new_env)
+		return ;
 	i = -1;
 	while (data->env[++i])
 		new_env[i] = ft_strdup(data->env[i]);
 	new_env[i++] = ft_strdup(str);
-	new_env[i] = NULL;
-	free(data->env);
+	ft_free_all(data->env, var_check);
 	data->env = new_env;
 }

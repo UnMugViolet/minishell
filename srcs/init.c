@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/20 09:33:09 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 10:38:19 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	ft_inc_shell_lvl(t_data *data)
 	if (!data->env[i])
 		return ;
 	new_value = ft_itoa(ft_atoi(data->env[i] + 6) + 1);
+	if (!new_value)
+		new_value = ft_strdup("1");
 	free(data->env[i]);
 	data->env[i] = ft_strjoin("SHLVL=", new_value);
 	free(new_value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_delete_env_var.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:02:18 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/20 09:34:38 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 10:53:48 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	ft_delete_env_var(t_data *data, char *variable)
 	while (data->env[i])
 		i++;
 	new_env = (char **)ft_calloc(sizeof(char *), i);
+	if (!new_env)
+		return ;
 	i = -1;
 	j = 0;
 	while (data->env[++i])
@@ -43,5 +45,6 @@ void	ft_delete_env_var(t_data *data, char *variable)
 		j++;
 	}
 	new_env[j] = NULL;
+	ft_free_array_str(data->env);
 	data->env = new_env;
 }

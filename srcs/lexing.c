@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 09:03:08 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/17 13:07:21 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/20 10:21:57 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	ft_init_lex_prompt(t_data *data)
 		i++;
 	}
 	ft_free_array_str(array);
+	ft_change_env_var(data, "_", ft_get_last_word(data->lex));
 	data->lex_size = ft_lexsize(data->lex);
 }

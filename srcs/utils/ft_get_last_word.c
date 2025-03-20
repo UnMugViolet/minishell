@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_last_word.c                                     :+:      :+:    :+:   */
+/*   ft_get_last_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,7 +18,7 @@
 	@param t_lex*lex
 	@return char *
 */
-char	*ft_last_word(t_lex *lex)
+char	*ft_get_last_word(t_lex *lex)
 {
 	char	*last;
 
