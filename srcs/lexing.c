@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 09:03:08 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/21 10:20:54 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 10:45:12 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_init_prompt_lexing(t_data *data)
 	t_lex	*new_lex;
 
 	i = 0;
-	array = ft_split_strset_quote(data->prompt, data->metachar);
+	array = ft_split_strset(data->prompt, data->metachar);
 	while (array[i])
 	{
 		type = ft_get_type(array[i]);

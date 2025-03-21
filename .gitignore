@@ -5,3 +5,8 @@ minishell
 # Object files
 *.o
 libft
+
+# Test files
+infile*
+outfile*
+test*

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/21 10:20:54 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 14:15:09 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char						*ft_get_env_var_adress(t_data *data,
 /* -------------------------------PARSING------------------------------- */
 
 void						ft_parse_prompt(t_data *data);
+void						ft_get_first_command_index(t_data *data, size_t *i);
 
 /* --------------------------------LEXING------------------------------- */
 

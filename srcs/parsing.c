@@ -6,21 +6,53 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:08:53 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/21 09:55:55 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 14:14:27 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_create_exec_tree(t_data *data)
+/*
+	Iterates through the lexeme list to find the first command
+	@param t_data*data
+	@param size_t*i
+	@return void
+*/
+char	*ft_get_first_cmd(t_data *data)
 {
-	t_exec	*exec;
+	size_t	i;
+	char 	*curr_cmd;
 
-	(void)data;
-	(void)exec;
+	curr_cmd = NULL;
+	ft_get_first_command_index(data, &i);
+	while (i < data->lex_size && data->lex->type == WORD)
+	{
+		curr_cmd = ft_strjoin_free(curr_cmd, data->lex->content);
+		curr_cmd = ft_strjoin_free(curr_cmd, " ");
+		if (data->lex->next)
+			data->lex = data->lex->next;
+		i++;
+	}
+	return (curr_cmd);
 }
 
-static void	ft_display_builtins(t_data *data, char *str)
+static void	ft_create_exec_tree(t_data *data)
+{
+	char *cmd;
+
+	cmd = ft_get_first_cmd(data);
+	printf("cmd: %s\n", cmd);
+}
+
+/* 
+	Builtins are commands that are built into the shell. The shell must interpret
+	them and display the result. If the cmd is not a builtin nothing is triggered.
+	The builtins are: `pwd` `env` `unset` `exit` `export` `echo -n`
+	@param t_data*data
+	@param char*str
+	@return void
+*/
+static void	ft_exec_builtins(t_data *data, char *str)
 {
 	if (!ft_strncmp(str, "pwd", 4))
 		ft_putendl_fd(ft_get_env_var_adress(data, "PWD") + 4, STDOUT_FILENO);
@@ -45,6 +77,6 @@ static void	ft_display_builtins(t_data *data, char *str)
 void	ft_parse_prompt(t_data *data)
 {
 	// ft_replace_env_variable(data); Not to be implemented yet
-	ft_display_builtins(data, data->lex->content);
+	ft_exec_builtins(data, data->lex->content);
 	ft_create_exec_tree(data);
 }
