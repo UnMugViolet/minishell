@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/21 17:59:14 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:25:37 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	ft_free_lex(t_lex *lex)
 	while (lex)
 	{
 		tmp = lex->next;
-		free(lex->content);
+		if (lex->content)
+			free(lex->content);
 		free(lex);
 		lex = tmp;
 	}

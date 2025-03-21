@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/21 17:52:31 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:27:06 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void						ft_init_prompt_lexing(t_data *data);
 t_lex						*ft_lexnew(size_t type, char *content);
 void						ft_lexadd_back(t_lex **lex, t_lex *new);
 size_t						ft_lexsize(t_lex *lex);
-t_lex						*ft_lex_last(t_lex *lex);
+void						ft_lex_del_content(t_lex *lex);
 
 t_exec						*ft_exec_new(char **cmd, char *path, size_t type);
 void						ft_exec_add_back(t_exec **exec, t_exec *new);

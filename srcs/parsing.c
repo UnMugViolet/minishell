@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:08:53 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/21 17:22:57 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:38:24 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 static void	ft_create_exec_tree(t_data *data)
 {
 	size_t	i;
+	t_lex	*tmp;
 
 	i = 0;
-	while (i < data->lex_size && data->lex)
+	tmp = data->lex;
+	while (i < data->lex_size && tmp)
 	{
+		ft_print_lex(data->lex);
 		ft_get_heredocs(data);
 		// ft_get_pipes(data);
 		// ft_get_redirections(data);
 		// ft_get_commands(data);
-		data->lex = data->lex->next;
+		tmp = tmp->next;
 		i++;
 	}
 }

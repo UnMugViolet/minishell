@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/21 18:13:28 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:34:18 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	ft_create_exec_conditionaly(t_data *data, char *cmd, size_t type)
 	free(cmd);
 }
 
-void	ft_destroy_lex();
-
 void	ft_get_heredocs(t_data *data)
 {
 	t_lex	*tmp;
@@ -36,9 +34,11 @@ void	ft_get_heredocs(t_data *data)
 	{
 		cmd = ft_strjoin(tmp->content, " ");
 		if (tmp->next && tmp->next->content)
+		{
 			cmd = ft_strjoin_free(cmd, tmp->next->content);
-		else 
-			cmd = ft_strdup(tmp->content);
+			ft_lex_del_content(tmp->next);
+		}
+		ft_lex_del_content(tmp);
 		ft_create_exec_conditionaly(data, cmd, DOUBLE_LEFT_BRACKET);
 	}
 }
