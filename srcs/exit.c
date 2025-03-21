@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/21 11:49:22 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:14:38 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	ft_exit_clean(t_data *data)
 	ft_conditional_free(data->prompt);
 	ft_conditional_free(data->lex);
 	ft_conditional_free(data->last_exit_value);
-	if (data->exec)
-		ft_free_array_str(data->exec->cmd);
+	ft_conditional_free(data->exec);
 	rl_clear_history();
 	ft_fprintf(1, "exit\n");
 	exit(EXIT_SUCCESS);

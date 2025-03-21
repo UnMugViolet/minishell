@@ -6,42 +6,26 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:08:53 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/21 14:14:27 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:22:57 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-	Iterates through the lexeme list to find the first command
-	@param t_data*data
-	@param size_t*i
-	@return void
-*/
-char	*ft_get_first_cmd(t_data *data)
-{
-	size_t	i;
-	char 	*curr_cmd;
-
-	curr_cmd = NULL;
-	ft_get_first_command_index(data, &i);
-	while (i < data->lex_size && data->lex->type == WORD)
-	{
-		curr_cmd = ft_strjoin_free(curr_cmd, data->lex->content);
-		curr_cmd = ft_strjoin_free(curr_cmd, " ");
-		if (data->lex->next)
-			data->lex = data->lex->next;
-		i++;
-	}
-	return (curr_cmd);
-}
-
 static void	ft_create_exec_tree(t_data *data)
 {
-	char *cmd;
+	size_t	i;
 
-	cmd = ft_get_first_cmd(data);
-	printf("cmd: %s\n", cmd);
+	i = 0;
+	while (i < data->lex_size && data->lex)
+	{
+		ft_get_heredocs(data);
+		// ft_get_pipes(data);
+		// ft_get_redirections(data);
+		// ft_get_commands(data);
+		data->lex = data->lex->next;
+		i++;
+	}
 }
 
 /* 

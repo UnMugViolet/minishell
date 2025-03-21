@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/21 12:38:05 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:22:47 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	ft_init_data_struct(t_data *data, char **env)
 	data->paths = ft_get_path_from_env(data);
 	data->prompt = NULL;
 	data->lex = NULL;
+	data->exec = NULL;
 	data->metachar = ft_split(METACHAR, ' ');
 	data->last_exit_value = ft_strdup("0");
 }

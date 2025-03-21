@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/21 14:15:09 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:52:31 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,11 @@ char						*ft_get_env_var_adress(t_data *data,
 /* -------------------------------PARSING------------------------------- */
 
 void						ft_parse_prompt(t_data *data);
-void						ft_get_first_command_index(t_data *data, size_t *i);
+void						ft_get_heredocs(t_data *data);
+void						ft_get_pipes(t_data *data);
+void						ft_get_redirections(t_data *data);
+void						ft_get_commands(t_data *data);
+
 
 /* --------------------------------LEXING------------------------------- */
 
@@ -95,11 +99,18 @@ t_lex						*ft_lexnew(size_t type, char *content);
 void						ft_lexadd_back(t_lex **lex, t_lex *new);
 size_t						ft_lexsize(t_lex *lex);
 t_lex						*ft_lex_last(t_lex *lex);
+
+t_exec						*ft_exec_new(char **cmd, char *path, size_t type);
+void						ft_exec_add_back(t_exec **exec, t_exec *new);
+void						ft_free_exec_tree(t_exec *exec);
+
 char						*ft_str_substitute(char *str, t_data *data);
 char						*ft_get_last_word(t_lex *lex);
 
 // TODO: remove for final version debug only
 void						ft_print_lex(t_lex *lex);
+void						ft_print_exec(t_exec *exec);
+
 void						ft_free_lex(t_lex *lex);
 
 void						ft_exit_clean(t_data *data);

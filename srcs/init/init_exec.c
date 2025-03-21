@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:35:30 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/21 12:38:18 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:14:56 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,22 @@ void	ft_free_exec_tree(t_exec *exec)
 	{
 		tmp = exec->next;
 		ft_free_array_str(exec->cmd);
+		if (exec->path)
+			free(exec->path);
+		
 		free(exec);
 		exec = tmp;
+	}
+}
+
+void	ft_print_exec(t_exec *exec)
+{
+	t_exec	*tmp;
+
+	tmp = exec;
+	while (tmp)
+	{
+		ft_print_array_str_fd(tmp->cmd, 1);
+		tmp = tmp->next;
 	}
 }
