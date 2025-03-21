@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:08:53 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/20 16:46:03 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 09:55:55 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void	ft_create_exec_tree(t_data *data)
 {
-	t_exec *exec;
+	t_exec	*exec;
 
-	
+	(void)data;
+	(void)exec;
 }
 
 static void	ft_display_builtins(t_data *data, char *str)
@@ -43,7 +44,7 @@ static void	ft_display_builtins(t_data *data, char *str)
 */
 void	ft_parse_prompt(t_data *data)
 {
-	ft_replace_env_variable(data);
+	// ft_replace_env_variable(data); Not to be implemented yet
 	ft_display_builtins(data, data->lex->content);
 	ft_create_exec_tree(data);
 }

@@ -37,7 +37,7 @@ static char	*ft_concat_until_next_dollar(char *src, char *dest)
 /*
 	Substitute the `$variable` by their value inside the `env` array
 	in the string `str`
- 	@param char*str
+	@param char*str
 	@param t_data*data
 	@return char *
 */

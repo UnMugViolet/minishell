@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/20 16:49:16 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 10:20:54 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ typedef struct s_exec
 {
 	char					**cmd;
 	char					*path;
+	int						infile;
+	int						outfile;
 	size_t					type;
-	struct t_exec			*next;
-	struct t_exec			*prev;
+	struct s_exec			*next;
+	struct s_exec			*prev;
 }							t_exec;
 
 typedef struct s_lex
@@ -73,7 +75,7 @@ char						*ft_get_associated_env_value(t_data *data,
 								char *variable);
 void						ft_delete_env_var(t_data *data, char *var);
 void						ft_create_env_var(t_data *data, char *str);
-void						ft_change_env_var(t_data *data, char *variable,
+void						ft_update_env_var(t_data *data, char *variable,
 								char *new_value);
 char						*ft_get_env_var_adress(t_data *data,
 								char *variable);
@@ -84,7 +86,7 @@ void						ft_parse_prompt(t_data *data);
 
 /* --------------------------------LEXING------------------------------- */
 
-void						ft_init_lex_prompt(t_data *data);
+void						ft_init_prompt_lexing(t_data *data);
 
 /* --------------------------------UTILS-------------------------------- */
 
@@ -106,6 +108,7 @@ void						display_usage(void);
 
 bool						ft_is_closed_quotes(char *prompt);
 bool						ft_is_token(char *str, t_data *data);
+bool						ft_is_env_var(char *str);
 
 /* ---------------------------------EXEC--------------------------------- */
 

@@ -6,42 +6,11 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/20 15:41:14 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 10:24:22 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-	Replace the value of the env variable `variable` by the string `new_val`
-	@param t_data*data
-	@param char*variable
-	@param char*new_val
-	@return void
-*/
-void	ft_change_env_var(t_data *data, char *variable, char *new_val)
-{
-	int				i;
-	size_t const	var_size = ft_strlen(variable);
-
-	i = -1;
-	while (data->env[++i])
-	{
-		if (!ft_strncmp(data->env[i], variable, var_size)
-			&& data->env[i][var_size] == '=')
-		{
-			free(data->env[i]);
-			data->env[i] = ft_strjoin_free(ft_strjoin(variable, "="), new_val);
-			return ;
-		}
-	}
-}
-
-static void	ft_free_all(char **new_env, char *var_check)
-{
-	ft_free_array_str(new_env);
-	free(var_check);
-}
 
 static bool	ft_check_env_var_format(char *str)
 {
@@ -49,10 +18,16 @@ static bool	ft_check_env_var_format(char *str)
 
 	i = 0;
 	while (ft_isalnum(str[i]))
-		i++;
+	i++;
 	if (str[i] == '=')
 		return (true);
 	return (false);
+}
+
+static void	ft_free_all(char **new_env, char *var_check)
+{
+	ft_free_array_str(new_env);
+	free(var_check);
 }
 
 /*
@@ -74,21 +49,47 @@ void	ft_create_env_var(t_data *data, char *str)
 	var_check = ft_substr(str, 0, ft_strchr(str, '=') - str);
 	if (ft_get_env_var_adress(data, var_check))
 	{
-		ft_change_env_var(data, var_check, str + ft_strlen(var_check) + 1);
+		ft_update_env_var(data, var_check, str + ft_strlen(var_check) + 1);
 		free(var_check);
 		return ;
 	}
 	while (data->env[i])
-		i++;
+	i++;
 	new_env = (char **)ft_calloc(sizeof(char *), i + 2);
 	if (!new_env)
 		return ;
 	i = -1;
 	while (data->env[++i])
-		new_env[i] = ft_strdup(data->env[i]);
+	new_env[i] = ft_strdup(data->env[i]);
 	new_env[i++] = ft_strdup(str);
 	ft_free_all(data->env, var_check);
 	data->env = new_env;
+}
+
+/*
+Replace the value of the env variable `variable` by the string `new_val`
+	@param t_data*data
+	@param char*variable
+	@param char*new_val
+	@return void
+*/
+void	ft_update_env_var(t_data *data, char *variable, char *new_val)
+{
+	int		i;
+	size_t	var_size;
+
+	i = -1;
+	var_size = ft_strlen(variable);
+	while (data->env[++i])
+	{
+		if (!ft_strncmp(data->env[i], variable, var_size)
+			&& data->env[i][var_size] == '=')
+		{
+			free(data->env[i]);
+			data->env[i] = ft_strjoin_free(ft_strjoin(variable, "="), new_val);
+			return ;
+		}
+	}
 }
 
 /*
@@ -100,10 +101,10 @@ void	ft_create_env_var(t_data *data, char *str)
 */
 void	ft_delete_env_var(t_data *data, char *variable)
 {
-	size_t const	variable_len = ft_strlen(variable);
 	int				i;
 	int				j;
 	char			**new_env;
+	size_t const	variable_len = ft_strlen(variable);
 
 	i = 0;
 	if (!ft_get_env_var_adress(data, variable))
@@ -126,4 +127,3 @@ void	ft_delete_env_var(t_data *data, char *variable)
 	ft_free_array_str(data->env);
 	data->env = new_env;
 }
-

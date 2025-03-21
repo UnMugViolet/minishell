@@ -6,7 +6,7 @@
 #    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/20 15:47:02 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/03/21 09:47:49 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ INC_DIR = ./includes/
 UTILS_DIR = ./srcs/utils/
 INIT_DIR = ./srcs/init/
 
-FILES = 		minishell.c lexing.c parsing.c signals.c exit.c check.c env.c exec.c
+FILES = 		minishell.c lexing.c parsing.c signals.c exit.c env.c exec.c
 
-UTILS_FILES =	lex_utils.c lex_utils2.c env_utils.c env_utils2.c exec_utils.c \
-				ft_str_substitute.c
+UTILS_FILES =	boolean_checks.c lex_utils.c lex_utils2.c env_utils.c env_utils2.c exec_utils.c \
+				ft_str_substitute.c parse_utils.c 
 
 INIT_FILES =	init_data.c init_exec.c
 

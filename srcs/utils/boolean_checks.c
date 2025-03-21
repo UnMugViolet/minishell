@@ -1,16 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   boolean_checks.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 19:24:10 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/19 10:39:36 by yguinio          ###   ########.fr       */
+/*   Created: 2025/03/21 09:39:26 by pjaguin           #+#    #+#             */
+/*   Updated: 2025/03/21 10:43:29 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+	Check if the `str` given as parameter is an environment variable
+	A string is considered an environment variable if it starts with a '$'
+	followed by an alphanumeric character. It can also be "$?" or "$_"
+	@param char*str
+	@return bool
+*/
+bool	ft_is_env_var(char *str)
+{
+	if (!str)
+		return (false);
+	if ((!ft_strncmp(str, "$", 1) && ft_isalnum(str[1])) || !ft_strncmp(str,
+			"$?", 2) || !ft_strncmp(str, "$_", 2))
+		return (true);
+	return (false);
+}
 
 /*
 	Checks if the `prompt` is left with open quotes

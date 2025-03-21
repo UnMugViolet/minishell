@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 09:03:08 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/20 12:10:52 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 10:20:54 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static size_t	ft_get_type(char *str)
 	@param t_data data
 	@return void
 */
-void	ft_init_lex_prompt(t_data *data)
+void	ft_init_prompt_lexing(t_data *data)
 {
 	int		i;
 	size_t	type;
@@ -64,6 +64,6 @@ void	ft_init_lex_prompt(t_data *data)
 		i++;
 	}
 	ft_free_array_str(array);
-	ft_change_env_var(data, "_", ft_get_last_word(data->lex));
+	ft_update_env_var(data, "_", ft_get_last_word(data->lex));
 	data->lex_size = ft_lexsize(data->lex);
 }
