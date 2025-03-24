@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:24:45 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/24 14:33:00 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:52:22 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_print_exec(t_exec *exec)
 	i = 0;
 	if (!tmp)
 		printf("EXEC IS EMPTY\n");
-	else
+	else if (tmp)
 		printf("EXEC ARRAY:\n");
 	while (tmp)
 	{

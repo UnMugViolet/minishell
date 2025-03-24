@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/21 10:24:22 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:37:25 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool	ft_check_env_var_format(char *str)
 
 	i = 0;
 	while (ft_isalnum(str[i]))
-	i++;
+		i++;
 	if (str[i] == '=')
 		return (true);
 	return (false);
@@ -54,13 +54,13 @@ void	ft_create_env_var(t_data *data, char *str)
 		return ;
 	}
 	while (data->env[i])
-	i++;
+		i++;
 	new_env = (char **)ft_calloc(sizeof(char *), i + 2);
 	if (!new_env)
 		return ;
 	i = -1;
 	while (data->env[++i])
-	new_env[i] = ft_strdup(data->env[i]);
+		new_env[i] = ft_strdup(data->env[i]);
 	new_env[i++] = ft_strdup(str);
 	ft_free_all(data->env, var_check);
 	data->env = new_env;

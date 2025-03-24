@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:29:05 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/20 10:29:14 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/24 17:39:43 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,24 @@ char	*ft_get_associated_env_value(t_data *data, char *variable)
 */
 void	ft_replace_env_variable(t_data *data)
 {
+	char	**cmd;
 	char	*temp;
-	t_lex	*start;
+	int		i;
 
-	start = data->lex;
-	while (start)
+	i = 0;
+	cmd = data->exec->cmd;
+	while (cmd[i])
 	{
-		if (start->type == WORD)
+		if (cmd[i][0] == SGL_QT)
 		{
-			if ((start->content)[0] == SGL_QT)
-			{
-				temp = start->content;
-				start->content = ft_strtrim(start->content, "\'");
-				free(temp);
-				start = start->next;
-				continue ;
-			}
-			temp = ft_str_substitute(start->content, data);
-			start->content = temp;
+			temp = cmd[i];
+			cmd[i] = ft_strtrim(cmd[i], "\'");
+			free(temp);
+			i++;
+			continue ;
 		}
-		start = start->next;
+		temp = ft_strtrim(ft_str_substitute(cmd[i], data), "\"");
+		cmd[i] = temp;
+		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/24 15:01:11 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/24 17:21:27 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	ft_create_exec_conditionaly(t_data *data, char *cmd, size_t type)
 {
 	if (!data->exec)
-		data->exec = ft_exec_new(ft_split(cmd, ' '), NULL, type);
+		data->exec = ft_exec_new(ft_split_strset(cmd, data->metachar), NULL, type);
 	else
-		ft_exec_add_back(&data->exec, ft_exec_new(ft_split(cmd, ' '), NULL,
+		ft_exec_add_back(&data->exec, ft_exec_new(ft_split_strset(cmd, data->metachar), NULL,
 				type));
 	free(cmd);
 }
@@ -79,7 +79,8 @@ void	ft_get_outfile(t_data *data)
 	tmp = data->lex;
 	while (tmp)
 	{
-		if (tmp && (tmp->type == RIGHT_BRACKET || tmp->type == DOUBLE_RIGHT_BRACKET))
+		if (tmp && (tmp->type == RIGHT_BRACKET
+				|| tmp->type == DOUBLE_RIGHT_BRACKET))
 		{
 			cmd = ft_strjoin(tmp->content, " ");
 			if (tmp->next && tmp->next->content)

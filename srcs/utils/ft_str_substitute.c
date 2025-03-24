@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_substitute.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:16:17 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/20 09:33:22 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/24 17:38:31 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@
 */
 static char	*ft_concat_until_next_dollar(char *src, char *dest)
 {
-	int		i;
 	char	*res;
 	char	*temp;
 
-	i = 0;
 	if (!dest && !(*src))
 		return (ft_strdup(src));
 	temp = ft_substr(src, 0, (ft_strchr(src, '$') - src));

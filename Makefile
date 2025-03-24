@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
+#    By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/21 09:47:49 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/03/24 17:06:01 by fureimu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ OBJ_DIR = ./objects/
 INC_DIR = ./includes/
 UTILS_DIR = ./srcs/utils/
 INIT_DIR = ./srcs/init/
+BUILTIN_DIR = ./srcs/builtins/
 
 FILES = 		minishell.c lexing.c parsing.c signals.c exit.c env.c exec.c
 
@@ -26,9 +27,12 @@ UTILS_FILES =	boolean_checks.c lex_utils.c lex_utils2.c env_utils.c env_utils2.c
 
 INIT_FILES =	init_data.c init_exec.c
 
+BUILTIN_FILES = builtins.c
+
 OBJ =	$(addprefix $(OBJ_DIR), $(FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o)) \
 		$(addprefix $(OBJ_DIR), $(INIT_FILES:.c=.o)) \
+		$(addprefix $(OBJ_DIR), $(BUILTIN_FILES:.c=.o)) \
 
 CC = cc
 MAKE = make
@@ -65,6 +69,9 @@ $(OBJ_DIR)%.o: $(INIT_DIR)%.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
 	
+$(OBJ_DIR)%.o: $(BUILTIN_DIR)%.c | $(OBJ_DIR)
+	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
