@@ -6,8 +6,29 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:24:45 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/21 12:37:16 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:04:47 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// size_t	
+
+void	ft_print_exec(t_exec *exec)
+{
+	t_exec	*tmp;
+	int		i;
+
+	tmp = exec;
+	i = 0;
+	if (!tmp)
+		printf("EXEC IS EMPTY\n");
+	else
+		printf("EXEC ARRAY:\n");
+	while (tmp)
+	{
+		ft_print_array_str_fd(tmp->cmd, 1);
+		printf("\n");
+		tmp = tmp->next;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:00:12 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/21 18:40:18 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/24 12:39:35 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_lex_del_content(t_lex *lex)
 	{
 		if (lex->content)
 			free(lex->content);
+		lex->type = 0;
 		lex->content = ft_strdup("");
 	}
 }
@@ -27,9 +28,11 @@ void	ft_print_lex(t_lex *lex)
 {
 	while (lex)
 	{
-		printf("type: %zu content: %s\n", lex->type, lex->content);
+		if (lex->type)
+			printf("type: %zu content: %s\n", lex->type, lex->content);
 		lex = lex->next;
 	}
+	printf("\n");
 }
 
 /*

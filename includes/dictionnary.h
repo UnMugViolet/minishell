@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dictionnary.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/19 12:18:12 by yguinio          ###   ########.fr       */
+/*   Updated: 2025/03/24 09:49:42 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@
 
 /*-------------------------------OPERATORS------------------------------------*/
 
-# define WORD 0
-# define PIPE 1
-# define DOUBLE_PIPE 2
-# define AMPERSAND 3
-# define DOUBLE_AMPERSAND 4
-# define LEFT_BRACKET 5
-# define DOUBLE_LEFT_BRACKET 6
-# define RIGHT_BRACKET 7
-# define DOUBLE_RIGHT_BRACKET 8
+# define ENPTY 0
+# define WORD 1
+# define PIPE 2
+# define DOUBLE_PIPE 3
+# define AMPERSAND 4
+# define DOUBLE_AMPERSAND 5
+# define LEFT_BRACKET 6
+# define DOUBLE_LEFT_BRACKET 7
+# define RIGHT_BRACKET 8
+# define DOUBLE_RIGHT_BRACKET 9
 
 /*---------------------------------TOKEN--------------------------------------*/
 
