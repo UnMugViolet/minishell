@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:24:45 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/24 14:04:47 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:33:00 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_print_exec(t_exec *exec)
 		printf("EXEC ARRAY:\n");
 	while (tmp)
 	{
+		printf("Chain nbr: %i\n", ++i);
 		ft_print_array_str_fd(tmp->cmd, 1);
 		printf("\n");
 		tmp = tmp->next;

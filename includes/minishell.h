@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/21 18:27:06 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/24 15:01:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ char						*ft_get_env_var_adress(t_data *data,
 
 void						ft_parse_prompt(t_data *data);
 void						ft_get_heredocs(t_data *data);
+void						ft_get_outfile(t_data *data);
 void						ft_get_pipes(t_data *data);
-void						ft_get_redirections(t_data *data);
+void						ft_get_infiles(t_data *data);
 void						ft_get_commands(t_data *data);
 
 /* --------------------------------LEXING------------------------------- */

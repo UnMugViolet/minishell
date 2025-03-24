@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:08:53 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/24 12:18:34 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/24 15:17:52 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ static void	ft_create_exec_tree(t_data *data)
 	i = 0;
 	tmp = data->lex;
 	ft_get_heredocs(data);
+	ft_get_infiles(data);
+	ft_get_outfile(data);
 	ft_get_commands(data);
 	// ft_get_pipes(data);
-	// ft_get_redirections(data);
+	// ft_get_infiles(data);
 }
 
 /*
@@ -46,6 +48,8 @@ static void	ft_exec_builtins(t_data *data, char *str)
 	else if (!ft_strncmp(str, "export", 7) && data->lex->next
 		&& data->lex->next->type == WORD)
 		ft_create_env_var(data, data->lex->next->content);
+	else if (!ft_strncmp(str, "echo", 5))
+		;
 	else
 		return ;
 }
@@ -61,3 +65,15 @@ void	ft_parse_prompt(t_data *data)
 	ft_exec_builtins(data, data->lex->content);
 	ft_create_exec_tree(data);
 }
+
+/* int	ft_echo(t_data *data)
+{
+	t_exec	*tmp;
+
+	tmp = data->exec;
+	while (data->exec && data->exec->type == WORD)
+	{
+		write(data->exec->cmd)
+	}
+}
+ */
