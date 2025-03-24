@@ -88,7 +88,6 @@ void						ft_get_pipes(t_data *data);
 void						ft_get_redirections(t_data *data);
 void						ft_get_commands(t_data *data);
 
-
 /* --------------------------------LEXING------------------------------- */
 
 void						ft_init_prompt_lexing(t_data *data);

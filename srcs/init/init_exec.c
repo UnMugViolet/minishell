@@ -61,5 +61,3 @@ void	ft_free_exec_tree(t_exec *exec)
 		exec = tmp;
 	}
 }
-
-

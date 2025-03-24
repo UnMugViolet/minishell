@@ -25,7 +25,7 @@ static void	ft_create_exec_tree(t_data *data)
 	// ft_get_redirections(data);
 }
 
-/* 
+/*
 	Builtins are commands that are built into the shell. The shell must interpret
 	them and display the result. If the cmd is not a builtin nothing is triggered.
 	The builtins are: `pwd` `env` `unset` `exit` `export` `echo -n`

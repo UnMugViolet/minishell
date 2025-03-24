@@ -17,7 +17,8 @@ void	ft_create_exec_conditionaly(t_data *data, char *cmd, size_t type)
 	if (!data->exec)
 		data->exec = ft_exec_new(ft_split(cmd, ' '), NULL, type);
 	else
-		ft_exec_add_back(&data->exec, ft_exec_new(ft_split(cmd, ' '), NULL, type));
+		ft_exec_add_back(&data->exec, ft_exec_new(ft_split(cmd, ' '), NULL,
+				type));
 	free(cmd);
 }
 
