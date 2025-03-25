@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:35:30 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/24 10:28:35 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/25 12:38:42 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_exec	*ft_exec_new(char **cmd, char *path, size_t type)
 	new_element->cmd = cmd;
 	new_element->type = type;
 	new_element->path = path;
-	new_element->infile = 0;
-	new_element->outfile = 0;
+	new_element->infile = NULL;
+	new_element->outfile = NULL;
 	new_element->next = NULL;
 	new_element->prev = NULL;
 	return (new_element);
@@ -49,15 +49,19 @@ void	ft_exec_add_back(t_exec **exec, t_exec *new)
 
 void	ft_free_exec_tree(t_exec *exec)
 {
-	t_exec	*tmp;
+    t_exec	*tmp;
 
-	while (exec)
-	{
-		tmp = exec->next;
-		ft_free_array_str(exec->cmd);
-		if (exec->path)
-			free(exec->path);
-		free(exec);
-		exec = tmp;
-	}
+    while (exec)
+    {
+        tmp = exec->next;
+        ft_free_array_str(exec->cmd);
+        if (exec->path)
+            free(exec->path);
+        if (exec->infile)
+            free(exec->infile);
+        if (exec->outfile)
+            free(exec->outfile);
+        free(exec);
+        exec = tmp;
+    }
 }

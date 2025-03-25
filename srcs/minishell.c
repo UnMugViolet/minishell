@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -15,7 +16,6 @@
 static void	ft_resolve(t_data *data)
 {
 	ft_init_prompt_lexing(data);
-	ft_print_lex(data->lex);
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);
 	ft_print_exec(data->exec);
@@ -44,7 +44,7 @@ static void	ft_start_minishell(t_data *data)
 			break ;
 		free(data->prompt);
 	}
-	ft_exit_clean(data);
+	ft_exit_clean(data, 1);
 }
 
 int	main(int ac, char **av, char **env)

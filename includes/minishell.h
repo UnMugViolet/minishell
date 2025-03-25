@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/24 17:11:37 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/25 12:08:54 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_exec
 {
 	char					**cmd;
 	char					*path;
-	int						infile;
-	int						outfile;
+	char					*infile;
+	char					*outfile;
 	size_t					type;
 	struct s_exec			*next;
 	struct s_exec			*prev;
@@ -102,19 +102,9 @@ void						ft_lex_del_content(t_lex *lex);
 
 t_exec						*ft_exec_new(char **cmd, char *path, size_t type);
 void						ft_exec_add_back(t_exec **exec, t_exec *new);
-void						ft_free_exec_tree(t_exec *exec);
 
 char						*ft_str_substitute(char *str, t_data *data);
 char						*ft_get_last_word(t_lex *lex);
-
-// TODO: remove for final version debug only
-void						ft_print_lex(t_lex *lex);
-void						ft_print_exec(t_exec *exec);
-
-void						ft_free_lex(t_lex *lex);
-
-void						ft_exit_clean(t_data *data);
-void						display_usage(void);
 
 /* --------------------------------CHECKS-------------------------------- */
 
@@ -130,5 +120,21 @@ void						ft_exec_builtins(t_data *data, char **cmd);
 
 void						ft_execute_prompt(t_data *data);
 void						ft_get_first_command(t_data *data, size_t *i);
+
+/* --------------------------------ERRORS-------------------------------- */
+
+void						ft_exit_error(t_data *data, char *str);
+void						ft_exit_clean(t_data *data, bool write_exit);
+void						display_usage(void);
+
+/* ---------------------------------FREE--------------------------------- */
+
+void						ft_free_lex(t_lex *lex);
+void						ft_free_exec_tree(t_exec *exec);
+
+/* -------------------------PRINTS TO-DO REMOVE LATER---------------------- */
+
+void						ft_print_lex(t_lex *lex);
+void						ft_print_exec(t_exec *exec);
 
 #endif

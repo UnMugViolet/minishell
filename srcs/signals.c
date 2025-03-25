@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:52:21 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/17 11:08:34 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/25 12:17:58 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_handle_signal(int signal)
 		rl_redisplay();
 	}
 	else if (signal == SIGTERM)
-		ft_exit_clean(NULL);
+		ft_exit_clean(NULL, 1);
 }
 
 /*

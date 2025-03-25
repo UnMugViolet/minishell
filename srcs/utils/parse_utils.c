@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/24 17:21:27 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/25 12:38:08 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 void	ft_create_exec_conditionaly(t_data *data, char *cmd, size_t type)
 {
+	char	**cmd_array;
+	
+	cmd_array = ft_split_strset(cmd, data->metachar);
+	if (!cmd_array)
+	{
+		ft_exit_error(data, "Error: malloc exec failed, cannot fetch commands.");
+		return ;
+	}
 	if (!data->exec)
-		data->exec = ft_exec_new(ft_split_strset(cmd, data->metachar), NULL, type);
+		data->exec = ft_exec_new(cmd_array, NULL, type);
 	else
-		ft_exec_add_back(&data->exec, ft_exec_new(ft_split_strset(cmd, data->metachar), NULL,
-				type));
+		ft_exec_add_back(&data->exec, ft_exec_new(cmd_array, NULL, type));
 	free(cmd);
 }
 

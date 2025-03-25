@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/21 18:14:38 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/25 12:41:33 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 	@param void*ptr
 	@return void
 */
-static void	ft_conditional_free(void *ptr)
+static void	ft_conditional_free(void *ptr, void (*func)(void *))
 {
 	if (ptr)
-		free(ptr);
+		func(ptr);
 }
 
 /*
@@ -28,18 +28,26 @@ static void	ft_conditional_free(void *ptr)
 	@param t_data *data
 	@return void
 */
-void	ft_exit_clean(t_data *data)
+void	ft_exit_clean(t_data *data, bool write_exit)
 {
-	ft_free_array_str(data->paths);
-	ft_free_array_str(data->metachar);
-	ft_free_array_str(data->env);
-	ft_conditional_free(data->prompt);
-	ft_conditional_free(data->lex);
-	ft_conditional_free(data->last_exit_value);
-	ft_conditional_free(data->exec);
-	rl_clear_history();
-	ft_fprintf(1, "exit\n");
-	exit(EXIT_SUCCESS);
+    ft_free_array_str(data->paths);
+    ft_free_array_str(data->metachar);
+    ft_free_array_str(data->env);
+    ft_conditional_free(data->prompt, free);
+    ft_conditional_free(data->lex, (void (*)(void *))ft_free_lex);
+    ft_conditional_free(data->exec, (void (*)(void *))ft_free_exec_tree);
+    ft_conditional_free(data->last_exit_value, free);
+    rl_clear_history(); 
+	if (write_exit)
+    	ft_fprintf(1, "exit\n");
+    exit(EXIT_SUCCESS);
+}
+
+void	ft_exit_error(t_data *data, char *str)
+{
+	ft_fprintf(STDERR_FILENO, "%s\n", str);
+	ft_exit_clean(data, 0);
+	exit(EXIT_FAILURE);
 }
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/24 17:44:23 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/25 10:34:39 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_exec_builtins(t_data *data, char **cmd)
 	else if (!ft_strncmp(*cmd, "unset", 6) && cmd[1])
 		ft_delete_env_var(data, cmd[1]);
 	else if (!ft_strncmp(data->prompt, "exit", 5))
-		ft_exit_clean(data);
+		ft_exit_clean(data, 1);
 	else
 		return ;
 }
