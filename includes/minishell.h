@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/25 12:08:54 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/25 15:03:04 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void						display_usage(void);
 /* ---------------------------------FREE--------------------------------- */
 
 void						ft_free_lex(t_lex *lex);
-void						ft_free_exec_tree(t_exec *exec);
+void						ft_free_exec(t_exec *exec);
 
 /* -------------------------PRINTS TO-DO REMOVE LATER---------------------- */
 

@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/25 12:41:33 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/25 15:02:55 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_exit_clean(t_data *data, bool write_exit)
     ft_free_array_str(data->env);
     ft_conditional_free(data->prompt, free);
     ft_conditional_free(data->lex, (void (*)(void *))ft_free_lex);
-    ft_conditional_free(data->exec, (void (*)(void *))ft_free_exec_tree);
+    ft_conditional_free(data->exec, (void (*)(void *))ft_free_exec);
     ft_conditional_free(data->last_exit_value, free);
     rl_clear_history(); 
 	if (write_exit)

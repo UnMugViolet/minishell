@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:35:30 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/25 12:38:42 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/25 15:07:19 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_exec	*ft_exec_new(char **cmd, char *path, size_t type)
 	new_element->cmd = cmd;
 	new_element->type = type;
 	new_element->path = path;
-	new_element->infile = NULL;
-	new_element->outfile = NULL;
+	new_element->infile = ft_strdup("");
+	new_element->outfile = ft_strdup("");
 	new_element->next = NULL;
 	new_element->prev = NULL;
 	return (new_element);
@@ -47,7 +47,7 @@ void	ft_exec_add_back(t_exec **exec, t_exec *new)
 	}
 }
 
-void	ft_free_exec_tree(t_exec *exec)
+void	ft_free_exec(t_exec *exec)
 {
     t_exec	*tmp;
 

@@ -20,7 +20,7 @@ static void	ft_resolve(t_data *data)
 	ft_execute_prompt(data);
 	ft_print_exec(data->exec);
 	ft_free_lex(data->lex);
-	ft_free_exec_tree(data->exec);
+	ft_free_exec(data->exec);
 	data->lex = NULL;
 	data->exec = NULL;
 }
