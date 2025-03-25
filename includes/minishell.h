@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/25 15:03:04 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/25 16:16:09 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ bool						ft_is_env_var(char *str);
 /* -------------------------------BUILTINS------------------------------- */
 
 void						ft_exec_builtins(t_data *data, char **cmd);
+int							ft_cd(t_data *data, char **cmd);
 
 /* ---------------------------------EXEC--------------------------------- */
 
