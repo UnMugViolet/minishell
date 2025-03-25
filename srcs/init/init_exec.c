@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:35:30 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/25 15:07:19 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/25 19:32:53 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_free_exec(t_exec *exec)
     while (exec)
     {
         tmp = exec->next;
-        ft_free_array_str(exec->cmd);
+		ft_free_array_str(exec->cmd);
         if (exec->path)
             free(exec->path);
         if (exec->infile)
