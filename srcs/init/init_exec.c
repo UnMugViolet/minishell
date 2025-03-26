@@ -6,13 +6,13 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:35:30 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 10:18:52 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 15:19:39 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_exec	*ft_exec_new(char **cmd, char *path, size_t type)
+t_exec	*ft_exec_new(char **cmd, char *full_cmd, size_t type)
 {
 	t_exec	*new_element;
 
@@ -21,7 +21,7 @@ t_exec	*ft_exec_new(char **cmd, char *path, size_t type)
 		return (NULL);
 	new_element->cmd = cmd;
 	new_element->type = type;
-	new_element->path = path;
+	new_element->full_cmd = full_cmd;
 	new_element->infile = ft_strdup("");
 	new_element->outfile = ft_strdup("");
 	new_element->next = NULL;
@@ -55,8 +55,8 @@ void	ft_free_exec(t_exec *exec)
     {
         tmp = exec->next;
 		ft_free_array_str(exec->cmd);
-        if (exec->path)
-            free(exec->path);
+        if (exec->full_cmd)
+            free(exec->full_cmd);
         if (exec->infile)
             free(exec->infile);
         if (exec->outfile)

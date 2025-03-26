@@ -101,11 +101,11 @@ void	ft_update_env_var(t_data *data, char *variable, char *new_val)
 */
 void	ft_delete_env_var(t_data *data, char *variable)
 {
-	int				i;
-	int				j;
-	char			**new_env;
-	size_t const	variable_len = ft_strlen(variable);
+	int		i;
+	int		j;
+	char	**new_env;
 
+	size_t const variable_len = ft_strlen(variable);
 	i = 0;
 	if (!ft_get_env_var_adress(data, variable))
 		return ;

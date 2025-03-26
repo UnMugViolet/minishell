@@ -18,6 +18,8 @@ static void	ft_resolve(t_data *data)
 	if (!ft_is_correct_input(data->prompt))
 		return ;
 	ft_init_prompt_lexing(data);
+	if (ft_single_token(data->lex, data->metachar))
+		ft_fprintf(STDERR_FILENO, "minishell: syntax error near unexpected token '%s'\n", ft_single_token(data->lex, data->metachar));
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);
 	ft_print_exec(data->exec);

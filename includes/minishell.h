@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 11:44:24 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 15:19:08 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 typedef struct s_exec
 {
 	char					**cmd;
-	char					*path;
+	char					*full_cmd;
 	char					*infile;
 	char					*outfile;
 	size_t					type;
@@ -116,11 +116,17 @@ bool						ft_is_correct_input(char *prompt);
 bool						ft_is_closed_quotes(char *prompt);
 bool						ft_is_token(char *str, t_data *data);
 bool						ft_is_env_var(char *str);
+bool						ft_is_metacharset(char *str, char **metacharset);
+char						*ft_single_token(t_lex *lex, char **metachar);
 
 /* -------------------------------BUILTINS------------------------------- */
 
 void						ft_exec_builtins(t_data *data, char **cmd);
 int							ft_cd(t_data *data, char **cmd);
+
+/* ---------------------------------PATH--------------------------------- */
+
+char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 
 /* ---------------------------------EXEC--------------------------------- */
 

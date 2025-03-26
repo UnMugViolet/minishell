@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/26 11:45:52 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 15:12:46 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	ft_init_data_struct(t_data *data, char **env)
 {
 	data->env = ft_str_array_dup(env);
 	if (!data->env)
-	ft_default_env(data);
+		ft_default_env(data);
 	ft_inc_shell_lvl(data);
 	data->paths = ft_get_path_from_env(data);
 	data->prompt = NULL;
