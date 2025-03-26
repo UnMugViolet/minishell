@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/26 11:31:00 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 11:45:52 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	ft_init_data_struct(t_data *data, char **env)
 	ft_inc_shell_lvl(data);
 	data->paths = ft_get_path_from_env(data);
 	data->prompt = NULL;
+	data->curr_dir = NULL;
 	data->lex = NULL;
 	data->exec = NULL;
 	data->metachar = ft_split(METACHAR, ' ');

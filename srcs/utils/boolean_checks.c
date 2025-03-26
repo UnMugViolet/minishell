@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   boolean_checks.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:39:26 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/21 10:43:29 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:43:13 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	ft_is_correct_input(char *prompt)
+{
+	while (ft_is_whitespace(*prompt))
+		prompt++;
+	if (!*prompt)
+		return (false);
+	return (true);
+}
 
 /*
 	Check if the `str` given as parameter is an environment variable

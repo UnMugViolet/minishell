@@ -15,6 +15,8 @@
 
 static void	ft_resolve(t_data *data)
 {
+	if (!ft_is_correct_input(data->prompt))
+		return ;
 	ft_init_prompt_lexing(data);
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);

@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 11:10:49 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 11:44:24 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char						*ft_get_last_word(t_lex *lex);
 
 /* --------------------------------CHECKS-------------------------------- */
 
+bool						ft_is_correct_input(char *prompt);
 bool						ft_is_closed_quotes(char *prompt);
 bool						ft_is_token(char *str, t_data *data);
 bool						ft_is_env_var(char *str);
