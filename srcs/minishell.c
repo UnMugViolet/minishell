@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 16:09:02 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 17:00:49 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ static void	ft_resolve(t_data *data)
 	if (!ft_is_correct_input(data->prompt))
 		return ;
 	ft_init_prompt_lexing(data);
+	ft_print_lex(data->lex);
 	if (ft_single_token(data->lex, data->metachar))
 		ft_fprintf(STDERR_FILENO,
 			"minishell: syntax error near unexpected token '%s'\n",
 			ft_single_token(data->lex, data->metachar));
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);
+	ft_print_exec(data->exec);
 	ft_free_lex(data->lex);
 	ft_free_exec(data->exec);
 	data->lex = NULL;

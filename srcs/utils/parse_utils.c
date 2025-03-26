@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 16:21:09 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 17:02:02 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 void	ft_create_exec_conditionaly(t_data *data, char *cmd, size_t type)
 {
+	char	**command;
 	char	**cmd_array;
 
 	cmd_array = ft_split_strset(cmd, data->metachar);
-	if (!cmd_array)
+	command = ft_split(cmd, ' ');
+	if (!cmd_array || !command)
 	{
 		ft_exit_error(data, "Error: malloc exec failed, cannot fetch cmd.");
 		return ;
 	}
 	if (!data->exec)
-		data->exec = ft_exec_new(cmd_array, ft_get_path_for_cmd(data, cmd),
+		data->exec = ft_exec_new(cmd_array, ft_get_path_for_cmd(data, command[0]),
 				type);
 	else
 		ft_exec_add_back(&data->exec, ft_exec_new(cmd_array,
-				ft_get_path_for_cmd(data, cmd), type));
+				ft_get_path_for_cmd(data, command[0]), type));
 	free(cmd);
+	ft_free_array_str(command);
 }
 
 void	ft_get_heredocs(t_data *data)
@@ -42,9 +45,9 @@ void	ft_get_heredocs(t_data *data)
 	{
 		if (tmp && tmp->type == DOUBLE_LEFT_BRACKET)
 		{
-			cmd = ft_strjoin(tmp->content, " ");
 			if (tmp->next && tmp->next->content)
 			{
+				cmd = ft_strjoin(tmp->content, " ");
 				cmd = ft_strjoin_free(cmd, tmp->next->content);
 				ft_lex_del_content(tmp->next);
 			}
@@ -66,9 +69,9 @@ void	ft_get_infiles(t_data *data)
 	{
 		if (tmp && tmp->type == LEFT_BRACKET)
 		{
-			cmd = ft_strjoin(tmp->content, " ");
 			if (tmp->next && tmp->next->content)
 			{
+				cmd = ft_strjoin(tmp->content, " ");
 				cmd = ft_strjoin_free(cmd, tmp->next->content);
 				ft_lex_del_content(tmp->next);
 			}
