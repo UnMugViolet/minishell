@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:29:05 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/25 14:44:39 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 10:30:08 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void	ft_replace_env_variable(t_data *data)
 			i++;
 			continue ;
 		}
-		temp = ft_strtrim(ft_str_substitute(cmd[i], data), "\"");
-		free(cmd[i]);
-		cmd[i] = temp;
+		temp = ft_str_substitute(cmd[i], data);
+		cmd[i] = ft_strtrim(temp, "\"");
+		free(temp);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_substitute.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:16:17 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/24 17:38:31 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/26 10:31:48 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static char	*ft_concat_until_next_dollar(char *src, char *dest)
 }
 
 /*
-	Substitute the `$variable` by their value inside the `env` array
-	in the string `str`
+	Return a duplicate of `str` string replacing the `$variable` by their
+	value inside the `env` array and free `str`.
 	@param char*str
 	@param t_data*data
 	@return char *
