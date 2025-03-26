@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/24 16:37:25 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/26 16:08:18 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ void	ft_update_env_var(t_data *data, char *variable, char *new_val)
 */
 void	ft_delete_env_var(t_data *data, char *variable)
 {
-	int		i;
-	int		j;
-	char	**new_env;
+	int				i;
+	int				j;
+	char			**new_env;
+	size_t const	variable_len = ft_strlen(variable);
 
-	size_t const variable_len = ft_strlen(variable);
 	i = 0;
 	if (!ft_get_env_var_adress(data, variable))
 		return ;

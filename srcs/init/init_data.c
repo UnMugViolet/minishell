@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/26 15:57:55 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:05:05 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_get_current_dir(t_data *data)
 {
-	char 	*colored_prompt;
+	char	*colored_prompt;
 	char	*tmp;
-	
+
 	if (data->curr_dir)
 		free(data->curr_dir);
 	data->curr_dir = getcwd(NULL, 0);
@@ -32,7 +32,7 @@ void	ft_get_current_dir(t_data *data)
 			free(data->curr_dir);
 		data->curr_dir = tmp;
 	}
-	colored_prompt = ft_strjoin(CYN BOLD ITALIC UNDERLINE , data->curr_dir);
+	colored_prompt = ft_strjoin(CYN BOLD ITALIC UNDERLINE, data->curr_dir);
 	free(data->curr_dir);
 	data->curr_dir = ft_strjoin_free(colored_prompt, ">" RESET);
 	data->curr_dir = ft_strjoin_free(data->curr_dir, " " BLK);

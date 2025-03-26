@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/25 19:27:51 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:06:21 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	ft_cd(t_data *data, char **cmd)
 	{
 		path = ft_get_associated_env_value(data, "HOME");
 		if (ft_strlen(path) == 0)
-			return (free(path), ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO),
-				1);
+			return (free(path), ft_putstr_fd("cd: HOME not set\n",
+					STDERR_FILENO), 1);
 		return (ft_change_dir(data, path), free(path), 0);
 	}
 	else

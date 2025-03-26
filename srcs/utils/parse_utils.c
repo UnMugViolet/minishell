@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 15:24:05 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:21:09 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	ft_create_exec_conditionaly(t_data *data, char *cmd, size_t type)
 	cmd_array = ft_split_strset(cmd, data->metachar);
 	if (!cmd_array)
 	{
-		ft_exit_error(data, "Error: malloc exec failed, \
-			cannot fetch commands.");
+		ft_exit_error(data, "Error: malloc exec failed, cannot fetch cmd.");
 		return ;
 	}
 	if (!data->exec)

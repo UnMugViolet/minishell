@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:18:56 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/26 15:22:28 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:20:42 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_get_path_for_cmd(t_data *data, char *cmd)
 			full_cmd = ft_strjoin(data->paths[i], cmd);
 			if (!full_cmd)
 				return (ft_exit_error(data, "Error: malloc failed, \
-						cannot get path for cmd."), NULL);
+cannot get path for cmd."), NULL);
 			if (access(full_cmd, X_OK) == 0)
 				return (full_cmd);
 			free(full_cmd);

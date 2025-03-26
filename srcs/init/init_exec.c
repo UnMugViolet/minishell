@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:35:30 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 15:19:39 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:05:31 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ void	ft_exec_add_back(t_exec **exec, t_exec *new)
 
 void	ft_free_exec(t_exec *exec)
 {
-    t_exec	*tmp;
+	t_exec	*tmp;
 
-    while (exec)
-    {
-        tmp = exec->next;
+	while (exec)
+	{
+		tmp = exec->next;
 		ft_free_array_str(exec->cmd);
-        if (exec->full_cmd)
-            free(exec->full_cmd);
-        if (exec->infile)
-            free(exec->infile);
-        if (exec->outfile)
-            free(exec->outfile);
-        free(exec);
-        exec = tmp;
-    }
+		if (exec->full_cmd)
+			free(exec->full_cmd);
+		if (exec->infile)
+			free(exec->infile);
+		if (exec->outfile)
+			free(exec->outfile);
+		free(exec);
+		exec = tmp;
+	}
 }
