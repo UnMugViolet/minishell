@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/25 16:49:29 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 11:10:49 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_data
 	char					**env;
 	char					**paths;
 	char					**metachar;
+	char					*curr_dir;
 	t_lex					*lex;
 	size_t					lex_size;
 	char					*last_exit_value;
@@ -95,6 +96,8 @@ void						ft_get_commands(t_data *data);
 void						ft_init_prompt_lexing(t_data *data);
 
 /* --------------------------------UTILS-------------------------------- */
+
+void						ft_get_current_dir(t_data *data);
 
 t_lex						*ft_lexnew(size_t type, char *content);
 void						ft_lexadd_back(t_lex **lex, t_lex *new);

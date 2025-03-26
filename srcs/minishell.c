@@ -29,7 +29,8 @@ static void	ft_start_minishell(t_data *data)
 {
 	while (true)
 	{
-		data->prompt = readline(CYN "minishell> " BLK);
+		ft_get_current_dir(data);
+		data->prompt = readline(data->curr_dir);
 		if (data->prompt && *data->prompt == 0)
 			continue ;
 		else if (data->prompt)

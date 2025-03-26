@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/24 17:09:51 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:31:00 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_get_current_dir(t_data *data)
+{
+	char 	*colored_prompt;
+	char	*tmp;
+	
+	if (data->curr_dir)
+		free(data->curr_dir);
+	data->curr_dir = getcwd(NULL, 0);
+	if (!data->curr_dir)
+	{
+		data->curr_dir = ft_strdup("(*_*)");
+		return ;
+	}
+	tmp = ft_strdup(ft_strrchr(data->curr_dir, '/') + 1);
+	if (tmp)
+	{
+		if (data->curr_dir)
+			free(data->curr_dir);
+		data->curr_dir = tmp;
+	}
+	colored_prompt = ft_strjoin(CYN BOLD ITALIC UNDERLINE , data->curr_dir);
+	free(data->curr_dir);
+	data->curr_dir = ft_strjoin_free(colored_prompt, ">" RESET);
+	data->curr_dir = ft_strjoin_free(data->curr_dir, " " BLK);
+}
 
 /*
 	Increment the value of the `SHLVL` variable in the `env` array
@@ -90,7 +116,7 @@ void	ft_init_data_struct(t_data *data, char **env)
 {
 	data->env = ft_str_array_dup(env);
 	if (!data->env)
-		ft_default_env(data);
+	ft_default_env(data);
 	ft_inc_shell_lvl(data);
 	data->paths = ft_get_path_from_env(data);
 	data->prompt = NULL;
@@ -98,4 +124,5 @@ void	ft_init_data_struct(t_data *data, char **env)
 	data->exec = NULL;
 	data->metachar = ft_split(METACHAR, ' ');
 	data->last_exit_value = ft_strdup("0");
+	ft_get_current_dir(data);
 }

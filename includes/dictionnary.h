@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dictionnary.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/24 09:49:42 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:28:42 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 
 # define CYN "\x1B[36m"
 # define BLK "\x1B[0m"
+
+#define BOLD "\033[1m"
+#define ITALIC "\033[3m"
+#define UNDERLINE "\033[4m"
+#define RESET "\033[0m" 
 
 /*-------------------------------OPERATORS------------------------------------*/
 
