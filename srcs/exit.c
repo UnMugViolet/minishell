@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/26 15:14:51 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/26 15:57:32 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static void	ft_conditional_free(void *ptr, void (*func)(void *))
 */
 void	ft_exit_clean(t_data *data, bool write_exit)
 {
+	ft_free_array_str(data->env);
     ft_free_array_str(data->paths);
     ft_free_array_str(data->metachar);
-    ft_free_array_str(data->env);
     ft_conditional_free(data->prompt, free);
     ft_conditional_free(data->curr_dir, free);
     ft_conditional_free(data->lex, (void (*)(void *))ft_free_lex);

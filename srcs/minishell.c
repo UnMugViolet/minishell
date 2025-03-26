@@ -22,7 +22,6 @@ static void	ft_resolve(t_data *data)
 		ft_fprintf(STDERR_FILENO, "minishell: syntax error near unexpected token '%s'\n", ft_single_token(data->lex, data->metachar));
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);
-	ft_print_exec(data->exec);
 	ft_free_lex(data->lex);
 	ft_free_exec(data->exec);
 	data->lex = NULL;
