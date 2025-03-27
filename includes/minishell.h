@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 12:23:48 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 13:31:54 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,16 @@ void						ft_exec_add_back(t_exec **exec, t_exec *new);
 char						*ft_str_substitute(char *str, t_data *data);
 char						*ft_get_last_word(t_lex *lex);
 
+void						ft_update_last_exit_value(t_data *data, int value);
+
 /* --------------------------------CHECKS-------------------------------- */
 
 bool						ft_is_correct_input(char *prompt);
 bool						ft_is_closed_quotes(char *prompt);
 bool						ft_is_token(char *str, t_data *data);
 bool						ft_is_env_var(char *str);
+bool						ft_is_correct_token(t_lex *lex, char **metachar);
 bool						ft_is_metacharset(char *str, char **metacharset);
-bool						ft_word_after_redir(t_lex *lex);
 char						*ft_single_token(t_lex *lex, char **metachar);
 
 /* -------------------------------BUILTINS------------------------------- */

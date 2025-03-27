@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/21 10:18:26 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 13:13:21 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,10 @@ char	*ft_get_env_var_adress(t_data *data, char *variable)
 			&& data->env[i][size] == '=')
 			return (data->env[i]);
 	return (NULL);
+}
+
+void	ft_update_last_exit_value(t_data *data, int value)
+{
+	free(data->last_exit_value);
+	data->last_exit_value = ft_itoa(value);
 }

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 12:10:33 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 13:30:45 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static void	ft_resolve(t_data *data)
 	if (!ft_is_correct_input(data->prompt))
 		return ;
 	ft_init_prompt_lexing(data);
-	if (ft_single_token(data->lex, data->metachar))
-		ft_fprintf(STDERR_FILENO,
-			"minishell: syntax error near unexpected token '%s'\n",
-			ft_single_token(data->lex, data->metachar));
-	else if (!ft_word_after_redir(data->lex))
-	ft_fprintf(STDERR_FILENO,
-		"minishell: syntax error near unexpected token 'newline'\n");
+	if (!ft_is_correct_token(data->lex, data->metachar))
+	{
+		ft_free_lex(data->lex);
+		data->lex = NULL;
+		ft_update_last_exit_value(data, 1);
+		return ;
+	}
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);
 	ft_print_exec(data->exec);
