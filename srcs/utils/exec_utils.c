@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:24:45 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 15:23:48 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 12:21:00 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	ft_print_exec(t_exec *exec)
 	tmp = exec;
 	i = 0;
 	if (!tmp)
-		ft_printf("EXEC IS EMPTY\n");
+		ft_printf("\nEXEC IS EMPTY\n");
 	else
 	{
-		ft_printf("EXEC ARRAY:\n");
+		ft_printf("\nEXEC ARRAY:\n");
 		while (tmp)
 		{
 			ft_printf("Chain nbr: %i\n", ++i);

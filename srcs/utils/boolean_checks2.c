@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   boolean_checks2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:39:26 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 15:13:37 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 11:46:18 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,29 @@ char	*ft_single_token(t_lex *lex, char **metachar)
 		lex = lex->next;
 	}
 	return (NULL);
+}
+
+static bool	ft_is_only_whitespace(char *str)
+{
+	while (*str)
+	{
+		if (!ft_is_whitespace(*str))
+			return (false);
+	}
+	return (true);
+}
+
+bool	ft_word_after_redir(t_lex *lex)
+{
+	char	**redir_charset;
+
+	redir_charset = ft_split("<< < >> >", ' ');
+	while (lex)
+	{
+		if (ft_is_metacharset(lex->content, redir_charset)
+			&& (!lex->next || ft_is_only_whitespace(lex->next->content)))
+			return (false);
+		lex = lex->next;
+	}
+	return (true);
 }

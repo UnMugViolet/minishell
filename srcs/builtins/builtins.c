@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/25 17:05:00 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 12:20:22 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,25 @@ int	ft_echo(char **cmd)
 	@param char*str
 	@return void
 */
-void	ft_exec_builtins(t_data *data, char **cmd)
+bool	ft_check_exec_builtins(t_data *data, char **cmd)
 {
 	if (!ft_strncmp(*cmd, "pwd", 4) && !cmd[1])
-		ft_putendl_fd(ft_get_env_var_adress(data, "PWD") + 4, STDOUT_FILENO);
+		return (ft_putendl_fd(ft_get_env_var_adress(data, "PWD") + 4,
+				STDOUT_FILENO), 1);
 	else if (!ft_strncmp(*cmd, "echo", 5))
-		ft_echo(cmd);
+		return (ft_echo(cmd), 1);
 	else if (!ft_strncmp(*cmd, "cd", 3))
-		ft_cd(data, cmd);
+		return (ft_cd(data, cmd), 1);
 	else if (!ft_strncmp(*cmd, "env", 4) && !cmd[1])
-		ft_print_array_str_fd(data->env, STDOUT_FILENO);
+		return (ft_print_array_str_fd(data->env, STDOUT_FILENO), 1);
 	else if (!ft_strncmp(*cmd, "export", 7) && cmd[1])
-		ft_create_env_var(data, cmd[1]);
+		return (ft_create_env_var(data, cmd[1]), 1);
 	else if (!ft_strncmp(*cmd, "export", 7))
-		ft_print_export(data->env, "export ", STDOUT_FILENO);
+		return (ft_print_export(data->env, "export ", STDOUT_FILENO), 1);
 	else if (!ft_strncmp(*cmd, "unset", 6) && cmd[1])
-		ft_delete_env_var(data, cmd[1]);
+		return (ft_delete_env_var(data, cmd[1]), 1);
 	else if (!ft_strncmp(data->prompt, "exit", 5))
-		ft_exit_clean(data, 1);
+		return (ft_exit_clean(data, 1), 1);
 	else
-		return ;
+		return (0);
 }

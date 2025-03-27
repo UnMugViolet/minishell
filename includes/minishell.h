@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 09:46:59 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 12:23:48 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <termios.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 typedef struct s_exec
 {
@@ -117,11 +119,12 @@ bool						ft_is_closed_quotes(char *prompt);
 bool						ft_is_token(char *str, t_data *data);
 bool						ft_is_env_var(char *str);
 bool						ft_is_metacharset(char *str, char **metacharset);
+bool						ft_word_after_redir(t_lex *lex);
 char						*ft_single_token(t_lex *lex, char **metachar);
 
 /* -------------------------------BUILTINS------------------------------- */
 
-void						ft_exec_builtins(t_data *data, char **cmd);
+bool						ft_check_exec_builtins(t_data *data, char **cmd);
 int							ft_cd(t_data *data, char **cmd);
 
 /* ---------------------------------PATH--------------------------------- */

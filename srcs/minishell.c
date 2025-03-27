@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 10:26:45 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 12:10:33 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ static void	ft_resolve(t_data *data)
 		ft_fprintf(STDERR_FILENO,
 			"minishell: syntax error near unexpected token '%s'\n",
 			ft_single_token(data->lex, data->metachar));
+	else if (!ft_word_after_redir(data->lex))
+	ft_fprintf(STDERR_FILENO,
+		"minishell: syntax error near unexpected token 'newline'\n");
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);
 	ft_print_exec(data->exec);

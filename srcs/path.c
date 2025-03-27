@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:18:56 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/26 16:20:42 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 12:29:33 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_get_path_for_cmd(t_data *data, char *cmd)
 	i = 0;
 	full_cmd = NULL;
 	if (!cmd)
-		return (NULL);
+		return (ft_strdup(""));
 	if (access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
 	else
@@ -46,5 +46,5 @@ cannot get path for cmd."), NULL);
 			i++;
 		}
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }
