@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 17:00:49 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 10:26:45 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	ft_resolve(t_data *data)
 	if (!ft_is_correct_input(data->prompt))
 		return ;
 	ft_init_prompt_lexing(data);
-	ft_print_lex(data->lex);
 	if (ft_single_token(data->lex, data->metachar))
 		ft_fprintf(STDERR_FILENO,
 			"minishell: syntax error near unexpected token '%s'\n",
