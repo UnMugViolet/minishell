@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/26 16:06:21 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 14:31:54 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	ft_cd(t_data *data, char **cmd)
 		path = ft_get_associated_env_value(data, "HOME");
 		if (ft_strlen(path) == 0)
 			return (free(path), ft_putstr_fd("cd: HOME not set\n",
-					STDERR_FILENO), 1);
+					ERR_OUT), 1);
 		return (ft_change_dir(data, path), free(path), 0);
 	}
 	else
 		path = cmd[1];
 	if (cmd[1] && cmd[2])
-		return (ft_putstr_fd("cd: Too many arguments\n", STDERR_FILENO), 1);
+		return (ft_putstr_fd("cd: Too many arguments\n", ERR_OUT), 1);
 	else if (stat(path, &sb) == -1 && ft_strncmp(path, "-", 2)
 		&& ft_strncmp(path, "~", 2))
 		return (perror("cd"), 1);

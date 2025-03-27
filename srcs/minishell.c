@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 13:30:45 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:40:52 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_start_minishell(t_data *data)
 		{
 			add_history(data->prompt);
 			if (!ft_is_closed_quotes(data->prompt))
-				ft_fprintf(2, "Missing closing quote.\n");
+				ft_fprintf(2, ERR_QUOTE);
 			else
 				ft_resolve(data);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/26 15:57:32 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 14:31:26 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ void	ft_exit_clean(t_data *data, bool write_exit)
 	exit(EXIT_SUCCESS);
 }
 
-void	ft_exit_error(t_data *data, char *str)
+void	ft_exit_error(t_data *data, char *str, int code)
 {
-	ft_fprintf(STDERR_FILENO, "%s\n", str);
+	ft_fprintf(ERR_OUT, "%s\n", str);
 	ft_exit_clean(data, 0);
-	exit(EXIT_FAILURE);
+	if (code)
+		exit(code);
+	else
+		exit(EXIT_FAILURE);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 12:36:54 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:53:12 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 static int	ft_handle_errors(t_exec *exec)
 {
 	if (errno == ENOENT)
-		return (ft_fprintf(2, "minishell: %s: command not found\n",
-				exec->cmd[0]), 127);
+		return (ft_fprintf(ERR_OUT, CMD_NOT_FOUND, exec->cmd[0]), 127);
 	else if (errno == EACCES)
-		return (ft_fprintf(2, "minishell: %s: permission denied\n",
-				exec->cmd[0]), 126);
+		return (ft_fprintf(ERR_OUT, PERM_DENIED, exec->cmd[0]), 126);
 	else
 		return (ft_fprintf(2, "minishell: %s: %s\n", exec->cmd[0],
 				strerror(errno)), 2);

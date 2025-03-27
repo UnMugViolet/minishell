@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 10:54:48 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 15:23:26 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_create_exec_conditionaly(t_data *data, char *cmd, size_t type)
 	command = ft_split(cmd, ' ');
 	if (!cmd_array || !command)
 	{
-		ft_exit_error(data, "Error: malloc exec failed, cannot fetch cmd.");
+		ft_exit_error(data, MALLOC_ERROR, 2);
 		return ;
 	}
 	path_cmd = ft_get_path_for_cmd(data, command[0]);

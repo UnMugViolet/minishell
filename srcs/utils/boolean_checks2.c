@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:39:26 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 13:41:09 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:39:59 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ static bool	ft_double_token(t_lex *lex, char **metachar)
 	{
 		if (lex->next && ft_is_metacharset(lex->content, metachar)
 			&& ft_is_metacharset(lex->next->content, metachar))
-			return (ft_fprintf(STDERR_FILENO,
-					"minishell: syntax error near unexpected token '%s'\n",
-					lex->next->content, true));
+			return (ft_fprintf(ERR_OUT, SYNTAX_ERROR, lex->next->content, 
+					true));
 		lex = lex->next;
 	}
 	return (false);
@@ -59,13 +58,12 @@ static bool	ft_word_after_redir(t_lex *lex)
 	{
 		if (ft_is_metacharset(lex->content, redir_charset) && (!lex->next
 				|| ft_is_only_whitespace(lex->next->content)))
-			return (ft_free_array_str(redir_charset), ft_fprintf(STDERR_FILENO,
-					"minishell: syntax error near unexpected token '\\n'\n"),
-				false);
+			return (ft_free_array_str(redir_charset), ft_fprintf(ERR_OUT, 
+				SYNTAX_ERROR_N), false);
 		else if (!ft_strncmp(lex->content, "|", 2) && (!lex->next
 				|| ft_is_only_whitespace(lex->next->content)))
-			return (ft_free_array_str(redir_charset), ft_fprintf(STDERR_FILENO,
-					"minishell: syntax error near unexpected token '|'\n"),
+			return (ft_free_array_str(redir_charset), ft_fprintf(ERR_OUT,
+					SYNTAX_ERROR, " |"),
 				false);
 		lex = lex->next;
 	}

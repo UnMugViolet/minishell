@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:18:56 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/27 12:29:33 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 15:21:18 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_get_path_for_cmd(t_data *data, char *cmd)
 	full_cmd = NULL;
 	if (!cmd)
 		return (ft_strdup(""));
-	if (access(cmd, X_OK) == 0)
+	if (access(cmd, F_OK) == 0)
 		return (ft_strdup(cmd));
 	else
 	{
@@ -38,9 +38,8 @@ char	*ft_get_path_for_cmd(t_data *data, char *cmd)
 		{
 			full_cmd = ft_strjoin(data->paths[i], cmd);
 			if (!full_cmd)
-				return (ft_exit_error(data, "Error: malloc failed, \
-cannot get path for cmd."), NULL);
-			if (access(full_cmd, X_OK) == 0)
+				return (ft_exit_error(data, MALLOC_ERROR, ERR_OUT), NULL);
+			if (access(full_cmd, F_OK) == 0)
 				return (full_cmd);
 			free(full_cmd);
 			i++;
