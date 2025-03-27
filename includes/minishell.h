@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 15:47:24 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 16:55:26 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_exec
 {
 	char					**cmd;
 	char					*full_cmd;
-	char					*infile;
-	char					*outfile;
+	char					**infile;
+	char					**outfile;
 	size_t					type;
 	struct s_exec			*next;
 	struct s_exec			*prev;
@@ -111,6 +111,7 @@ void						ft_exec_add_back(t_exec **exec, t_exec *new);
 
 char						*ft_str_substitute(char *str, t_data *data);
 char						*ft_get_last_word(t_lex *lex);
+void						ft_add_str_array(char ***array, char *str);
 
 void						ft_update_last_exit_value(t_data *data, int value);
 

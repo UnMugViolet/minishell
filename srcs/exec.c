@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 15:52:17 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 16:04:15 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_exec_cmd(t_data *data, t_exec *exec)
 	else
 	{
 		waitpid(pid, &status, 0);
-		ft_update_last_exit_value(data, status);
+		ft_update_last_exit_value(data, WEXITSTATUS(status));
 	}
 }
 
