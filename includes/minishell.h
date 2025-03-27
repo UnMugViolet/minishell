@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 14:27:50 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 15:47:24 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void						ft_get_first_command(t_data *data, size_t *i);
 /* --------------------------------ERRORS-------------------------------- */
 
 void						ft_exit_error(t_data *data, char *str, int code);
-void						ft_exit_clean(t_data *data, bool write_exit);
+void						ft_exit_clean(t_data *data, int error_code);
 void						display_usage(void);
 
 /* ---------------------------------FREE--------------------------------- */

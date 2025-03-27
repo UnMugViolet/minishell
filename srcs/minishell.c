@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 14:40:52 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 15:48:47 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	ft_start_minishell(t_data *data)
 			break ;
 		free(data->prompt);
 	}
-	ft_exit_clean(data, 1);
+	ft_exit_clean(data, 0);
 }
 
 int	main(int ac, char **av, char **env)

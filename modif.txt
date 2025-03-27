@@ -1,0 +1,15 @@
+J'ai ajouté une fonction de check des tokens qui regarde si tout est ok,
+le cas échéant affiche un message d'erreur et je modifie la valeur du last exit de data struct
+
+Donc mini fonction pour update la valeur du dernier exit, et vu que la variable d'environnement est pas censée être accessible 
+et bah on touche pas au env
+
+TLDR, verif des tokens dans boolean_checks2
+fonction d'update d'exit dans env_utils2
+
+
+TODO: 
+
+- Fix leaks on command not found (exit_error + code error)
+- Check the error code in case file not accessible (wrong permission)
+
