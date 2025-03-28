@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:52:21 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/27 16:02:49 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/28 08:17:42 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	ft_disable_echoctl(void)
 */
 static void	ft_handle_signal(int signal)
 {
-	if (signal == SIGINT)
+	if (signal == SIGINT || signal == SIGCHLD)
 	{
 		ft_fprintf(STDOUT_FILENO, "\n");
 		rl_on_new_line();
