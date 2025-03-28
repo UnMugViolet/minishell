@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/26 15:57:32 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 15:44:18 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_conditional_free(void *ptr, void (*func)(void *))
 	@param t_data *data
 	@return void
 */
-void	ft_exit_clean(t_data *data, bool write_exit)
+void	ft_exit_clean(t_data *data, int error_code)
 {
 	ft_free_array_str(data->env);
 	ft_free_array_str(data->paths);
@@ -39,16 +39,19 @@ void	ft_exit_clean(t_data *data, bool write_exit)
 	ft_conditional_free(data->exec, (void (*)(void *))ft_free_exec);
 	ft_conditional_free(data->last_exit_value, free);
 	rl_clear_history();
-	if (write_exit)
+	if (!error_code)
 		ft_fprintf(1, "exit\n");
-	exit(EXIT_SUCCESS);
+	exit(error_code);
 }
 
-void	ft_exit_error(t_data *data, char *str)
+void	ft_exit_error(t_data *data, char *str, int code)
 {
-	ft_fprintf(STDERR_FILENO, "%s\n", str);
+	ft_fprintf(ERR_OUT, "%s\n", str);
 	ft_exit_clean(data, 0);
-	exit(EXIT_FAILURE);
+	if (code)
+		exit(code);
+	else
+		exit(EXIT_FAILURE);
 }
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 16:24:05 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 16:55:26 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <termios.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 typedef struct s_exec
 {
 	char					**cmd;
 	char					*full_cmd;
-	char					*infile;
-	char					*outfile;
+	char					**infile;
+	char					**outfile;
 	size_t					type;
 	struct s_exec			*next;
 	struct s_exec			*prev;
@@ -109,6 +111,9 @@ void						ft_exec_add_back(t_exec **exec, t_exec *new);
 
 char						*ft_str_substitute(char *str, t_data *data);
 char						*ft_get_last_word(t_lex *lex);
+void						ft_add_str_array(char ***array, char *str);
+
+void						ft_update_last_exit_value(t_data *data, int value);
 
 /* --------------------------------CHECKS-------------------------------- */
 
@@ -116,12 +121,13 @@ bool						ft_is_correct_input(char *prompt);
 bool						ft_is_closed_quotes(char *prompt);
 bool						ft_is_token(char *str, t_data *data);
 bool						ft_is_env_var(char *str);
+bool						ft_is_correct_token(t_lex *lex, char **metachar);
 bool						ft_is_metacharset(char *str, char **metacharset);
 char						*ft_single_token(t_lex *lex, char **metachar);
 
 /* -------------------------------BUILTINS------------------------------- */
 
-void						ft_exec_builtins(t_data *data, char **cmd);
+bool						ft_check_exec_builtins(t_data *data, char **cmd);
 int							ft_cd(t_data *data, char **cmd);
 
 /* ---------------------------------PATH--------------------------------- */
@@ -135,8 +141,8 @@ void						ft_get_first_command(t_data *data, size_t *i);
 
 /* --------------------------------ERRORS-------------------------------- */
 
-void						ft_exit_error(t_data *data, char *str);
-void						ft_exit_clean(t_data *data, bool write_exit);
+void						ft_exit_error(t_data *data, char *str, int code);
+void						ft_exit_clean(t_data *data, int error_code);
 void						display_usage(void);
 
 /* ---------------------------------FREE--------------------------------- */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 17:00:49 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/27 15:48:47 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ static void	ft_resolve(t_data *data)
 	if (!ft_is_correct_input(data->prompt))
 		return ;
 	ft_init_prompt_lexing(data);
-	ft_print_lex(data->lex);
-	if (ft_single_token(data->lex, data->metachar))
-		ft_fprintf(STDERR_FILENO,
-			"minishell: syntax error near unexpected token '%s'\n",
-			ft_single_token(data->lex, data->metachar));
+	if (!ft_is_correct_token(data->lex, data->metachar))
+	{
+		ft_free_lex(data->lex);
+		data->lex = NULL;
+		ft_update_last_exit_value(data, 1);
+		return ;
+	}
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);
 	ft_print_exec(data->exec);
@@ -43,7 +45,7 @@ static void	ft_start_minishell(t_data *data)
 		{
 			add_history(data->prompt);
 			if (!ft_is_closed_quotes(data->prompt))
-				ft_fprintf(2, "Missing closing quote.\n");
+				ft_fprintf(2, ERR_QUOTE);
 			else
 				ft_resolve(data);
 		}
@@ -51,7 +53,7 @@ static void	ft_start_minishell(t_data *data)
 			break ;
 		free(data->prompt);
 	}
-	ft_exit_clean(data, 1);
+	ft_exit_clean(data, 0);
 }
 
 int	main(int ac, char **av, char **env)
