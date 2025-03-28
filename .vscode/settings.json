@@ -1,0 +1,18 @@
+{
+	"files.associations": {
+		"*.sqlbook": "sql",
+		"*.ndjson": "jsonl",
+		"*.dbclient-js": "javascript",
+		"*.php": "php",
+		"minishell.h": "c",
+		"libft.h": "c",
+		"x.h": "c",
+		"linked_list.h": "c",
+		"array": "c",
+		"compare": "c",
+		"functional": "c",
+		"tuple": "c",
+		"type_traits": "c",
+		"utility": "c"
+	}
+}
