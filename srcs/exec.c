@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 16:04:15 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/28 08:25:32 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	ft_handle_errors(t_exec *exec)
 	else if (errno == EACCES)
 		return (ft_fprintf(ERR_OUT, PERM_DENIED, exec->cmd[0]), 126);
 	else
-		return (ft_fprintf(2, "minishell: %s: %s\n", exec->cmd[0],
-				strerror(errno)), 2);
+		return (ft_fprintf(2, STDRD_ERR, exec->cmd[0], strerror(errno)), 2);
 }
 
 static void	ft_exec_cmd(t_data *data, t_exec *exec)
@@ -35,7 +34,7 @@ static void	ft_exec_cmd(t_data *data, t_exec *exec)
 			ft_exit_clean(data, ft_handle_errors(exec));
 	}
 	else if (pid < 0)
-		ft_fprintf(2, "minishell : %s\n", strerror(errno));
+		ft_fprintf(2, STDRD_ERR_SINGLE, strerror(errno));
 	else
 	{
 		waitpid(pid, &status, 0);
@@ -52,7 +51,7 @@ void	ft_execute_prompt(t_data *data)
 	{
 		if (ft_check_exec_builtins(data, tmp->cmd))
 			;
-		else
+		else if (!ft_is_metacharset(tmp->cmd[0], data->metachar))
 			ft_exec_cmd(data, tmp);
 		tmp = tmp->next;
 	}
