@@ -22,13 +22,13 @@
 # include <errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <sys/stat.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <termios.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 
 typedef struct s_exec
 {
@@ -95,7 +95,8 @@ void						ft_get_outfile(t_data *data);
 void						ft_get_pipes(t_data *data);
 void						ft_get_infiles(t_data *data);
 void						ft_get_commands(t_data *data);
-void						ft_create_exec_conditionaly(t_data *data, char *cmd, size_t type);
+void						ft_create_exec_conditionaly(t_data *data, char *cmd,
+								size_t type);
 
 /* --------------------------------LEXING------------------------------- */
 
@@ -143,7 +144,8 @@ char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 void						ft_execute_prompt(t_data *data);
 void						ft_get_first_command(t_data *data, size_t *i);
 void						ft_exec_child(t_data *data, t_exec *exec);
-void						ft_setup_pipe(t_data *data, int is_pipe, int is_child);
+void						ft_setup_pipe(t_data *data, int is_pipe,
+								int is_child);
 void						ft_wait_and_update_status(t_data *data, pid_t pid);
 
 /* --------------------------------ERRORS-------------------------------- */

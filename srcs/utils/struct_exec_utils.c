@@ -48,9 +48,9 @@ void	ft_print_exec(t_exec *exec)
 */
 void	ft_add_str_array(char ***array, char *str)
 {
-	char 	**temp;
+	char	**temp;
 	int		i;
-	
+
 	i = 0;
 	if (!str)
 		return ;

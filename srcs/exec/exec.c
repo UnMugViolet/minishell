@@ -19,7 +19,7 @@ static void	ft_exec_command(t_data *data, t_exec *exec, int is_pipe)
 	if (is_pipe && pipe(data->pipe_fd) == -1)
 	{
 		ft_fprintf(2, STDRD_ERR_SINGLE, strerror(errno));
-		return;
+		return ;
 	}
 	pid = fork();
 	if (pid == 0)
@@ -36,7 +36,7 @@ static void	ft_exec_command(t_data *data, t_exec *exec, int is_pipe)
 	}
 }
 
-static void ft_exec_and_skip(t_data *data, t_exec *tmp, int is_pipe)
+static void	ft_exec_and_skip(t_data *data, t_exec *tmp, int is_pipe)
 {
 	ft_exec_command(data, tmp, is_pipe);
 	tmp = tmp->next;
@@ -46,22 +46,22 @@ void	ft_execute_prompt(t_data *data)
 {
 	t_exec	*tmp;
 
-    data->in_fd = dup(STDIN_FILENO);
-    data->out_fd = dup(STDOUT_FILENO);
+	data->in_fd = dup(STDIN_FILENO);
+	data->out_fd = dup(STDOUT_FILENO);
 	tmp = data->exec;
-    while (tmp)
-    {
-        if (ft_check_exec_builtins(data, tmp->cmd))
-            ;
-        else if (!ft_is_metacharset(tmp->cmd[0], data->metachar))
-        {
-            if (tmp->next && tmp->next->type == PIPE)
+	while (tmp)
+	{
+		if (ft_check_exec_builtins(data, tmp->cmd))
+			;
+		else if (!ft_is_metacharset(tmp->cmd[0], data->metachar))
+		{
+			if (tmp->next && tmp->next->type == PIPE)
 				ft_exec_and_skip(data, tmp, true);
-            else
+			else
 				ft_exec_command(data, tmp, false);
-        }
-        tmp = tmp->next;
-    }
-    dup2(data->in_fd , STDIN_FILENO);
-    dup2(data->out_fd, STDOUT_FILENO);
+		}
+		tmp = tmp->next;
+	}
+	dup2(data->in_fd, STDIN_FILENO);
+	dup2(data->out_fd, STDOUT_FILENO);
 }

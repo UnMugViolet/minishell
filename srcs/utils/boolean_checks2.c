@@ -32,7 +32,7 @@ static bool	ft_double_token(t_lex *lex, char **metachar)
 	{
 		if (lex->next && ft_is_metacharset(lex->content, metachar)
 			&& ft_is_metacharset(lex->next->content, metachar))
-			return (ft_fprintf(ERR_OUT, SYNTAX_ERROR, lex->next->content, 
+			return (ft_fprintf(ERR_OUT, SYNTAX_ERROR, lex->next->content,
 					true));
 		lex = lex->next;
 	}
@@ -58,13 +58,12 @@ static bool	ft_word_after_redir(t_lex *lex)
 	{
 		if (ft_is_metacharset(lex->content, redir_charset) && (!lex->next
 				|| ft_is_only_whitespace(lex->next->content)))
-			return (ft_free_array_str(redir_charset), ft_fprintf(ERR_OUT, 
-				SYNTAX_ERROR_N), false);
+			return (ft_free_array_str(redir_charset), ft_fprintf(ERR_OUT,
+					SYNTAX_ERROR_N), false);
 		else if (!ft_strncmp(lex->content, "|", 2) && (!lex->next
 				|| ft_is_only_whitespace(lex->next->content)))
 			return (ft_free_array_str(redir_charset), ft_fprintf(ERR_OUT,
-					SYNTAX_ERROR, " |"),
-				false);
+					SYNTAX_ERROR, " |"), false);
 		lex = lex->next;
 	}
 	return (ft_free_array_str(redir_charset), true);

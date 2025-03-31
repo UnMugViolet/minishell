@@ -24,33 +24,33 @@ static int	ft_handle_cmd_errors(t_exec *exec)
 
 void	ft_exec_child(t_data *data, t_exec *exec)
 {
-    if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
-        ft_exit_clean(data, ft_handle_cmd_errors(exec));
+	if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
+		ft_exit_clean(data, ft_handle_cmd_errors(exec));
 }
 
 void	ft_setup_pipe(t_data *data, int is_pipe, int is_child)
 {
-    if (is_pipe)
-    {
-        if (is_child)
-        {
-            close(data->pipe_fd[0]);
-            dup2(data->pipe_fd[1], STDOUT_FILENO);
-            close(data->pipe_fd[1]);
-        }
-        else
-        {
-            close(data->pipe_fd[1]);
-            dup2(data->pipe_fd[0], STDIN_FILENO);
-            close(data->pipe_fd[0]);
-        }
-    }
+	if (is_pipe)
+	{
+		if (is_child)
+		{
+			close(data->pipe_fd[0]);
+			dup2(data->pipe_fd[1], STDOUT_FILENO);
+			close(data->pipe_fd[1]);
+		}
+		else
+		{
+			close(data->pipe_fd[1]);
+			dup2(data->pipe_fd[0], STDIN_FILENO);
+			close(data->pipe_fd[0]);
+		}
+	}
 }
 
 void	ft_wait_and_update_status(t_data *data, pid_t pid)
 {
-    int	status;
+	int	status;
 
-    waitpid(pid, &status, 0);
-    ft_update_last_exit_value(data, WEXITSTATUS(status));
+	waitpid(pid, &status, 0);
+	ft_update_last_exit_value(data, WEXITSTATUS(status));
 }

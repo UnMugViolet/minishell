@@ -15,7 +15,7 @@
 static void	ft_resolve(t_data *data)
 {
 	if (!ft_is_correct_input(data->prompt))
-	return ;
+		return ;
 	ft_init_prompt_lexing(data);
 	if (!ft_is_correct_token(data->lex, data->metachar))
 	{
