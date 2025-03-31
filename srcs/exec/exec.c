@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/31 11:18:27 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/31 13:30:46 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	ft_execute_prompt(t_data *data)
 	{
 		if (ft_check_exec_builtins(data, tmp->cmd))
 			;
+		else if (ft_handle_redirection(tmp) == -1)
+			ft_exit_error(data, "Error: redirection", 1);
 		else if (!ft_is_metacharset(tmp->cmd[0], data->metachar))
 		{
 			if (tmp->next && tmp->next->type == PIPE)

@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/31 11:14:27 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/31 13:30:51 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void						ft_exec_child(t_data *data, t_exec *exec);
 void						ft_setup_pipe(t_data *data, int is_pipe,
 								int is_child);
 void						ft_wait_and_update_status(t_data *data, pid_t pid);
+int							ft_handle_redirection(t_exec *exec);
 
 /* --------------------------------ERRORS-------------------------------- */
 

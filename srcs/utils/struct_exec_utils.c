@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*   struct_exec_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:24:45 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 16:29:40 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/31 13:07:06 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	ft_print_exec(t_exec *exec)
 				tmp->full_cmd ? tmp->full_cmd : "NULL");
 			ft_printf("Infile: %s\n", (tmp->infile[0]
 					&& ft_strlen(tmp->infile[0]) > 0) ? tmp->infile[0] : "NULL");
-			ft_printf("Outfile: %s\n\n", (tmp->outfile[0]
+			ft_printf("Outfile: %s\n", (tmp->outfile[0]
 					&& ft_strlen(tmp->outfile[0]) > 0) ? tmp->outfile[0] : "NULL");
+			ft_printf("Type: %i\n\n", tmp->type);
 			tmp = tmp->next;
 		}
 	}
