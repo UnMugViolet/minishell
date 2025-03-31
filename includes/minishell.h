@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 16:55:26 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/31 11:14:27 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,12 @@ typedef struct s_data
 	char					**env;
 	char					**paths;
 	char					**metachar;
-	char					*curr_dir;
 	t_lex					*lex;
 	size_t					lex_size;
+	int						pipe_fd[2];
+	int						in_fd;
+	int						out_fd;
+	char					*curr_dir;
 	char					*last_exit_value;
 	t_exec					*exec;
 }							t_data;
@@ -92,6 +95,7 @@ void						ft_get_outfile(t_data *data);
 void						ft_get_pipes(t_data *data);
 void						ft_get_infiles(t_data *data);
 void						ft_get_commands(t_data *data);
+void						ft_create_exec_conditionaly(t_data *data, char *cmd, size_t type);
 
 /* --------------------------------LEXING------------------------------- */
 
@@ -138,11 +142,15 @@ char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 
 void						ft_execute_prompt(t_data *data);
 void						ft_get_first_command(t_data *data, size_t *i);
+void						ft_exec_child(t_data *data, t_exec *exec);
+void						ft_setup_pipe(t_data *data, int is_pipe, int is_child);
+void						ft_wait_and_update_status(t_data *data, pid_t pid);
 
 /* --------------------------------ERRORS-------------------------------- */
 
 void						ft_exit_error(t_data *data, char *str, int code);
 void						ft_exit_clean(t_data *data, int error_code);
+void						ft_close_fds(t_data *data);
 void						display_usage(void);
 
 /* ---------------------------------FREE--------------------------------- */

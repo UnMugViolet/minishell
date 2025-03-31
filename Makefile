@@ -6,7 +6,7 @@
 #    By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/26 14:59:49 by unmugviolet      ###   ########.fr        #
+#    Updated: 2025/03/31 11:14:53 by unmugviolet      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ BUILTIN_DIR = ./srcs/builtins/
 
 FILES = 		minishell.c lexing.c parsing.c signals.c exit.c env.c exec.c path.c
 
-UTILS_FILES =	boolean_checks.c boolean_checks2.c lex_utils.c lex_utils2.c env_utils.c env_utils2.c exec_utils.c \
-				ft_str_substitute.c parse_utils.c 
+UTILS_FILES =	boolean_checks.c boolean_checks2.c lex_utils.c lex_utils2.c env_utils.c env_utils2.c exec_struct_utils.c \
+				ft_str_substitute.c parse_utils.c parse_utils2.c exec_utils.c
 
 INIT_FILES =	init_data.c init_exec.c
 

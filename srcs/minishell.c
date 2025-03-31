@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/28 08:20:50 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/31 11:06:25 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_resolve(t_data *data)
 {
 	if (!ft_is_correct_input(data->prompt))
-		return ;
+	return ;
 	ft_init_prompt_lexing(data);
 	if (!ft_is_correct_token(data->lex, data->metachar))
 	{
@@ -26,9 +26,9 @@ static void	ft_resolve(t_data *data)
 	}
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);
-	ft_print_exec(data->exec);
 	ft_free_lex(data->lex);
 	ft_free_exec(data->exec);
+	ft_close_fds(data);
 	data->lex = NULL;
 	data->exec = NULL;
 }

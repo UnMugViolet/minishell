@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 13:08:53 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/31 09:56:12 by unmugviolet      ###   ########.fr       */
+/*   Created: 2025/03/31 09:41:17 by unmugviolet       #+#    #+#             */
+/*   Updated: 2025/03/31 10:03:01 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_create_exec(t_data *data)
+void	ft_get_pipes(t_data *data)
 {
-	ft_get_heredocs(data);
-	ft_get_infiles(data);
-	ft_get_outfile(data);
-	ft_get_pipes(data);
-	ft_get_commands(data);
-}
+	t_lex	*tmp;
+	char	*cmd;
 
-/*
-	Check the inputs from the user, exit if the value entered is incorrect
-	@param t_data*data
-	@return void
-*/
-void	ft_parse_prompt(t_data *data)
-{
-	ft_create_exec(data);
-	ft_replace_env_variable(data);
+	cmd = NULL;
+	tmp = data->lex;
+	while (tmp)
+	{
+		if (tmp && tmp->type == PIPE)
+		{
+			ft_get_commands(data);
+			cmd = ft_strdup(tmp->content);
+			ft_lex_del_content(tmp);
+			ft_create_exec_conditionaly(data, cmd, PIPE);
+		}
+		tmp = tmp->next;
+	}
 }

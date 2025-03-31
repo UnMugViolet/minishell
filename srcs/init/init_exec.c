@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:35:30 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 16:05:31 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:33:28 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_exec	*ft_exec_new(char **cmd, char *full_cmd, size_t type)
 	new_element->cmd = cmd;
 	new_element->type = type;
 	new_element->full_cmd = full_cmd;
-	new_element->infile = ft_strdup("");
-	new_element->outfile = ft_strdup("");
+	new_element->infile = ft_split("", ' ');
+	new_element->outfile = ft_split("", ' ');
 	new_element->next = NULL;
 	new_element->prev = NULL;
 	return (new_element);
@@ -58,9 +58,9 @@ void	ft_free_exec(t_exec *exec)
 		if (exec->full_cmd)
 			free(exec->full_cmd);
 		if (exec->infile)
-			free(exec->infile);
+			ft_free_array_str(exec->infile);
 		if (exec->outfile)
-			free(exec->outfile);
+			ft_free_array_str(exec->outfile);
 		free(exec);
 		exec = tmp;
 	}

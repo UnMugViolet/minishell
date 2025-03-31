@@ -3,74 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 12:24:45 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 16:29:40 by pjaguin          ###   ########.fr       */
+/*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
+/*   Updated: 2025/03/31 11:14:08 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_print_exec(t_exec *exec)
+static int	ft_handle_cmd_errors(t_exec *exec)
 {
-	t_exec	*tmp;
-	int		i;
-
-	tmp = exec;
-	i = 0;
-	if (!tmp)
-		ft_printf("\nEXEC IS EMPTY\n");
+	if (errno == ENOENT)
+		return (ft_fprintf(ERR_OUT, CMD_NOT_FOUND, exec->cmd[0]), 127);
+	else if (errno == EACCES)
+		return (ft_fprintf(ERR_OUT, PERM_DENIED, exec->cmd[0]), 126);
 	else
-	{
-		ft_printf("\nEXEC ARRAY:\n");
-		while (tmp)
-		{
-			ft_printf("Chain nbr: %i\n", ++i);
-			ft_print_array_str_fd(tmp->cmd, 1);
-			ft_printf("Full Command: %s\n",
-				tmp->full_cmd ? tmp->full_cmd : "NULL");
-			ft_printf("Infile: %s\n", (tmp->infile[0]
-					&& ft_strlen(tmp->infile[0]) > 0) ? tmp->infile[0] : "NULL");
-			ft_printf("Outfile: %s\n\n", (tmp->outfile[0]
-					&& ft_strlen(tmp->outfile[0]) > 0) ? tmp->outfile[0] : "NULL");
-			tmp = tmp->next;
-		}
-	}
+		return (ft_fprintf(2, STDRD_ERR, exec->cmd[0], strerror(errno)), 2);
 }
 
-/*
-	Add the `str` string at the end of `array`, if `array` is NULL,
-	creates an `array` of 1 string `str`.
-	@param char***array
-	@param char*str
-	@return void
-*/
-void	ft_add_str_array(char ***array, char *str)
+void	ft_exec_child(t_data *data, t_exec *exec)
 {
-	char 	**temp;
-	int		i;
-	
-	i = 0;
-	if (!str)
-		return ;
-	if (!*array)
-	{
-		*array = (char **)ft_calloc(sizeof(char *), 2);
-		if (!*array)
-			return ;
-		*array[0] = ft_strdup(str);
-		return ;
-	}
-	while (*array[i])
-		i++;
-	temp = (char **)ft_calloc(sizeof(char *), i + 2);
-	if (!temp)
-		return ;
-	i = -1;
-	while (*array[++i])
-		temp[i] = ft_strdup(*array[i]);
-	temp[i] = ft_strdup(str);
-	ft_free_array_str(*array);
-	*array = temp;
+    if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
+        ft_exit_clean(data, ft_handle_cmd_errors(exec));
+}
+
+void	ft_setup_pipe(t_data *data, int is_pipe, int is_child)
+{
+    if (is_pipe)
+    {
+        if (is_child)
+        {
+            close(data->pipe_fd[0]);
+            dup2(data->pipe_fd[1], STDOUT_FILENO);
+            close(data->pipe_fd[1]);
+        }
+        else
+        {
+            close(data->pipe_fd[1]);
+            dup2(data->pipe_fd[0], STDIN_FILENO);
+            close(data->pipe_fd[0]);
+        }
+    }
+}
+
+void	ft_wait_and_update_status(t_data *data, pid_t pid)
+{
+    int	status;
+
+    waitpid(pid, &status, 0);
+    ft_update_last_exit_value(data, WEXITSTATUS(status));
 }

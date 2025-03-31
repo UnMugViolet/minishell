@@ -14,5 +14,6 @@
 		"tuple": "c",
 		"type_traits": "c",
 		"utility": "c"
-	}
+	},
+	"makefile.configureOnOpen": false
 }

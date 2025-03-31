@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/27 15:23:26 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/03/31 09:55:17 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ void	ft_get_outfile(t_data *data)
 	tmp = data->lex;
 	while (tmp)
 	{
-		if (tmp && (tmp->type == RIGHT_BRACKET
-				|| tmp->type == DOUBLE_RIGHT_BRACKET))
+		if (tmp && tmp->type == RIGHT_BRACKET)
 		{
 			if (tmp->next && tmp->next->content)
 			{
@@ -107,7 +106,7 @@ void	ft_get_outfile(t_data *data)
 			else
 				cmd = ft_strdup(tmp->content);
 			ft_lex_del_content(tmp);
-			ft_create_exec_conditionaly(data, cmd, LEFT_BRACKET);
+			ft_create_exec_conditionaly(data, cmd, RIGHT_BRACKET);
 		}
 		tmp = tmp->next;
 	}

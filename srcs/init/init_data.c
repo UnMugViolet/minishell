@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/26 16:05:05 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:48:58 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,10 @@ void	ft_init_data_struct(t_data *data, char **env)
 	data->curr_dir = NULL;
 	data->lex = NULL;
 	data->exec = NULL;
+	data->pipe_fd[0] = -1;
+	data->pipe_fd[1] = -1;
+	data->in_fd = dup(STDIN_FILENO);
+	data->out_fd = dup(STDOUT_FILENO);
 	data->metachar = ft_split(METACHAR, ' ');
 	data->last_exit_value = ft_strdup("0");
 	ft_get_current_dir(data);
