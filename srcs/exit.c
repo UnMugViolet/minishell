@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/31 10:54:48 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/03/31 11:32:47 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_exit_clean(t_data *data, int error_code)
 	ft_conditional_free(data->exec, (void (*)(void *))ft_free_exec);
 	ft_conditional_free(data->last_exit_value, free);
 	rl_clear_history();
+	ft_close_fds(data);
 	if (!error_code)
 		ft_fprintf(1, "exit\n");
 	exit(error_code);

@@ -6,33 +6,41 @@
 #    By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/31 11:14:53 by unmugviolet      ###   ########.fr        #
+#    Updated: 2025/03/31 11:47:27 by unmugviolet      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-LIBFT_DIR = ./libft
-SRC_DIR = ./srcs/
-OBJ_DIR = ./objects/
-INC_DIR = ./includes/
-UTILS_DIR = ./srcs/utils/
-INIT_DIR = ./srcs/init/
-BUILTIN_DIR = ./srcs/builtins/
+LIBFT_DIR = 	./libft
+SRC_DIR = 		./srcs/
+OBJ_DIR = 		./objects/
+INC_DIR = 		./includes/
 
-FILES = 		minishell.c lexing.c parsing.c signals.c exit.c env.c exec.c path.c
+# Directories for categorized source files
+DIRS = 			env utils init lexing parsing builtins exec
 
-UTILS_FILES =	boolean_checks.c boolean_checks2.c lex_utils.c lex_utils2.c env_utils.c env_utils2.c exec_struct_utils.c \
-				ft_str_substitute.c parse_utils.c parse_utils2.c exec_utils.c
-
+# Source files for each directory
+FILES = 		minishell.c path.c signals.c exit.c
+ENV_FILES = 	env.c env_utils.c env_utils2.c ft_str_substitute.c
+UTILS_FILES =	boolean_checks.c boolean_checks2.c struct_exec_utils.c
 INIT_FILES =	init_data.c init_exec.c
-
+LEX_FILES = 	lexing.c lex_utils.c lex_utils2.c
+PARSE_FILES = 	parsing.c parse_utils.c parse_utils2.c
 BUILTIN_FILES = builtins.c cd.c
+EXEC_FILES = 	exec.c exec_utils.c
 
-OBJ =	$(addprefix $(OBJ_DIR), $(FILES:.c=.o)) \
-		$(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o)) \
-		$(addprefix $(OBJ_DIR), $(INIT_FILES:.c=.o)) \
-		$(addprefix $(OBJ_DIR), $(BUILTIN_FILES:.c=.o)) \
+
+SRC_FILES = 	$(FILES) \
+                $(addprefix env/, $(ENV_FILES)) \
+                $(addprefix utils/, $(UTILS_FILES)) \
+                $(addprefix init/, $(INIT_FILES)) \
+                $(addprefix lexing/, $(LEX_FILES)) \
+                $(addprefix parsing/, $(PARSE_FILES)) \
+                $(addprefix builtins/, $(BUILTIN_FILES)) \
+                $(addprefix exec/, $(EXEC_FILES))
+
+OBJ = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
 
 CC = cc
 MAKE = make
@@ -48,36 +56,20 @@ CYAN = \033[0;96m
 
 all: $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME): $(OBJ)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(INC_H) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME) -l readline
-
-$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
-	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
-
-$(OBJ_DIR)%.o: $(UTILS_DIR)%.c | $(OBJ_DIR)
-	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(INIT_DIR)%.c | $(OBJ_DIR)
-	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
-	
-$(OBJ_DIR)%.o: $(BUILTIN_DIR)%.c | $(OBJ_DIR)
-	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@$(CC) $(CFLAGS) $(INC_H) -c $< -o $@
-
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR) $(addprefix $(OBJ_DIR), $(DIRS))
 
 clean: 
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@echo "$(GREEN)$(NAME) object files cleaned!$(DEFAULT)"
 
 fclean: clean
