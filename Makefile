@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+         #
+#    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/03/31 11:47:27 by unmugviolet      ###   ########.fr        #
+#    Updated: 2025/04/01 16:15:09 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,10 @@ gov: all
 	@valgrind --suppressions=valgrind-readline.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
 	@rm -rf $(NAME)
 
+debug: all
+	@lldb $(NAME)
+	@rm -rf $(NAME)
+
 # Specify that these are not files to compile (just for safety)
-.PHONY: all clean fclean re go gov
+.PHONY: all clean fclean re go gov debug
 	

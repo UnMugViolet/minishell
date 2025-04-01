@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/31 11:32:47 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/01 16:23:57 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,8 @@ void	ft_close_fds(t_data *data)
 		close(data->pipe_fd[0]);
 	if (data->pipe_fd[1] != -1)
 		close(data->pipe_fd[1]);
-	if (data->in_fd != -1)
-		close(data->in_fd);
-	if (data->out_fd != -1)
-		close(data->out_fd);
 	data->pipe_fd[0] = -1;
 	data->pipe_fd[1] = -1;
-	data->in_fd = -1;
-	data->out_fd = -1;
 }
 
 /*

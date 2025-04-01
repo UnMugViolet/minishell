@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/31 13:30:51 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/01 16:25:27 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_exec
 {
 	char					**cmd;
 	char					*full_cmd;
-	char					**infile;
-	char					**outfile;
+	int						in_fd;
+	int						out_fd;
 	size_t					type;
 	struct s_exec			*next;
 	struct s_exec			*prev;
@@ -57,8 +57,6 @@ typedef struct s_data
 	t_lex					*lex;
 	size_t					lex_size;
 	int						pipe_fd[2];
-	int						in_fd;
-	int						out_fd;
 	char					*curr_dir;
 	char					*last_exit_value;
 	t_exec					*exec;
@@ -143,7 +141,7 @@ char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 
 void						ft_execute_prompt(t_data *data);
 void						ft_get_first_command(t_data *data, size_t *i);
-void						ft_exec_child(t_data *data, t_exec *exec);
+void						ft_exec_child(t_data *data, t_exec *exec, pid_t *pid);
 void						ft_setup_pipe(t_data *data, int is_pipe,
 								int is_child);
 void						ft_wait_and_update_status(t_data *data, pid_t pid);
