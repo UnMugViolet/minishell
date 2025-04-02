@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/31 13:25:35 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/02 10:37:33 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	ft_resolve(t_data *data)
 		return ;
 	}
 	ft_parse_prompt(data);
+	ft_print_exec(data->exec);
 	ft_execute_prompt(data);
 	ft_free_lex(data->lex);
 	ft_free_exec(data->exec);

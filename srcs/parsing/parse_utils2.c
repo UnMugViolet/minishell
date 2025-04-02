@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:41:17 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/31 10:03:01 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/02 10:42:06 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	ft_get_pipes(t_data *data)
 	{
 		if (tmp && tmp->type == PIPE)
 		{
+			ft_get_heredocs(data);
+			ft_get_infiles(data);
+			ft_get_outfiles(data);
 			ft_get_commands(data);
 			cmd = ft_strdup(tmp->content);
 			ft_lex_del_content(tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/31 09:55:17 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/02 10:37:03 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	ft_get_infiles(t_data *data)
 	tmp = data->lex;
 	while (tmp)
 	{
+		if (tmp && tmp->type == PIPE)
+			return ;
 		if (tmp && tmp->type == LEFT_BRACKET)
 		{
 			if (tmp->next && tmp->next->content)
@@ -86,7 +88,7 @@ void	ft_get_infiles(t_data *data)
 	}
 }
 
-void	ft_get_outfile(t_data *data)
+void	ft_get_outfiles(t_data *data)
 {
 	t_lex	*tmp;
 	char	*cmd;
@@ -95,6 +97,8 @@ void	ft_get_outfile(t_data *data)
 	tmp = data->lex;
 	while (tmp)
 	{
+		if (tmp && tmp->type == PIPE)
+			return ;
 		if (tmp && tmp->type == RIGHT_BRACKET)
 		{
 			if (tmp->next && tmp->next->content)

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/01 16:25:27 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/02 10:37:03 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_lex
 	size_t					type;
 	char					*content;
 	struct s_lex			*next;
+	
 }							t_lex;
 
 typedef struct s_data
@@ -89,7 +90,7 @@ char						*ft_get_env_var_adress(t_data *data,
 
 void						ft_parse_prompt(t_data *data);
 void						ft_get_heredocs(t_data *data);
-void						ft_get_outfile(t_data *data);
+void						ft_get_outfiles(t_data *data);
 void						ft_get_pipes(t_data *data);
 void						ft_get_infiles(t_data *data);
 void						ft_get_commands(t_data *data);
