@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/02 12:21:14 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/02 16:37:59 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ typedef struct s_data
 	int						pipe_fd[2];
 	pid_t					pid_list[1024];
 	int						pid_count;
+	int						in_fd;
+	int						out_fd;
+	int						og_stdin;
+	int						og_stdout;
 	char					*curr_dir;
 	char					*last_exit_value;
 	t_exec					*exec;
@@ -144,11 +148,11 @@ char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 
 void						ft_execute_prompt(t_data *data);
 void						ft_get_first_command(t_data *data, size_t *i);
-void						ft_exec_child(t_data *data, t_exec *exec, pid_t *pid);
+void						ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe);
 void						ft_setup_pipe(t_data *data, int is_pipe,
 								int is_child);
 void						ft_wait_and_update_status(t_data *data);
-int							ft_handle_redirection(t_exec *exec);
+void						ft_handle_redirection(t_exec *exec);
 
 /* --------------------------------ERRORS-------------------------------- */
 

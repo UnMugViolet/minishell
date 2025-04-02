@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/04/02 12:16:37 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/02 16:39:48 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void	ft_init_data_struct(t_data *data, char **env)
 	data->exec = NULL;
 	data->pipe_fd[0] = -1;
 	data->pipe_fd[1] = -1;
+	data->og_stdin = dup(STDIN_FILENO);
+	data->og_stdout = dup(STDOUT_FILENO);
 	data->pid_count = 0;
 	data->metachar = ft_split(METACHAR, ' ');
 	data->last_exit_value = ft_strdup("0");

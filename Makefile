@@ -6,7 +6,7 @@
 #    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/04/01 16:15:09 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/04/02 14:11:24 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,4 +94,3 @@ debug: all
 
 # Specify that these are not files to compile (just for safety)
 .PHONY: all clean fclean re go gov debug
-	

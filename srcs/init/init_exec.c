@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:35:30 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/01 16:28:48 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/02 16:32:20 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_exec	*ft_exec_new(char **cmd, char *full_cmd, size_t type)
 	new_element->cmd = cmd;
 	new_element->type = type;
 	new_element->full_cmd = full_cmd;
-	new_element->in_fd = -1;
-	new_element->out_fd = -1;
+	new_element->in_fd = STDIN_FILENO;
+	new_element->out_fd = STDOUT_FILENO;
 	new_element->next = NULL;
 	new_element->prev = NULL;
 	return (new_element);
