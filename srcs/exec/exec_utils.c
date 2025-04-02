@@ -6,11 +6,26 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/01 16:31:34 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/02 12:21:04 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void ft_wait_and_update_status(t_data *data)
+{
+	int i;
+	int	status;
+
+	i = 0;
+	while (i < data->pid_count)
+	{
+		if (waitpid(data->pid_list[i], &status, 0) == -1)
+			ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
+		ft_update_last_exit_value(data, WEXITSTATUS(status));
+		i++;
+	}
+}
 
 static int	ft_handle_cmd_errors(t_exec *exec)
 {
@@ -27,17 +42,19 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid)
 	*pid = fork();
 	if (*pid == -1)
 		ft_exit_clean(data, ft_fprintf(2, STDRD_ERR_SINGLE, strerror(errno)));
-	if (*pid == 0)
+	else if (*pid == 0)
 	{
 		if (exec->in_fd != -1)
-			if (dup2(exec->in_fd, STDIN_FILENO) == -1)
-				ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
+		if (dup2(exec->in_fd, STDIN_FILENO) == -1)
+		ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
 		if (exec->out_fd != -1)
-			if (dup2(exec->out_fd, STDOUT_FILENO) == -1)
-				ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
+		if (dup2(exec->out_fd, STDOUT_FILENO) == -1)
+		ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
 		if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
-			ft_exit_clean(data, ft_handle_cmd_errors(exec));
+		ft_exit_clean(data, ft_handle_cmd_errors(exec));
 	}
+	else 
+		data->pid_list[data->pid_count++] = *pid;
 	
 }
 

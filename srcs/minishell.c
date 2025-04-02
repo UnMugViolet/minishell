@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/02 10:37:33 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/02 12:17:17 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	ft_resolve(t_data *data)
 	ft_close_fds(data);
 	data->lex = NULL;
 	data->exec = NULL;
+	data->pid_count = 0;
 }
 
 static void	ft_start_minishell(t_data *data)
