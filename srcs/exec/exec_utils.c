@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/02 16:58:24 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/02 18:00:05 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,23 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 				ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
 			close(exec->out_fd);
 		}
-		if (is_pipe)
+		if (is_pipe && exec->out_fd == STDOUT_FILENO)
 		{
+			close (data->pipe_fd[0]);
 			if (dup2(data->pipe_fd[1], STDOUT_FILENO) == -1)
 				ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
 			close(data->pipe_fd[1]);
 		}
 		if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
 			ft_exit_clean(data, ft_handle_cmd_errors(exec));
-		close(exec->in_fd);
-		close(exec->out_fd);
 	}
-	else 
+	else
+	{
+		close (data->pipe_fd[0]);
+		if (is_pipe && exec->out_fd == STDOUT_FILENO)
+			close(data->pipe_fd[1]);
 		data->pid_list[data->pid_count++] = *pid;
-	
+	}
 }
 
 /*
@@ -97,7 +100,7 @@ void	ft_handle_redirection(t_exec *exec)
 		fd = open(exec->cmd[1], O_RDONLY);
 		if (fd == -1)
 			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
-		exec->in_fd = fd;
+		exec->next->in_fd = fd;
 	}
 }
 
