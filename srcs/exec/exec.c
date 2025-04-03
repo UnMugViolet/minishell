@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/02 17:54:28 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 10:52:55 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 */
 static void	ft_exec_command(t_data *data, t_exec *exec, int is_pipe, pid_t *pid)
 {
-	ft_print_exec(exec);
-	if (is_pipe && exec->out_fd == STDOUT_FILENO)
+	if (is_pipe)
 	{
 		if (pipe(data->pipe_fd) == -1)
 		{
@@ -32,10 +31,14 @@ static void	ft_exec_command(t_data *data, t_exec *exec, int is_pipe, pid_t *pid)
 		}
 	}
 	ft_exec_child(data, exec, pid, is_pipe);
-	if (is_pipe && exec->out_fd == STDOUT_FILENO)
+	if (is_pipe)
 	{
 		close(data->pipe_fd[1]);
-		dup2(data->pipe_fd[0], STDIN_FILENO);
+		if (dup2(data->pipe_fd[0], STDIN_FILENO) == -1)
+		{
+			ft_fprintf(2, STDRD_ERR_SINGLE, strerror(errno));
+			return ;
+		}
 		close(data->pipe_fd[0]);
 	}
 }

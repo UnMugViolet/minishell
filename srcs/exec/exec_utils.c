@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/02 18:00:05 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 11:06:41 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,7 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 			ft_exit_clean(data, ft_handle_cmd_errors(exec));
 	}
 	else
-	{
-		close (data->pipe_fd[0]);
-		if (is_pipe && exec->out_fd == STDOUT_FILENO)
-			close(data->pipe_fd[1]);
 		data->pid_list[data->pid_count++] = *pid;
-	}
 }
 
 /*
