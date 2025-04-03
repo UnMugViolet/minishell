@@ -6,11 +6,25 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:24:45 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/01 16:28:29 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 17:29:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_exec	*ft_get_next_word(t_exec *exec)
+{
+	t_exec	*tmp;
+
+	tmp = exec;
+	while (tmp)
+	{
+		if (tmp->type == WORD)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
 
 void	ft_print_exec(t_exec *exec)
 {

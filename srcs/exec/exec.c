@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 15:34:48 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 17:34:17 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_execute_prompt(t_data *data)
 	tmp = data->exec;
 	while (tmp)
 	{
-		ft_handle_redirection(tmp);
+		ft_handle_redirection(data, tmp);
 		if (!ft_is_metacharset(tmp->cmd[0], data->metachar))
 		{
 			if (tmp->next && tmp->next->type == PIPE)

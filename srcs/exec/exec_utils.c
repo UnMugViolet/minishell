@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/03 15:59:13 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 16:31:51 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,10 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 	This function is called everytime and executed only if the `type` is
 	`RIGHT_BRACKET` or `LEFT_BRACKET`.
 	@param t_exec*exec
+	@param t_data*data
 	@return void
 */
-void	ft_handle_redirection(t_exec *exec)
+void	ft_handle_redirection(t_data *data, t_exec *exec)
 {
 	int	fd;
 
@@ -137,30 +138,6 @@ void	ft_handle_redirection(t_exec *exec)
 		exec->next->out_fd = fd;
 	}
 	else if (exec->type == DOUBLE_LEFT_BRACKET)
-		;
+		ft_exec_heredoc(data, exec, exec->cmd[1]);
 }
 
-/* static void	ft_exec_heredoc(t_pipex *pipex, char *limiter)
-{
-	char	*line;
-	size_t	limiter_len;
-
-	limiter_len = ft_strlen(limiter);
-	if (pipe(pipex->pipefd) == -1)
-		ft_exit_error(pipex, "pipe error\n");
-	while (true)
-	{
-		ft_putstr_fd("heredoc> ", 1);
-		line = get_next_line(0);
-		if (!line || (!ft_strncmp(line, limiter, limiter_len)
-				&& line[limiter_len] == '\n'))
-		{
-			free(line);
-			break ;
-		}
-		ft_putstr_fd(line, pipex->pipefd[1]);
-		free(line);
-	}
-	close(pipex->pipefd[1]);
-	pipex->in_fd = pipex->pipefd[0];
-} */

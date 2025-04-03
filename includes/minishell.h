@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 15:16:10 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 17:26:28 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "dictionnary.h"
 # include "ft_fprintf.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
 # include "libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -117,6 +118,7 @@ size_t						ft_lexsize(t_lex *lex);
 void						ft_lex_del_content(t_lex *lex);
 
 t_exec						*ft_exec_new(char **cmd, char *path, size_t type);
+t_exec						*ft_get_next_word(t_exec *exec);
 void						ft_exec_add_back(t_exec **exec, t_exec *new);
 
 char						*ft_str_substitute(char *str, t_data *data);
@@ -153,7 +155,8 @@ void						ft_execute_prompt(t_data *data);
 void						ft_exec_child(t_data *data, t_exec *exec,
 								pid_t *pid, int is_pipe);
 void						ft_wait_and_update_status(t_data *data);
-void						ft_handle_redirection(t_exec *exec);
+void						ft_handle_redirection(t_data *data, t_exec *exec);
+void						ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter);
 
 /* --------------------------------ERRORS-------------------------------- */
 
