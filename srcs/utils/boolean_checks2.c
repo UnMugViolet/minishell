@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   boolean_checks2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:39:26 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/31 10:36:21 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/03 18:43:55 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,27 @@ bool	ft_is_metacharset(char *str, char **metacharset)
 	return (false);
 }
 
-static bool	ft_double_token(t_lex *lex, char **metachar)
+static bool	ft_check_token(t_lex *lex, char **metachar)
 {
+	int	is_charset;
+	int	is_charset_next;
+	
 	while (lex)
 	{
-		if (lex->next && ft_is_metacharset(lex->content, metachar)
-			&& ft_is_metacharset(lex->next->content, metachar))
-			return (ft_fprintf(ERR_OUT, SYNTAX_ERROR, lex->next->content,
-					true));
+		is_charset_next = 0;
+		is_charset = ft_is_metacharset(lex->content, metachar);
+		if (lex->type == DBL_PIPE || lex->type == DBL_AMPERSAND
+			|| lex->type == AMPERSAND)
+			return (ft_fprintf(ERR_OUT, SYNTAX_FLM_ERROR, lex->content), 1);
+		if (lex->type != WORD && lex->next && lex->next->type == lex->type)
+			return (ft_fprintf(ERR_OUT, SYNTAX_ERROR, lex->next->content, 1));
+		if (lex->next)
+			is_charset_next = ft_is_metacharset(lex->next->content, metachar);
+		if (lex->next && (is_charset && lex->type != PIPE) && is_charset_next)
+			return (ft_fprintf(ERR_OUT, SYNTAX_ERROR, lex->next->content, 1));
 		lex = lex->next;
 	}
-	return (false);
+	return (0);
 }
 
 static bool	ft_is_only_whitespace(char *str)
@@ -49,7 +59,7 @@ static bool	ft_is_only_whitespace(char *str)
 	return (true);
 }
 
-static bool	ft_word_after_redir(t_lex *lex)
+static bool	ft_check_word_after_redir(t_lex *lex)
 {
 	char	**redir_charset;
 
@@ -59,21 +69,21 @@ static bool	ft_word_after_redir(t_lex *lex)
 		if (ft_is_metacharset(lex->content, redir_charset) && (!lex->next
 				|| ft_is_only_whitespace(lex->next->content)))
 			return (ft_free_array_str(redir_charset), ft_fprintf(ERR_OUT,
-					SYNTAX_ERROR_N), false);
+					SYNTAX_ERROR_N), 0);
 		else if (!ft_strncmp(lex->content, "|", 2) && (!lex->next
 				|| ft_is_only_whitespace(lex->next->content)))
 			return (ft_free_array_str(redir_charset), ft_fprintf(ERR_OUT,
-					SYNTAX_ERROR, " |"), false);
+					SYNTAX_ERROR, " |"), 0);
 		lex = lex->next;
 	}
-	return (ft_free_array_str(redir_charset), true);
+	return (ft_free_array_str(redir_charset), 1);
 }
 
 bool	ft_is_correct_token(t_lex *lex, char **metachar)
 {
-	if (ft_double_token(lex, metachar))
+	if (ft_check_token(lex, metachar))
 		return (false);
-	if (!ft_word_after_redir(lex))
+	if (!ft_check_word_after_redir(lex))
 		return (false);
 	return (true);
 }

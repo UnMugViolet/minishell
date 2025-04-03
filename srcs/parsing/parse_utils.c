@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 15:52:23 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 19:17:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_get_heredocs(t_data *data)
 	tmp = data->lex;
 	while (tmp)
 	{
-		if (tmp && tmp->type == DOUBLE_LEFT_BRACKET)
+		if (tmp && tmp->type == DBL_LEFT_BRACKET)
 		{
 			if (tmp->next && tmp->next->content != NULL)
 			{
@@ -54,7 +54,7 @@ void	ft_get_heredocs(t_data *data)
 			else
 				cmd = ft_strdup(tmp->content);
 			ft_lex_del_content(tmp);
-			ft_create_exec_conditionaly(data, cmd, DOUBLE_LEFT_BRACKET);
+			ft_create_exec_conditionaly(data, cmd, DBL_LEFT_BRACKET);
 		}
 		tmp = tmp->next;
 	}

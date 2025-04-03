@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/04/03 14:38:02 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 19:17:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int	ft_cd(t_data *data, char **cmd)
 	char		*path;
 	struct stat	sb;
 
-	ft_print_array_str_fd(cmd, STDOUT_FILENO);
 	if (!cmd[1])
 	{
 		path = ft_get_associated_env_value(data, "HOME");

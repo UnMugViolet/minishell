@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/03 16:31:51 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 19:17:12 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ void	ft_handle_redirection(t_data *data, t_exec *exec)
 		fd = open(exec->cmd[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
 			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
-		exec->next->out_fd = fd;
+		if (exec->next)
+			exec->next->out_fd = fd;
 	}
 	else if (exec->type == LEFT_BRACKET)
 	{
@@ -137,7 +138,7 @@ void	ft_handle_redirection(t_data *data, t_exec *exec)
 			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
 		exec->next->out_fd = fd;
 	}
-	else if (exec->type == DOUBLE_LEFT_BRACKET)
+	else if (exec->type == DBL_LEFT_BRACKET)
 		ft_exec_heredoc(data, exec, exec->cmd[1]);
 }
 

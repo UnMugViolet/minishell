@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/03 15:52:23 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 19:17:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define PERM_DENIED "minishell: %s: permission denied\n"
 # define SYNTAX_ERROR "minishell: syntax error near unexpected token '%s'\n"
 # define SYNTAX_ERROR_N "minishell: syntax error near unexpected token '\\n'\n"
+# define SYNTAX_FLM_ERROR "miniflemme: syntax error near unexpected token '%s'\n"
 
 /*--------------------------------COLORS--------------------------------------*/
 
@@ -42,11 +43,11 @@
 # define ENPTY 0
 # define WORD 1
 # define PIPE 2
-# define DOUBLE_PIPE 3
+# define DBL_PIPE 3
 # define AMPERSAND 4
-# define DOUBLE_AMPERSAND 5
+# define DBL_AMPERSAND 5
 # define LEFT_BRACKET 6
-# define DOUBLE_LEFT_BRACKET 7
+# define DBL_LEFT_BRACKET 7
 # define RIGHT_BRACKET 8
 # define DBL_RIGHT_BRACKET 9
 

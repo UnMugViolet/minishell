@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 17:34:17 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 19:17:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	ft_execute_prompt(t_data *data)
 		tmp = tmp->next;
 	}
 	ft_wait_and_update_status(data);
-	dup2(data->og_stdin, STDIN_FILENO);
-	dup2(data->og_stdout, STDOUT_FILENO);
+	if (dup2(data->og_stdin, STDIN_FILENO) == -1)
+		ft_exit_error(data, ERR_DUP, 1);
+	if (dup2(data->og_stdout, STDERR_FILENO) == -1)
+		ft_exit_error(data, ERR_DUP, 1);
 }

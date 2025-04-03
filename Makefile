@@ -6,7 +6,7 @@
 #    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/04/03 16:14:45 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/04/03 19:17:11 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,10 @@ gov: all
 
 debug: all
 	@lldb $(NAME)
+	@rm -rf $(NAME)
+	
+test: all
+	@cd ./minishell_tester && ./tester
 	@rm -rf $(NAME)
 
 # Specify that these are not files to compile (just for safety)

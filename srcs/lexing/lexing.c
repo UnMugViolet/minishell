@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 09:03:08 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/03 15:52:23 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 19:04:38 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 static size_t	ft_get_type(char *str)
 {
 	if (!ft_strncmp(str, "<<", 3))
-		return (DOUBLE_LEFT_BRACKET);
+		return (DBL_LEFT_BRACKET);
 	if (!ft_strncmp(str, ">>", 3))
 		return (DBL_RIGHT_BRACKET);
 	if (!ft_strncmp(str, "<", 2))
@@ -28,11 +28,11 @@ static size_t	ft_get_type(char *str)
 	if (!ft_strncmp(str, ">", 2))
 		return (RIGHT_BRACKET);
 	if (!ft_strncmp(str, "||", 3))
-		return (DOUBLE_PIPE);
+		return (DBL_PIPE);
 	if (!ft_strncmp(str, "|", 2))
 		return (PIPE);
 	if (!ft_strncmp(str, "&&", 3))
-		return (DOUBLE_AMPERSAND);
+		return (DBL_AMPERSAND);
 	if (!ft_strncmp(str, "&", 2))
 		return (AMPERSAND);
 	return (WORD);

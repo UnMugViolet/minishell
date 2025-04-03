@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:39:23 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 14:46:22 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 19:17:12 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	ft_echo(char **cmd)
 	while (cmd[i])
 	{
 		ft_putstr_fd(cmd[i], STDOUT_FILENO);
-		ft_putstr_fd(" ", STDOUT_FILENO);
+		if (cmd[i + 1])
+			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
 	if (newline)

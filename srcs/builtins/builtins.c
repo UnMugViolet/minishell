@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/04/03 15:34:01 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 19:12:01 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_print_export(char **env, char *str, int fd)
 
 static int	ft_exec_builtins(t_data *data, char **cmd)
 {
-	if (!ft_strncmp(*cmd, "pwd", 4) && !cmd[1])
+	if (!ft_strncmp(*cmd, "pwd", 4))
 		return (ft_putendl_fd(ft_get_env_var_adress(data, "PWD") + 4,
 				STDOUT_FILENO), ft_update_last_exit_value(data, 0), 1);
 	else if (!ft_strncmp(*cmd, "echo", 5))
@@ -101,9 +101,7 @@ bool	ft_check_exec_builtins(t_data *data, t_exec *exec, int is_pipe)
 		ft_dup(data, data->pipe_fd[1], STDOUT_FILENO);
 	}
 	ft_exec_builtins(data, exec->cmd);
-	if (dup2(save_fd[0], STDIN_FILENO) == -1)
-		ft_exit_error(data, ERR_DUP, 1);
-	if (dup2(save_fd[1], STDOUT_FILENO) == -1)
-		ft_exit_error(data, ERR_DUP, 1);
+	dup2(save_fd[0], STDIN_FILENO);
+	dup2(save_fd[1], STDOUT_FILENO);
 	return (1);
 }
