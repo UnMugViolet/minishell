@@ -6,22 +6,31 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/03 11:06:41 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 11:26:28 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_wait_and_update_status(t_data *data)
+static void	ft_dup(t_data *data, int fd, int fd2)
 {
-	int i;
+	if (dup2(fd, fd2) == -1)
+		ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE,
+				strerror(errno)));
+	close(fd);
+}
+
+void	ft_wait_and_update_status(t_data *data)
+{
+	int	i;
 	int	status;
 
 	i = 0;
 	while (i < data->pid_count)
 	{
 		if (waitpid(data->pid_list[i], &status, 0) == -1)
-			ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
+			ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE,
+					strerror(errno)));
 		ft_update_last_exit_value(data, WEXITSTATUS(status));
 		i++;
 	}
@@ -45,23 +54,13 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 	else if (*pid == 0)
 	{
 		if (exec->in_fd != STDIN_FILENO)
-		{
-			if (dup2(exec->in_fd, STDIN_FILENO) == -1)
-				ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
-			close(exec->in_fd);
-		}
+			ft_dup(data, exec->in_fd, STDIN_FILENO);
 		if (exec->out_fd != STDOUT_FILENO)
-		{
-			if (dup2(exec->out_fd, STDOUT_FILENO) == -1)
-				ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
-			close(exec->out_fd);
-		}
+			ft_dup(data, exec->out_fd, STDOUT_FILENO);
 		if (is_pipe && exec->out_fd == STDOUT_FILENO)
 		{
-			close (data->pipe_fd[0]);
-			if (dup2(data->pipe_fd[1], STDOUT_FILENO) == -1)
-				ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
-			close(data->pipe_fd[1]);
+			close(data->pipe_fd[0]);
+			ft_dup(data, data->pipe_fd[1], STDOUT_FILENO);
 		}
 		if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
 			ft_exit_clean(data, ft_handle_cmd_errors(exec));
@@ -73,7 +72,7 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 /*
 	Handle all the redirections from `>` `<` `>>` `<<` get the file descriptor
 	from exec command and redirect the output/input to the file.
-	This function is called everytime and executed only if the `type` is 
+	This function is called everytime and executed only if the `type` is
 	`RIGHT_BRACKET` or `LEFT_BRACKET`.
 	@param t_exec*exec
 	@return void
@@ -91,11 +90,9 @@ void	ft_handle_redirection(t_exec *exec)
 	}
 	else if (exec->type == LEFT_BRACKET)
 	{
-		
 		fd = open(exec->cmd[1], O_RDONLY);
 		if (fd == -1)
 			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
 		exec->next->in_fd = fd;
 	}
 }
-

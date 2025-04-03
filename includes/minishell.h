@@ -46,7 +46,7 @@ typedef struct s_lex
 	size_t					type;
 	char					*content;
 	struct s_lex			*next;
-	
+
 }							t_lex;
 
 typedef struct s_data
@@ -148,7 +148,8 @@ char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 
 void						ft_execute_prompt(t_data *data);
 void						ft_get_first_command(t_data *data, size_t *i);
-void						ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe);
+void						ft_exec_child(t_data *data, t_exec *exec,
+								pid_t *pid, int is_pipe);
 void						ft_setup_pipe(t_data *data, int is_pipe,
 								int is_child);
 void						ft_wait_and_update_status(t_data *data);
