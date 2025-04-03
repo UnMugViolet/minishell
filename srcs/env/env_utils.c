@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/26 16:08:18 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/03 14:40:26 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+	Checks if the `str` string is rightfully formated for an `env` variable
+	@param char*str
+	@return bool
+*/
 static bool	ft_check_env_var_format(char *str)
 {
 	int	i;
@@ -67,7 +72,7 @@ void	ft_create_env_var(t_data *data, char *str)
 }
 
 /*
-Replace the value of the env variable `variable` by the string `new_val`
+	Replace the value of the env variable `variable` by the string `new_val`
 	@param t_data*data
 	@param char*variable
 	@param char*new_val

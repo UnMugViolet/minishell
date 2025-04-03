@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:24:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/02 10:37:03 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 15:52:23 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_get_outfiles(t_data *data)
 	{
 		if (tmp && tmp->type == PIPE)
 			return ;
-		if (tmp && tmp->type == RIGHT_BRACKET)
+		if (tmp && (tmp->type == RIGHT_BRACKET || tmp->type == DBL_RIGHT_BRACKET))
 		{
 			if (tmp->next && tmp->next->content)
 			{
@@ -109,8 +109,8 @@ void	ft_get_outfiles(t_data *data)
 			}
 			else
 				cmd = ft_strdup(tmp->content);
+			ft_create_exec_conditionaly(data, cmd, tmp->type);
 			ft_lex_del_content(tmp);
-			ft_create_exec_conditionaly(data, cmd, RIGHT_BRACKET);
 		}
 		tmp = tmp->next;
 	}

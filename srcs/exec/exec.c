@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 10:52:55 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 15:34:48 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,17 @@ static void	ft_exec_command(t_data *data, t_exec *exec, int is_pipe, pid_t *pid)
 	{
 		if (pipe(data->pipe_fd) == -1)
 		{
-			ft_fprintf(2, STDRD_ERR_SINGLE, strerror(errno));
+			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
 			return ;
 		}
 	}
-	ft_exec_child(data, exec, pid, is_pipe);
+	if (!ft_check_exec_builtins(data, exec, is_pipe))
+		ft_exec_child(data, exec, pid, is_pipe);
 	if (is_pipe)
 	{
 		close(data->pipe_fd[1]);
 		if (dup2(data->pipe_fd[0], STDIN_FILENO) == -1)
-		{
-			ft_fprintf(2, STDRD_ERR_SINGLE, strerror(errno));
-			return ;
-		}
+			ft_exit_error(data, ERR_DUP, 1);
 		close(data->pipe_fd[0]);
 	}
 }
@@ -52,9 +50,7 @@ void	ft_execute_prompt(t_data *data)
 	while (tmp)
 	{
 		ft_handle_redirection(tmp);
-		if (ft_check_exec_builtins(data, tmp->cmd))
-			;
-		else if (!ft_is_metacharset(tmp->cmd[0], data->metachar))
+		if (!ft_is_metacharset(tmp->cmd[0], data->metachar))
 		{
 			if (tmp->next && tmp->next->type == PIPE)
 			{

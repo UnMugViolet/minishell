@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/27 16:06:00 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 15:34:01 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,51 @@ static void	ft_print_export(char **env, char *str, int fd)
 	}
 }
 
-int	ft_echo(char **cmd)
-{
-	int		i;
-	bool	newline;
 
-	newline = true;
-	i = 1;
-	if (!ft_strncmp(cmd[1], "-n", 3))
-	{
-		newline = false;
-		i++;
-	}
-	while (cmd[i])
-	{
-		ft_putstr_fd(cmd[i], STDOUT_FILENO);
-		ft_putstr_fd(" ", STDOUT_FILENO);
-		i++;
-	}
-	if (newline)
-		ft_putstr_fd("\n", STDOUT_FILENO);
+static int	ft_exec_builtins(t_data *data, char **cmd)
+{
+	if (!ft_strncmp(*cmd, "pwd", 4) && !cmd[1])
+		return (ft_putendl_fd(ft_get_env_var_adress(data, "PWD") + 4,
+				STDOUT_FILENO), ft_update_last_exit_value(data, 0), 1);
+	else if (!ft_strncmp(*cmd, "echo", 5))
+		return (ft_echo(cmd), ft_update_last_exit_value(data, 0),  1);
+	else if (!ft_strncmp(*cmd, "cd", 3))
+		return (ft_cd(data, cmd), 1);
+	else if (!ft_strncmp(*cmd, "env", 4) && !cmd[1])
+		return (ft_print_array_str_fd(data->env, STDOUT_FILENO),
+				ft_update_last_exit_value(data, 0), 1);
+	else if (!ft_strncmp(*cmd, "export", 7) && cmd[1])
+		return (ft_create_env_var(data, cmd[1]), ft_update_last_exit_value(data, 0), 1);
+	else if (!ft_strncmp(*cmd, "export", 7))
+		return (ft_print_export(data->env, "export ", STDOUT_FILENO),
+				ft_update_last_exit_value(data, 0),  1);
+	else if (!ft_strncmp(*cmd, "unset", 6) && cmd[1])
+		return (ft_delete_env_var(data, cmd[1]),
+				ft_update_last_exit_value(data, 0), 1);
+	else if (!ft_strncmp(data->prompt, "exit", 5))
+		return (ft_exit_clean(data, 0), 1);
 	return (0);
+}
+
+/*
+	Checks if `cmd` is a builtin function.
+	@param char*cmd
+	@return bool	
+*/
+static bool	ft_is_builtin(char *cmd)
+{
+	char	**tmp;
+	int		i;
+	
+	tmp = ft_split(BUILTINS, ' ');
+	i = 0;
+	while (tmp[i])
+	{
+		if (!ft_strncmp(cmd, tmp[i], ft_strlen(tmp[i])))
+			return (ft_free_array_str(tmp), true);
+		i++;
+	}
+	return (ft_free_array_str(tmp), false);
 }
 
 /*
@@ -59,25 +83,27 @@ int	ft_echo(char **cmd)
 	@param char*str
 	@return void
 */
-bool	ft_check_exec_builtins(t_data *data, char **cmd)
+bool	ft_check_exec_builtins(t_data *data, t_exec *exec, int is_pipe)
 {
-	if (!ft_strncmp(*cmd, "pwd", 4) && !cmd[1])
-		return (ft_putendl_fd(ft_get_env_var_adress(data, "PWD") + 4,
-				STDOUT_FILENO), 1);
-	else if (!ft_strncmp(*cmd, "echo", 5))
-		return (ft_echo(cmd), 1);
-	else if (!ft_strncmp(*cmd, "cd", 3))
-		return (ft_cd(data, cmd), 1);
-	else if (!ft_strncmp(*cmd, "env", 4) && !cmd[1])
-		return (ft_print_array_str_fd(data->env, STDOUT_FILENO), 1);
-	else if (!ft_strncmp(*cmd, "export", 7) && cmd[1])
-		return (ft_create_env_var(data, cmd[1]), 1);
-	else if (!ft_strncmp(*cmd, "export", 7))
-		return (ft_print_export(data->env, "export ", STDOUT_FILENO), 1);
-	else if (!ft_strncmp(*cmd, "unset", 6) && cmd[1])
-		return (ft_delete_env_var(data, cmd[1]), 1);
-	else if (!ft_strncmp(data->prompt, "exit", 5))
-		return (ft_exit_clean(data, 0), 1);
-	else
+	int	save_fd[2];
+	
+	save_fd[0] = dup(STDIN_FILENO);
+	save_fd[1] = dup(STDOUT_FILENO);
+	if (!ft_is_builtin(exec->cmd[0]))
 		return (0);
+	if (exec->in_fd != STDIN_FILENO)
+		ft_dup(data, exec->in_fd, STDIN_FILENO);
+	if (exec->out_fd != STDOUT_FILENO)
+		ft_dup(data, exec->out_fd, STDOUT_FILENO);
+	if (is_pipe && exec->out_fd == STDOUT_FILENO)
+	{
+		close(data->pipe_fd[0]);
+		ft_dup(data, data->pipe_fd[1], STDOUT_FILENO);
+	}
+	ft_exec_builtins(data, exec->cmd);
+	if (dup2(save_fd[0], STDIN_FILENO) == -1)
+		ft_exit_error(data, ERR_DUP, 1);
+	if (dup2(save_fd[1], STDOUT_FILENO) == -1)
+		ft_exit_error(data, ERR_DUP, 1);
+	return (1);
 }

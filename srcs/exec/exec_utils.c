@@ -6,13 +6,21 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/03 11:26:28 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 15:59:13 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_dup(t_data *data, int fd, int fd2)
+/*
+	Created to make the function exec child more readable, this function
+	duplicates the file descriptor `fd` to `fd2` and closes `fd`.
+	@param t_data*data
+	@param int fd
+	@param int fd2
+	@return void
+*/
+void	ft_dup(t_data *data, int fd, int fd2)
 {
 	if (dup2(fd, fd2) == -1)
 		ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE,
@@ -20,6 +28,13 @@ static void	ft_dup(t_data *data, int fd, int fd2)
 	close(fd);
 }
 
+/*
+	Bullk wait for all the child processes to finish and update the last exit
+	value of the shell env. The waiting is done in a loop and checks the
+	`pid_list` to get all the pids.
+	@param t_data*data
+	@return void
+*/
 void	ft_wait_and_update_status(t_data *data)
 {
 	int	i;
@@ -36,6 +51,13 @@ void	ft_wait_and_update_status(t_data *data)
 	}
 }
 
+/*
+	Tiny utilitary function to handle the errors of the command. Depending on
+	the error, it will print the error message and return the exit code.
+	That exit code is used to update the last exit value of the shell env.
+	@param t_exec*exec
+	@return int
+*/
 static int	ft_handle_cmd_errors(t_exec *exec)
 {
 	if (errno == ENOENT)
@@ -43,14 +65,25 @@ static int	ft_handle_cmd_errors(t_exec *exec)
 	else if (errno == EACCES)
 		return (ft_fprintf(ERR_OUT, PERM_DENIED, exec->cmd[0]), 126);
 	else
-		return (ft_fprintf(2, STDRD_ERR, exec->cmd[0], strerror(errno)), 2);
+		return (ft_fprintf(ERR_OUT, STDRD_ERR, exec->cmd[0], strerror(errno)), 2);
 }
 
+/*
+	Will execute all the commands in parallel, in case of redirection the
+	`in_fd` and `out_fd` will be set to the file descriptor of the file.
+	In case of pipe, the `in_fd` will be set to the read end of the pipe and
+	the `out_fd` will be set to the write end of the pipe.
+	@param t_data*data
+	@param t_exec*exec
+	@param pid_t*pid
+	@param int is_pipe
+	@return void
+*/
 void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 {
 	*pid = fork();
 	if (*pid == -1)
-		ft_exit_clean(data, ft_fprintf(2, STDRD_ERR_SINGLE, strerror(errno)));
+		ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
 	else if (*pid == 0)
 	{
 		if (exec->in_fd != STDIN_FILENO)
@@ -70,8 +103,9 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 }
 
 /*
-	Handle all the redirections from `>` `<` `>>` `<<` get the file descriptor
-	from exec command and redirect the output/input to the file.
+	Store all the redirections from `>` `<` `>>` `<<` get the file descriptor
+	from exec command, open the file and add the fd of the file in `exec` struct 
+	of the command.
 	This function is called everytime and executed only if the `type` is
 	`RIGHT_BRACKET` or `LEFT_BRACKET`.
 	@param t_exec*exec
@@ -95,4 +129,38 @@ void	ft_handle_redirection(t_exec *exec)
 			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
 		exec->next->in_fd = fd;
 	}
+	else if (exec->type == DBL_RIGHT_BRACKET)
+	{
+		fd = open(exec->cmd[1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (fd == -1)
+			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
+		exec->next->out_fd = fd;
+	}
+	else if (exec->type == DOUBLE_LEFT_BRACKET)
+		;
 }
+
+/* static void	ft_exec_heredoc(t_pipex *pipex, char *limiter)
+{
+	char	*line;
+	size_t	limiter_len;
+
+	limiter_len = ft_strlen(limiter);
+	if (pipe(pipex->pipefd) == -1)
+		ft_exit_error(pipex, "pipe error\n");
+	while (true)
+	{
+		ft_putstr_fd("heredoc> ", 1);
+		line = get_next_line(0);
+		if (!line || (!ft_strncmp(line, limiter, limiter_len)
+				&& line[limiter_len] == '\n'))
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(line, pipex->pipefd[1]);
+		free(line);
+	}
+	close(pipex->pipefd[1]);
+	pipex->in_fd = pipex->pipefd[0];
+} */

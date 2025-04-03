@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
-/*   Updated: 2025/03/27 13:13:21 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:40:51 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ char	*ft_get_env_var_adress(t_data *data, char *variable)
 	return (NULL);
 }
 
+/*
+	Update the `last_exit_value` in the `data` struct to the `value`
+	@param t_data*data
+	@param int value
+*/
 void	ft_update_last_exit_value(t_data *data, int value)
 {
 	free(data->last_exit_value);

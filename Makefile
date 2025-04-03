@@ -6,7 +6,7 @@
 #    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/04/02 14:11:24 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/04/03 14:40:53 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ UTILS_FILES =	boolean_checks.c boolean_checks2.c struct_exec_utils.c
 INIT_FILES =	init_data.c init_exec.c
 LEX_FILES = 	lexing.c lex_utils.c lex_utils2.c
 PARSE_FILES = 	parsing.c parse_utils.c parse_utils2.c
-BUILTIN_FILES = builtins.c cd.c
+BUILTIN_FILES = builtins.c cd.c echo.c
 EXEC_FILES = 	exec.c exec_utils.c
 
 

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/27 14:40:46 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 15:52:23 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define ERR_OUT STDERR_FILENO
 
 # define ERR_QUOTE "Missing closing quote.\n"
+# define ERR_DUP "minishell: Error in dup2\n"
 # define STDRD_ERR "minishell: %s: %s\n"
 # define STDRD_ERR_SINGLE "minishell: %s\n"
 # define MALLOC_ERROR "Error: malloc failed, cannot allocate memory.\n"
@@ -47,7 +48,7 @@
 # define LEFT_BRACKET 6
 # define DOUBLE_LEFT_BRACKET 7
 # define RIGHT_BRACKET 8
-# define DOUBLE_RIGHT_BRACKET 9
+# define DBL_RIGHT_BRACKET 9
 
 /*---------------------------------TOKEN--------------------------------------*/
 
@@ -56,6 +57,7 @@
 /*------------------------------- DEFAULT-------------------------------------*/
 
 # define DEF_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+# define BUILTINS "pwd echo cd env export unset exit"
 # define DEF_SHLVL "SHLVL=0"
 # define DEF_LAST_ARG "_="
 

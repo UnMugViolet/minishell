@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/02 16:37:59 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 15:16:10 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void						ft_add_str_array(char ***array, char *str);
 
 void						ft_update_last_exit_value(t_data *data, int value);
 
+void						ft_dup(t_data *data, int fd, int fd2);
+
 /* --------------------------------CHECKS-------------------------------- */
 
 bool						ft_is_correct_input(char *prompt);
@@ -137,8 +139,9 @@ char						*ft_single_token(t_lex *lex, char **metachar);
 
 /* -------------------------------BUILTINS------------------------------- */
 
-bool						ft_check_exec_builtins(t_data *data, char **cmd);
+bool						ft_check_exec_builtins(t_data *data, t_exec *exec, int is_pipe);
 int							ft_cd(t_data *data, char **cmd);
+int							ft_echo(char **cmd);
 
 /* ---------------------------------PATH--------------------------------- */
 
@@ -147,11 +150,8 @@ char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 /* ---------------------------------EXEC--------------------------------- */
 
 void						ft_execute_prompt(t_data *data);
-void						ft_get_first_command(t_data *data, size_t *i);
 void						ft_exec_child(t_data *data, t_exec *exec,
 								pid_t *pid, int is_pipe);
-void						ft_setup_pipe(t_data *data, int is_pipe,
-								int is_child);
 void						ft_wait_and_update_status(t_data *data);
 void						ft_handle_redirection(t_exec *exec);
 

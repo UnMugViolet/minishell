@@ -6,12 +6,21 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/03/27 14:31:54 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:38:02 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+	Created to make the function ft_cd more readable, this function update the
+	the environment variables `PWD` and `OLDPWD` with the new directory, and free
+	the `curr_dir` and `new_dir` variables.
+	@param t_data*data
+	@param char*curr_dir
+	@param char*new_dir
+	@return void
+*/
 static void	ft_update_env_and_free(t_data *data, char *curr_dir, char *new_dir)
 {
 	ft_update_env_var(data, "PWD", new_dir);
@@ -20,6 +29,13 @@ static void	ft_update_env_and_free(t_data *data, char *curr_dir, char *new_dir)
 	free(new_dir);
 }
 
+/* 
+	Utilitary function to update the environment variables `PWD` and `OLDPWD`
+	after a successful change of directory. It update the env variables with the
+	`new_dir` variables.
+	@param t_data*data
+	@param char*path
+*/
 static int	ft_change_dir(t_data *data, char *path)
 {
 	bool	is_env_var;
@@ -49,6 +65,16 @@ static int	ft_change_dir(t_data *data, char *path)
 	return (ft_update_env_and_free(data, curr_dir, new_dir), 0);
 }
 
+/*
+	Change the current working directory to the one specified in `cmd[1]`.
+	If no argument is given, change to the home directory.
+	If the argument is `-`, change to the previous directory.
+	If the argument is `~`, change to the home directory.
+	If the argument is not a valid path, print an error message and return 1.
+	@param t_data*data
+	@param char**cmd
+	@return int
+*/
 int	ft_cd(t_data *data, char **cmd)
 {
 	char		*path;
@@ -71,5 +97,5 @@ int	ft_cd(t_data *data, char **cmd)
 		&& ft_strncmp(path, "~", 2))
 		return (perror("cd"), 1);
 	else
-		return (ft_change_dir(data, path));
+		return (ft_update_last_exit_value(data, 0), ft_change_dir(data, path));
 }
