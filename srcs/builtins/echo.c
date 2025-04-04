@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yguinio <yguinio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:39:23 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 19:18:37 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 10:28:56 by yguinio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
+
+void	ft_remove_quotes(char *str)
+{
+	char	*dst;
+
+	dst = str;
+	while (*str)
+	{
+		if (*str != '"' && *str != '\'')
+		{
+			*dst = *str;
+			dst++;
+		}
+		str++;
+	}
+	*dst = '\0';
+}
 
 /*
 	Handle the echo builtin command. It prints the arguments passed to it
@@ -34,6 +51,7 @@ int	ft_echo(char **cmd)
 	}
 	while (cmd[i])
 	{
+		ft_remove_quotes(cmd[i]);
 		ft_putstr_fd(cmd[i], STDOUT_FILENO);
 		if (cmd[i + 1])
 			ft_putstr_fd(" ", STDOUT_FILENO);
