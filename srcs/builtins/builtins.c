@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/04/04 10:32:51 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 12:06:09 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static int	ft_exec_builtins(t_data *data, char **cmd)
 	else if (!ft_strncmp(*cmd, "unset", 6) && cmd[1])
 		return (ft_delete_env_var(data, cmd[1]),
 				ft_update_last_exit_value(data, 0), 1);
-	else if (!ft_strncmp(data->prompt, "exit", 5))
-		return (ft_exit_clean(data, 0), 1);
+	else if (!ft_strncmp(*cmd, "exit", 5))
+		return (ft_exit(data, cmd), 1);
 	return (0);
 }
 

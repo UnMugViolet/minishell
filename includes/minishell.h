@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 17:26:28 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 12:04:40 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ char						*ft_single_token(t_lex *lex, char **metachar);
 bool						ft_check_exec_builtins(t_data *data, t_exec *exec, int is_pipe);
 int							ft_cd(t_data *data, char **cmd);
 int							ft_echo(char **cmd);
+void						ft_exit(t_data *data, char **cmd);
 
 /* ---------------------------------PATH--------------------------------- */
 
