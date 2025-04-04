@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/04/03 19:19:02 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 10:38:45 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	ft_change_dir(t_data *data, char *path)
 	is_env_var = false;
 	curr_dir = getcwd(NULL, 0);
 	if (!curr_dir)
-		return (perror("cd"), 1);
+		return (perror("cd"), ft_update_last_exit_value(data, 1), 1);
 	if (!ft_strncmp(path, "-", 2))
 	{
 		new_dir = ft_get_associated_env_value(data, "OLDPWD");
@@ -91,7 +91,7 @@ int	ft_cd(t_data *data, char **cmd)
 	else
 		path = cmd[1];
 	if (cmd[1] && cmd[2])
-		return (ft_putstr_fd("cd: Too many arguments\n", ERR_OUT), 1);
+		return (ft_putstr_fd("cd: too many arguments\n", ERR_OUT), 1);
 	else if (stat(path, &sb) == -1 && ft_strncmp(path, "-", 2)
 		&& ft_strncmp(path, "~", 2))
 		return (perror("cd"), 1);

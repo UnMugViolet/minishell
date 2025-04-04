@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/04/03 19:12:01 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 10:32:51 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ft_exec_builtins(t_data *data, char **cmd)
 	else if (!ft_strncmp(*cmd, "echo", 5))
 		return (ft_echo(cmd), ft_update_last_exit_value(data, 0),  1);
 	else if (!ft_strncmp(*cmd, "cd", 3))
-		return (ft_cd(data, cmd), 1);
+		return (ft_update_last_exit_value(data, ft_cd(data, cmd)), 1);
 	else if (!ft_strncmp(*cmd, "env", 4) && !cmd[1])
 		return (ft_print_array_str_fd(data->env, STDOUT_FILENO),
 				ft_update_last_exit_value(data, 0), 1);
