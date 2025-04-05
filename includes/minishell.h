@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/04 12:04:40 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:27:16 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char						*ft_get_env_var_name(char *str);
 char						*ft_get_associated_env_value(t_data *data,
 								char *variable);
 void						ft_delete_env_var(t_data *data, char *var);
-void						ft_create_env_var(t_data *data, char *str);
+int							ft_create_env_var(t_data *data, char *str);
 void						ft_update_env_var(t_data *data, char *variable,
 								char *new_value);
 char						*ft_get_env_var_adress(t_data *data,

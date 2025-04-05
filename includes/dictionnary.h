@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dictionnary.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/04 12:02:30 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:22:54 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define ERR_DUP "minishell: Error in dup2\n"
 # define ERR_EXIT_SYNTAX "minishell: exit: numeric argument required\n"
 # define ERR_EXIT_TOO_MANY "minishell: exit: too many arguments\n"
+# define ERR_EXPORT_SYNTAX "minishell: export: `%s`: not a valid identifier\n"
 # define STDRD_ERR "minishell: %s: %s\n"
 # define STDRD_ERR_SINGLE "minishell: %s\n"
 # define MALLOC_ERROR "Error: malloc failed, cannot allocate memory.\n"

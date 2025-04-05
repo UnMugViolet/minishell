@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/04/04 12:06:09 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:37:44 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_exec_builtins(t_data *data, char **cmd)
 		return (ft_print_array_str_fd(data->env, STDOUT_FILENO),
 				ft_update_last_exit_value(data, 0), 1);
 	else if (!ft_strncmp(*cmd, "export", 7) && cmd[1])
-		return (ft_create_env_var(data, cmd[1]), ft_update_last_exit_value(data, 0), 1);
+		return (ft_update_last_exit_value(data, ft_create_env_var(data, cmd[1])), 1);
 	else if (!ft_strncmp(*cmd, "export", 7))
 		return (ft_print_export(data->env, "export ", STDOUT_FILENO),
 				ft_update_last_exit_value(data, 0),  1);

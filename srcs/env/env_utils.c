@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:33:42 by yguinio           #+#    #+#             */
-/*   Updated: 2025/04/03 14:40:26 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:33:22 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 /*
 	Checks if the `str` string is rightfully formated for an `env` variable
+	(only alphanumeric characters and `_` are allowed, and it must not start
+	with a digit).
 	@param char*str
 	@return bool
 */
@@ -22,11 +24,17 @@ static bool	ft_check_env_var_format(char *str)
 	int	i;
 
 	i = 0;
-	while (ft_isalnum(str[i]))
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return (ft_fprintf(ERR_OUT, ERR_EXPORT_SYNTAX, str), false);
+	while (str[i] && str[i] != '=')
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (ft_fprintf(ERR_OUT, ERR_EXPORT_SYNTAX, str), false);
 		i++;
+	}
 	if (str[i] == '=')
 		return (true);
-	return (false);
+	return (ft_fprintf(ERR_OUT, ERR_EXPORT_SYNTAX, str), false);
 }
 
 static void	ft_free_all(char **new_env, char *var_check)
@@ -42,7 +50,7 @@ static void	ft_free_all(char **new_env, char *var_check)
 	@param char*str
 	@return void
 */
-void	ft_create_env_var(t_data *data, char *str)
+int	ft_create_env_var(t_data *data, char *str)
 {
 	int		i;
 	char	**new_env;
@@ -50,25 +58,25 @@ void	ft_create_env_var(t_data *data, char *str)
 
 	i = 0;
 	if (!ft_check_env_var_format(str))
-		return ;
+		return (1);
 	var_check = ft_substr(str, 0, ft_strchr(str, '=') - str);
 	if (ft_get_env_var_adress(data, var_check))
 	{
 		ft_update_env_var(data, var_check, str + ft_strlen(var_check) + 1);
-		free(var_check);
-		return ;
+		return (free(var_check), 0);
 	}
 	while (data->env[i])
 		i++;
 	new_env = (char **)ft_calloc(sizeof(char *), i + 2);
 	if (!new_env)
-		return ;
+		return (free(var_check), 1);
 	i = -1;
 	while (data->env[++i])
 		new_env[i] = ft_strdup(data->env[i]);
 	new_env[i++] = ft_strdup(str);
 	ft_free_all(data->env, var_check);
 	data->env = new_env;
+	return (0);
 }
 
 /*
