@@ -8,4 +8,4 @@ libft
 # Test files
 infile*
 outfile*
-test*
+./test*
