@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/03 19:19:02 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 12:58:38 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 		{
 			close(data->pipe_fd[0]);
 			ft_dup(data, data->pipe_fd[1], STDOUT_FILENO);
+		}
+		if (ft_is_builtin_cmd(exec->cmd[0]))
+		{
+			if (ft_exec_builtins(data, exec, is_pipe))
+				exit(0);
 		}
 		if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
 			ft_exit_clean(data, ft_handle_cmd_errors(exec));

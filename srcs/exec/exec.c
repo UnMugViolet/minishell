@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 19:17:19 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 12:50:26 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static void	ft_exec_command(t_data *data, t_exec *exec, int is_pipe, pid_t *pid)
 			return ;
 		}
 	}
-	if (!ft_check_exec_builtins(data, exec, is_pipe))
-		ft_exec_child(data, exec, pid, is_pipe);
+	ft_exec_child(data, exec, pid, is_pipe);
 	if (is_pipe)
 	{
 		close(data->pipe_fd[1]);

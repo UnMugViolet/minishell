@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/05 17:27:16 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/07 12:58:20 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void						ft_dup(t_data *data, int fd, int fd2);
 bool						ft_is_correct_input(char *prompt);
 bool						ft_is_closed_quotes(char *prompt);
 bool						ft_is_token(char *str, t_data *data);
+bool						ft_is_builtin_cmd(char *cmd);
 bool						ft_is_env_var(char *str);
 bool						ft_is_correct_token(t_lex *lex, char **metachar);
 bool						ft_is_metacharset(char *str, char **metacharset);
@@ -141,7 +142,7 @@ char						*ft_single_token(t_lex *lex, char **metachar);
 
 /* -------------------------------BUILTINS------------------------------- */
 
-bool						ft_check_exec_builtins(t_data *data, t_exec *exec, int is_pipe);
+bool						ft_exec_builtins(t_data *data, t_exec *exec, int is_pipe);
 int							ft_cd(t_data *data, char **cmd);
 int							ft_echo(char **cmd);
 void						ft_exit(t_data *data, char **cmd);

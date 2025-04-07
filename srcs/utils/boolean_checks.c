@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:39:26 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/03/26 14:54:11 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/07 12:52:42 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,25 @@ bool	ft_is_token(char *str, t_data *data)
 		if (ft_strncmp(str, data->metachar[i], ft_strlen(data->metachar[i])))
 			return (true);
 	return (false);
+}
+
+/*
+	Checks if `cmd` is a builtin function.
+	@param char*cmd
+	@return bool	
+*/
+bool	ft_is_builtin_cmd(char *cmd)
+{
+	char	**tmp;
+	int		i;
+	
+	tmp = ft_split(BUILTINS, ' ');
+	i = 0;
+	while (tmp[i])
+	{
+		if (!ft_strncmp(cmd, tmp[i], ft_strlen(tmp[i])))
+			return (ft_free_array_str(tmp), true);
+		i++;
+	}
+	return (ft_free_array_str(tmp), false);
 }
