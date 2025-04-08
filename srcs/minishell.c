@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 17:33:02 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 19:29:06 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	ft_resolve(t_data *data)
 	data->lex = NULL;
 	data->exec = NULL;
 	data->pid_count = 0;
+	data->paths = ft_get_path_from_env(data, false);
 }
 
 static void	ft_start_minishell(t_data *data)

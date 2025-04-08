@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/08 18:39:31 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/08 19:27:35 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void						ft_exit(t_data *data, char **cmd);
 
 /* ---------------------------------PATH--------------------------------- */
 
+char						**ft_get_path_from_env(t_data *data, bool get_default);
 char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 
 /* ---------------------------------EXEC--------------------------------- */

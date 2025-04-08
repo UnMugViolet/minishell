@@ -3,14 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:18:56 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/03/27 15:21:18 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 19:42:17 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+	Fetches the `$PATH` value from the `env` array.
+	If no `$PATH` is found, sets the value to `DEF_PATH`.
+	@param t_data*data
+	@return char *
+*/
+char	**ft_get_path_from_env(t_data *data, bool get_default)
+{
+    int		i;
+    char	**paths;
+    char	*env_var;
+
+    i = 0;
+    paths = NULL;
+    if (*data->env)
+    {
+        while (data->env[i] && ft_strncmp(data->env[i], "PATH=", 5))
+            i++;
+        if (data->env[i] && !ft_strncmp(data->env[i], "PATH=", 5))
+            paths = ft_split(data->env[i] + 5, ':');
+    }
+    if (!paths && get_default)
+    {
+        paths = ft_split(DEF_PATH, ':');
+        env_var = ft_strjoin("PATH=", DEF_PATH);
+        if (!env_var)
+            return (NULL);
+        ft_create_env_var(data, env_var);
+        free(env_var);
+    }
+    if (!paths)
+        return (NULL);
+    i = -1;
+    while (paths[++i])
+        paths[i] = ft_strjoin_free(paths[i], "/");
+    return (paths);
+}
 
 /*
 	Parse the paths given from the `data` struc and return the concatenation of
@@ -28,7 +66,7 @@ char	*ft_get_path_for_cmd(t_data *data, char *cmd)
 
 	i = 0;
 	full_cmd = NULL;
-	if (!cmd)
+	if (!cmd || !data->paths)
 		return (ft_strdup(""));
 	if (access(cmd, F_OK) == 0)
 		return (ft_strdup(cmd));
