@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/03 19:19:02 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 17:44:21 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static int	ft_handle_cmd_errors(t_exec *exec)
 	else if (errno == EACCES)
 		return (ft_fprintf(ERR_OUT, PERM_DENIED, exec->cmd[0]), 126);
 	else
-		return (ft_fprintf(ERR_OUT, STDRD_ERR, exec->cmd[0], strerror(errno)), 2);
+		return (ft_fprintf(ERR_OUT, STDRD_ERR, exec->cmd[0], strerror(errno)),
+			2);
 }
 
 /*
@@ -83,7 +84,8 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 {
 	*pid = fork();
 	if (*pid == -1)
-		ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno)));
+		ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE,
+				strerror(errno)));
 	else if (*pid == 0)
 	{
 		if (exec->in_fd != STDIN_FILENO)
@@ -95,6 +97,11 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 			close(data->pipe_fd[0]);
 			ft_dup(data, data->pipe_fd[1], STDOUT_FILENO);
 		}
+		if (ft_is_builtin(exec->cmd[0]))
+		{
+			ft_exec_builtins(data, exec->cmd);
+			exit(0);
+		}
 		if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
 			ft_exit_clean(data, ft_handle_cmd_errors(exec));
 	}
@@ -104,7 +111,7 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 
 /*
 	Store all the redirections from `>` `<` `>>` `<<` get the file descriptor
-	from exec command, open the file and add the fd of the file in `exec` struct 
+	from exec command, open the file and add the fd of the file in `exec` struct
 	of the command.
 	This function is called everytime and executed only if the `type` is
 	`RIGHT_BRACKET` or `LEFT_BRACKET`.
@@ -141,4 +148,3 @@ void	ft_handle_redirection(t_data *data, t_exec *exec)
 	else if (exec->type == DBL_LEFT_BRACKET)
 		ft_exec_heredoc(data, exec, exec->cmd[1]);
 }
-

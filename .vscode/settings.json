@@ -15,7 +15,8 @@
 		"type_traits": "c",
 		"utility": "c",
 		"ft_fprintf.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"random": "c"
 	},
 	"makefile.configureOnOpen": false,
 	"workbench.colorCustomizations": {
