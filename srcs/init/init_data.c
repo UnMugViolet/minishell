@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:24:34 by fureimu           #+#    #+#             */
-/*   Updated: 2025/04/02 16:39:48 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 18:56:57 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static char	**ft_get_path_from_env(t_data *data)
 {
 	int		i;
 	char	**paths;
+	char	*env_var;
 
 	i = 0;
 	if (*data->env)
@@ -99,7 +100,14 @@ static char	**ft_get_path_from_env(t_data *data)
 			paths = ft_split(data->env[i] + 5, ':');
 	}
 	if (!data->env[i])
+	{
 		paths = ft_split(DEF_PATH, ':');
+		env_var = ft_strjoin("PATH=", DEF_PATH);
+		if (!env_var)
+			return (NULL);
+		ft_create_env_var(data, env_var);
+		free(env_var);
+	}
 	i = -1;
 	while (paths[++i])
 		paths[i] = ft_strjoin_free(paths[i], "/");

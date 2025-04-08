@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/08 17:14:58 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/08 18:39:31 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ char						*ft_single_token(t_lex *lex, char **metachar);
 
 /* -------------------------------BUILTINS------------------------------- */
 
-int							ft_exec_builtins(t_data *data, char **cmd);
+int							ft_exec_parent_builtins(t_data *data, char **cmd);
+int							ft_exec_child_builtins(t_data *data, char **cmd);
 int							ft_cd(t_data *data, char **cmd);
 int							ft_echo(char **cmd);
 void						ft_exit(t_data *data, char **cmd);
