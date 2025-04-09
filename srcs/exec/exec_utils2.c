@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:09:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/09 11:31:51 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 12:14:18 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
 		ft_putstr_fd(line, data->pipe_fd[1]);
 		free(line);
 	}
-	ft_print_exec(data->exec);
 	close(data->pipe_fd[1]);
 	if (ft_get_next_word(exec))
 		ft_get_next_word(exec)->in_fd = data->pipe_fd[0];
