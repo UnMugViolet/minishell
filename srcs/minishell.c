@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 17:33:02 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/09 11:30:35 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,23 @@
 static void	ft_resolve(t_data *data)
 {
 	if (!ft_is_correct_input(data->prompt))
-		return ;
+	return ;
 	ft_init_prompt_lexing(data);
 	if (!ft_is_correct_token(data->lex, data->metachar))
 	{
 		ft_free_lex(data->lex);
 		data->lex = NULL;
-		ft_update_last_exit_value(data, 1);
+		ft_update_last_exit_value(data, ERR_OUT);
 		return ;
 	}
+	data->paths = ft_get_path_from_env(data, false);
 	ft_parse_prompt(data);
 	ft_execute_prompt(data);
 	ft_free_lex(data->lex);
 	ft_free_exec(data->exec);
 	ft_close_fds(data);
+	ft_free_array_str(data->paths);
+	data->paths = NULL;
 	data->lex = NULL;
 	data->exec = NULL;
 	data->pid_count = 0;
@@ -54,7 +57,7 @@ static void	ft_start_minishell(t_data *data)
 			break ;
 		free(data->prompt);
 	}
-	ft_exit_clean(data, 0);
+	ft_exit_clean(data, 0, false);
 }
 
 int	main(int ac, char **av, char **env)

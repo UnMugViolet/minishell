@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/07 12:58:20 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 11:50:47 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ t_exec						*ft_exec_new(char **cmd, char *path, size_t type);
 t_exec						*ft_get_next_word(t_exec *exec);
 void						ft_exec_add_back(t_exec **exec, t_exec *new);
 
+void						ft_remove_quotes_if_pair(char *str);
 char						*ft_str_substitute(char *str, t_data *data);
 char						*ft_get_last_word(t_lex *lex);
 void						ft_add_str_array(char ***array, char *str);
@@ -134,7 +135,7 @@ void						ft_dup(t_data *data, int fd, int fd2);
 bool						ft_is_correct_input(char *prompt);
 bool						ft_is_closed_quotes(char *prompt);
 bool						ft_is_token(char *str, t_data *data);
-bool						ft_is_builtin_cmd(char *cmd);
+bool						ft_is_builtin(char *str);
 bool						ft_is_env_var(char *str);
 bool						ft_is_correct_token(t_lex *lex, char **metachar);
 bool						ft_is_metacharset(char *str, char **metacharset);
@@ -142,13 +143,16 @@ char						*ft_single_token(t_lex *lex, char **metachar);
 
 /* -------------------------------BUILTINS------------------------------- */
 
-bool						ft_exec_builtins(t_data *data, t_exec *exec, int is_pipe);
+int							ft_exec_parent_builtins(t_data *data, char **cmd);
+int							ft_exec_child_builtins(t_data *data, char **cmd);
 int							ft_cd(t_data *data, char **cmd);
 int							ft_echo(char **cmd);
 void						ft_exit(t_data *data, char **cmd);
 
 /* ---------------------------------PATH--------------------------------- */
 
+char						**ft_get_path_from_env(t_data *data,
+								bool get_default);
 char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 
 /* ---------------------------------EXEC--------------------------------- */
@@ -158,12 +162,13 @@ void						ft_exec_child(t_data *data, t_exec *exec,
 								pid_t *pid, int is_pipe);
 void						ft_wait_and_update_status(t_data *data);
 void						ft_handle_redirection(t_data *data, t_exec *exec);
-void						ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter);
+void						ft_exec_heredoc(t_data *data, t_exec *exec,
+								char *limiter);
 
 /* --------------------------------ERRORS-------------------------------- */
 
 void						ft_exit_error(t_data *data, char *str, int code);
-void						ft_exit_clean(t_data *data, int error_code);
+void						ft_exit_clean(t_data *data, int error_code, bool write);
 void						ft_close_fds(t_data *data);
 void						display_usage(void);
 

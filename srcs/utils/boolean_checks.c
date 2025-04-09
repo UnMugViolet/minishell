@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:39:26 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/07 12:52:42 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 11:51:51 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool	ft_is_token(char *str, t_data *data)
 	@param char*cmd
 	@return bool	
 */
-bool	ft_is_builtin_cmd(char *cmd)
+bool	ft_is_builtin(char *cmd)
 {
 	char	**tmp;
 	int		i;

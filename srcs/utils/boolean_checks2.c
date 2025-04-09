@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   boolean_checks2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:39:26 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 18:43:55 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/09 08:58:56 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static bool	ft_check_word_after_redir(t_lex *lex)
 		else if (!ft_strncmp(lex->content, "|", 2) && (!lex->next
 				|| ft_is_only_whitespace(lex->next->content)))
 			return (ft_free_array_str(redir_charset), ft_fprintf(ERR_OUT,
-					SYNTAX_ERROR, " |"), 0);
+					SYNTAX_ERROR, "|"), 0);
 		lex = lex->next;
 	}
 	return (ft_free_array_str(redir_charset), 1);

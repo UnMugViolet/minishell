@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
+#    By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/04/04 12:01:00 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/04/09 10:26:54 by unmugviolet      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ DIRS = 			env utils init lexing parsing builtins exec
 
 # Source files for each directory
 FILES = 		minishell.c path.c signals.c exit.c
-ENV_FILES = 	env.c env_utils.c env_utils2.c ft_str_substitute.c
+ENV_FILES = 	env_utils.c env_utils2.c ft_str_substitute.c ft_replace_env_variable.c ft_remove_quotes.c
 UTILS_FILES =	boolean_checks.c boolean_checks2.c struct_exec_utils.c
 INIT_FILES =	init_data.c init_exec.c
 LEX_FILES = 	lexing.c lex_utils.c lex_utils2.c
@@ -93,7 +93,7 @@ debug: all
 	@rm -rf $(NAME)
 	
 test: all
-	@cd ./minishell_tester && ./tester
+	@cd ./minishell_tester && ./tester $(args)
 	@rm -rf $(NAME)
 
 # Specify that these are not files to compile (just for safety)

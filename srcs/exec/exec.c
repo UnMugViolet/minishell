@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/07 12:50:26 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 11:51:35 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	ft_exec_command(t_data *data, t_exec *exec, int is_pipe, pid_t *pid)
 			return ;
 		}
 	}
-	ft_exec_child(data, exec, pid, is_pipe);
+	if (!ft_exec_parent_builtins(data, exec->cmd))
+		ft_exec_child(data, exec, pid, is_pipe);
 	if (is_pipe)
 	{
 		close(data->pipe_fd[1]);
