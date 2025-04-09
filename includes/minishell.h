@@ -168,7 +168,8 @@ void						ft_exec_heredoc(t_data *data, t_exec *exec,
 /* --------------------------------ERRORS-------------------------------- */
 
 void						ft_exit_error(t_data *data, char *str, int code);
-void						ft_exit_clean(t_data *data, int error_code, bool write);
+void						ft_exit_clean(t_data *data, int error_code,
+								bool write);
 void						ft_close_fds(t_data *data);
 void						display_usage(void);
 

@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 09:39:26 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/09 11:51:51 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 13:02:47 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ bool	ft_is_builtin(char *cmd)
 {
 	char	**tmp;
 	int		i;
-	
+
 	tmp = ft_split(BUILTINS, ' ');
 	i = 0;
 	while (tmp[i])

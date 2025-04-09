@@ -6,11 +6,22 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/09 11:51:16 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 12:59:20 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_attach_fd_to_exec(int fd, t_exec *exec)
+{
+	if (exec->next)
+	{
+		if (exec->type == RIGHT_BRACKET || exec->type == DBL_RIGHT_BRACKET)
+			exec->next->out_fd = fd;
+		else if (exec->type == LEFT_BRACKET)
+			exec->next->in_fd = fd;
+	}
+}
 
 /*
 	Created to make the function exec child more readable, this function
@@ -77,7 +88,7 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 		if (ft_is_builtin(exec->cmd[0]))
 		{
 			ft_exec_child_builtins(data, exec->cmd);
-				ft_exit_clean(data, 0, false);
+			ft_exit_clean(data, 0, false);
 		}
 		if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
 			ft_exit_clean(data, ft_handle_cmd_errors(exec), false);
@@ -105,22 +116,21 @@ void	ft_handle_redirection(t_data *data, t_exec *exec)
 		fd = open(exec->cmd[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
 			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
-		if (exec->next)
-			exec->next->out_fd = fd;
+		ft_attach_fd_to_exec(fd, exec);
 	}
 	else if (exec->type == LEFT_BRACKET)
 	{
 		fd = open(exec->cmd[1], O_RDONLY);
 		if (fd == -1)
 			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
-		exec->next->in_fd = fd;
+		ft_attach_fd_to_exec(fd, exec);
 	}
 	else if (exec->type == DBL_RIGHT_BRACKET)
 	{
 		fd = open(exec->cmd[1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
 			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
-		exec->next->out_fd = fd;
+		ft_attach_fd_to_exec(fd, exec);
 	}
 	else if (exec->type == DBL_LEFT_BRACKET)
 		ft_exec_heredoc(data, exec, exec->cmd[1]);
