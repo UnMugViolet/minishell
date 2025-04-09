@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/09 10:27:04 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 11:28:06 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void						ft_exec_heredoc(t_data *data, t_exec *exec,
 /* --------------------------------ERRORS-------------------------------- */
 
 void						ft_exit_error(t_data *data, char *str, int code);
-void						ft_exit_clean(t_data *data, int error_code);
+void						ft_exit_clean(t_data *data, int error_code, bool write);
 void						ft_close_fds(t_data *data);
 void						display_usage(void);
 

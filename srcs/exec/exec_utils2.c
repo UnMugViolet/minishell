@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:09:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/09 09:47:12 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 11:31:51 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_wait_and_update_status(t_data *data)
 	{
 		if (waitpid(data->pid_list[i], &status, 0) == -1)
 			ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE,
-					strerror(errno)));
+					strerror(errno)), false);
 		ft_update_last_exit_value(data, WEXITSTATUS(status));
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/08 18:37:28 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 11:31:40 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,8 @@ void	ft_dup(t_data *data, int fd, int fd2)
 {
 	if (dup2(fd, fd2) == -1)
 		ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE,
-				strerror(errno)));
+				strerror(errno)), false);
 	close(fd);
-}
-
-/*
-	Bullk wait for all the child processes to finish and update the last exit
-	value of the shell env. The waiting is done in a loop and checks the
-	`pid_list` to get all the pids.
-	@param t_data*data
-	@return void
-*/
-void	ft_wait_and_update_status(t_data *data)
-{
-	int	i;
-	int	status;
-
-	i = 0;
-	while (i < data->pid_count)
-	{
-		if (waitpid(data->pid_list[i], &status, 0) == -1)
-			ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE,
-					strerror(errno)));
-		ft_update_last_exit_value(data, WEXITSTATUS(status));
-		i++;
-	}
 }
 
 /*
@@ -85,7 +62,7 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 	*pid = fork();
 	if (*pid == -1)
 		ft_exit_clean(data, ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE,
-				strerror(errno)));
+				strerror(errno)), false);
 	else if (*pid == 0)
 	{
 		if (exec->in_fd != STDIN_FILENO)
@@ -100,10 +77,10 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 		if (ft_is_builtin(exec->cmd[0]))
 		{
 			ft_exec_child_builtins(data, exec->cmd);
-			exit(0);
+				ft_exit_clean(data, 0, false);
 		}
 		if (execve(exec->full_cmd, exec->cmd, data->env) == -1)
-			ft_exit_clean(data, ft_handle_cmd_errors(exec));
+			ft_exit_clean(data, ft_handle_cmd_errors(exec), false);
 	}
 	else
 		data->pid_list[data->pid_count++] = *pid;

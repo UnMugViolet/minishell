@@ -99,7 +99,8 @@ void	ft_get_outfiles(t_data *data)
 	{
 		if (tmp && tmp->type == PIPE)
 			return ;
-		if (tmp && (tmp->type == RIGHT_BRACKET || tmp->type == DBL_RIGHT_BRACKET))
+		if (tmp && (tmp->type == RIGHT_BRACKET
+				|| tmp->type == DBL_RIGHT_BRACKET))
 		{
 			if (tmp->next && tmp->next->content)
 			{

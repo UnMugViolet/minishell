@@ -6,16 +6,18 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:18:56 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/08 19:42:17 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 11:23:04 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-	Fetches the `$PATH` value from the `env` array.
-	If no `$PATH` is found, sets the value to `DEF_PATH`.
+	Fetches the `$PATH` value from the `data->env` array.
+	If no `$PATH` is found, sets the value to `DEF_PATH` if the `get_default` is
+	set to `true`. Otherwise returns `NULL`.
 	@param t_data*data
+	@param bool get_default
 	@return char *
 */
 char	**ft_get_path_from_env(t_data *data, bool get_default)
@@ -26,7 +28,7 @@ char	**ft_get_path_from_env(t_data *data, bool get_default)
 
 	i = 0;
 	paths = NULL;
-	if (*data->env)
+	if (data->env && *data->env)
 	{
 		while (data->env[i] && ft_strncmp(data->env[i], "PATH=", 5))
 			i++;
