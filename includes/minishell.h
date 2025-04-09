@@ -150,7 +150,8 @@ void						ft_exit(t_data *data, char **cmd);
 
 /* ---------------------------------PATH--------------------------------- */
 
-char						**ft_get_path_from_env(t_data *data, bool get_default);
+char						**ft_get_path_from_env(t_data *data,
+								bool get_default);
 char						*ft_get_path_for_cmd(t_data *data, char *cmd);
 
 /* ---------------------------------EXEC--------------------------------- */
@@ -160,7 +161,8 @@ void						ft_exec_child(t_data *data, t_exec *exec,
 								pid_t *pid, int is_pipe);
 void						ft_wait_and_update_status(t_data *data);
 void						ft_handle_redirection(t_data *data, t_exec *exec);
-void						ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter);
+void						ft_exec_heredoc(t_data *data, t_exec *exec,
+								char *limiter);
 
 /* --------------------------------ERRORS-------------------------------- */
 
