@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/05 17:22:54 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 09:05:06 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define CMD_NOT_FOUND "minishell: %s: command not found\n"
 # define PERM_DENIED "minishell: %s: permission denied\n"
 # define SYNTAX_ERROR "minishell: syntax error near unexpected token '%s'\n"
-# define SYNTAX_ERROR_N "minishell: syntax error near unexpected token '\\n'\n"
+# define SYNTAX_ERROR_N "minishell: syntax error near unexpected token 'newline'\n"
 # define SYNTAX_FLM_ERROR "miniflemme: syntax error near unexpected token '%s'\n"
 
 /*--------------------------------COLORS--------------------------------------*/

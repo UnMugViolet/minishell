@@ -2,3 +2,10 @@ TODO :
 
 - Check tous les leaks possible
 - Remplacer la maniere dont on recupere le path (unset PATH puis ls ne doit plus rien donner)
+
+
+TESTS : 
+- Syntax [x]
+- Pipes []
+- Redirs [x]
+- Builtins []

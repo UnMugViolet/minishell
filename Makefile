@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
+#    By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/04/04 12:01:00 by pjaguin          ###   ########.fr        #
+#    Updated: 2025/04/09 08:55:54 by unmugviolet      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ debug: all
 	@rm -rf $(NAME)
 	
 test: all
-	@cd ./minishell_tester && ./tester
+	@cd ./minishell_tester && ./tester $(args)
 	@rm -rf $(NAME)
 
 # Specify that these are not files to compile (just for safety)

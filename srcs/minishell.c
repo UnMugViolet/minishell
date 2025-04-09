@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/08 19:29:06 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 09:01:46 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_resolve(t_data *data)
 	{
 		ft_free_lex(data->lex);
 		data->lex = NULL;
-		ft_update_last_exit_value(data, 1);
+		ft_update_last_exit_value(data, ERR_OUT);
 		return ;
 	}
 	ft_parse_prompt(data);
