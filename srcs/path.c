@@ -6,11 +6,22 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:18:56 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/09 11:23:04 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 13:10:25 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	get_default_path(t_data *data, char ***paths)
+{
+	int	i;
+
+	i = 0;
+	while (data->env[i] && ft_strncmp(data->env[i], "PATH=", 5))
+		i++;
+	if (data->env[i] && !ft_strncmp(data->env[i], "PATH=", 5))
+		*paths = ft_split(data->env[i] + 5, ':');
+}
 
 /*
 	Fetches the `$PATH` value from the `data->env` array.
@@ -26,15 +37,10 @@ char	**ft_get_path_from_env(t_data *data, bool get_default)
 	char	**paths;
 	char	*env_var;
 
-	i = 0;
+	i = -1;
 	paths = NULL;
 	if (data->env && *data->env)
-	{
-		while (data->env[i] && ft_strncmp(data->env[i], "PATH=", 5))
-			i++;
-		if (data->env[i] && !ft_strncmp(data->env[i], "PATH=", 5))
-			paths = ft_split(data->env[i] + 5, ':');
-	}
+		get_default_path(data, &paths);
 	if (!paths && get_default)
 	{
 		paths = ft_split(DEF_PATH, ':');
@@ -46,7 +52,6 @@ char	**ft_get_path_from_env(t_data *data, bool get_default)
 	}
 	if (!paths)
 		return (NULL);
-	i = -1;
 	while (paths[++i])
 		paths[i] = ft_strjoin_free(paths[i], "/");
 	return (paths);
