@@ -1,3 +1,7 @@
 [submodule "libft_minishell"]
     path = libft
     url = https://github.com/UnMugViolet/libft
+
+[submodule "minishell_tester"]
+    path = minishell_tester
+    url = https://github.com/LucasKuhn/minishell_tester.git
