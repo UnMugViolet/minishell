@@ -6,7 +6,7 @@
 /*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/08 19:27:35 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/09 10:27:04 by unmugviolet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ t_exec						*ft_exec_new(char **cmd, char *path, size_t type);
 t_exec						*ft_get_next_word(t_exec *exec);
 void						ft_exec_add_back(t_exec **exec, t_exec *new);
 
+void						ft_remove_quotes_if_pair(char *str);
 char						*ft_str_substitute(char *str, t_data *data);
 char						*ft_get_last_word(t_lex *lex);
 void						ft_add_str_array(char ***array, char *str);
