@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:04:00 by fureimu           #+#    #+#             */
-/*   Updated: 2025/04/04 10:38:45 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/10 10:46:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	ft_change_dir(t_data *data, char *path)
 		is_env_var = true;
 	}
 	if (chdir(new_dir) == -1)
-		return (perror("cd"), 1);
+		return (perror("cd"), free(curr_dir), 1);
 	if (is_env_var)
 		free(new_dir);
 	new_dir = getcwd(NULL, 0);
