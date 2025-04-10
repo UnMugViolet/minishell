@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/09 11:39:39 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/10 11:40:35 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	ft_exit_clean(t_data *data, int error_code, bool write)
 	ft_close_fds(data);
 	if (write)
 		ft_fprintf(1, "exit\n");
+	close(data->og_stdin);
+	close(data->og_stdout);
 	exit(error_code);
 }
 
