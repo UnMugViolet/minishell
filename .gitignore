@@ -9,3 +9,4 @@ libft
 infile*
 outfile*
 ./test*
+tests/*
