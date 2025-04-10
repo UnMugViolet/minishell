@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+         #
+#    By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 13:05:36 by pjaguin           #+#    #+#              #
-#    Updated: 2025/04/09 10:26:54 by unmugviolet      ###   ########.fr        #
+#    Updated: 2025/04/10 12:37:22 by pjaguin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ go: all
 	@rm -rf $(NAME)
 
 gov: all
-	@valgrind --suppressions=valgrind-readline.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
+	@valgrind --suppressions=valgrind-readline.supp --leak-check=full --track-fds=yes --show-leak-kinds=all ./$(NAME)
 	@rm -rf $(NAME)
 
 debug: all
