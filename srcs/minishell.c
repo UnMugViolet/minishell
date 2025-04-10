@@ -6,11 +6,13 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/10 10:43:40 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/10 17:33:40 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int g_exit_heredoc = 0;
 
 static void	ft_resolve(t_data *data)
 {
@@ -32,6 +34,7 @@ static void	ft_resolve(t_data *data)
 	ft_free_exec(data->exec);
 	ft_close_fds(data);
 	ft_free_array_str(data->paths);
+	g_exit_heredoc = 0;
 	data->paths = NULL;
 	data->lex = NULL;
 	data->exec = NULL;
