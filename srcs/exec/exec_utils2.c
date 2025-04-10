@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:09:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/09 12:14:18 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/10 17:42:48 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,17 @@ void	ft_wait_and_update_status(t_data *data)
 void	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
 {
 	char	*line;
-	size_t	limiter_len;
+	size_t	const limiter_len = ft_strlen(limiter);
 
-	limiter_len = ft_strlen(limiter);
 	if (data->pipe_fd[0] != -1)
 		close(data->pipe_fd[0]);
 	if (pipe(data->pipe_fd) == -1)
 		ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
 	while (true)
 	{
-		ft_putstr_fd("heredoc> ", 1);
+		if (g_exit_heredoc)
+			return ;
+		ft_fprintf(1, "heredoc> ");
 		line = get_next_line(0);
 		if (!line || (!ft_strncmp(line, limiter, limiter_len)
 				&& line[limiter_len] == '\n'))
@@ -71,6 +72,7 @@ void	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
 	close(data->pipe_fd[1]);
 	if (ft_get_next_word(exec))
 		ft_get_next_word(exec)->in_fd = data->pipe_fd[0];
+	g_exit_heredoc = 0; 
 }
 // Tu t'emmerdes pour rien la !!
 // Moi j'aurais pas fait comme ca !

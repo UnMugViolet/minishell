@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/09 12:59:20 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/10 17:35:39 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,8 @@ void	ft_handle_redirection(t_data *data, t_exec *exec)
 		ft_attach_fd_to_exec(fd, exec);
 	}
 	else if (exec->type == DBL_LEFT_BRACKET)
-		ft_exec_heredoc(data, exec, exec->cmd[1]);
+	{
+		g_exit_heredoc = 0;
+		ft_exec_heredoc(data, exec, exec->cmd[1]);		
+	}
 }
