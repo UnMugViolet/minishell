@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/11 09:21:25 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 12:02:08 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	ft_exec_child(t_data *data, t_exec *exec, pid_t *pid, int is_pipe)
 	@param t_data*data
 	@return void
 */
-void	ft_handle_redirection(t_data *data, t_exec *exec)
+int	ft_handle_redirection(t_data *data, t_exec *exec)
 {
 	int	fd;
 
@@ -133,8 +133,6 @@ void	ft_handle_redirection(t_data *data, t_exec *exec)
 		ft_attach_fd_to_exec(fd, exec);
 	}
 	else if (exec->type == DBL_LEFT_BRACKET)
-	{
-		g_in_heredoc = 0;
-		ft_exec_heredoc(data, exec, exec->cmd[1]);		
-	}
+		return (ft_exec_heredoc(data, exec, exec->cmd[1]));
+	return (0);
 }

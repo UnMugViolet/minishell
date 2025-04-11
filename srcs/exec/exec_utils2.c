@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:09:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/11 09:21:25 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 17:04:14 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,23 @@ void	ft_wait_and_update_status(t_data *data)
 	@param char* limiter
 	@return void
 */
-void	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
+int	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
 {
 	char	*line;
 	size_t	const limiter_len = ft_strlen(limiter);
 
+	g_sigint_received = 0;
 	if (data->pipe_fd[0] != -1)
 		close(data->pipe_fd[0]);
 	if (pipe(data->pipe_fd) == -1)
 		ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
-	while (true)
+	while (!g_sigint_received)
 	{
-		if (g_in_heredoc)
-			return ;
 		ft_fprintf(1, "heredoc> ");
 		line = get_next_line(0);
-		if (!line || (!ft_strncmp(line, limiter, limiter_len)
+		if (!line)
+			return (free(line),close(data->pipe_fd[0]), close(data->pipe_fd[1]), ft_fprintf(1, EOF_HD_ERR, limiter), 1);
+		if ((!ft_strncmp(line, limiter, limiter_len)
 				&& line[limiter_len] == '\n'))
 		{
 			free(line);
@@ -72,7 +73,7 @@ void	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
 	close(data->pipe_fd[1]);
 	if (ft_get_next_word(exec))
 		ft_get_next_word(exec)->in_fd = data->pipe_fd[0];
-	g_in_heredoc = 0; 
+	return (0);
 }
 // Tu t'emmerdes pour rien la !!
 // Moi j'aurais pas fait comme ca !

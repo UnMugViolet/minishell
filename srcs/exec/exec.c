@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:15 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/09 12:38:00 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/11 12:01:02 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	ft_execute_prompt(t_data *data)
 	tmp = data->exec;
 	while (tmp)
 	{
-		ft_handle_redirection(data, tmp);
+		if (ft_handle_redirection(data, tmp) == -1)
+			return ;
 		if (!ft_is_metacharset(tmp->cmd[0], data->metachar))
 		{
 			if (tmp->next && tmp->next->type == PIPE)
