@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:38:07 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/11 09:21:25 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 17:05:50 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int g_in_heredoc = 0;
+volatile int g_sigint_received;
 
 static void	ft_resolve(t_data *data)
 {
@@ -34,7 +34,6 @@ static void	ft_resolve(t_data *data)
 	ft_free_exec(data->exec);
 	ft_close_fds(data);
 	ft_free_array_str(data->paths);
-	g_in_heredoc = 0;
 	data->paths = NULL;
 	data->lex = NULL;
 	data->exec = NULL;

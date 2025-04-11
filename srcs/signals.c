@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:52:21 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/11 09:21:25 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:48:00 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,20 @@ static void	ft_disable_echoctl(void)
 */
 static void	ft_handle_signal(int signal)
 {
-	printf("exit heredoc: %d\n", g_in_heredoc);
-	if (g_in_heredoc)
+	if (!g_sigint_received && signal == SIGINT)
+		g_sigint_received = 1;
+	if (signal == SIGINT || signal == SIGCHLD)
 	{
-		printf("Been here\n");
-		if (signal == SIGINT || signal == SIGCHLD || signal == SIGTERM)
-			ft_fprintf(STDOUT_FILENO, "\n");
-		return ;
-	}
-	if (!g_in_heredoc && (signal == SIGINT || signal == SIGCHLD))
-	{
-		printf("Been there\n");
 		ft_fprintf(STDOUT_FILENO, "\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	else if (signal == SIGTERM)
+	{
+		ft_fprintf(STDOUT_FILENO, "\n");
 		ft_exit_clean(NULL, 1, false);
+	}
 }
 
 /*

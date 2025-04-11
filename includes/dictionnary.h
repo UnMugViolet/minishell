@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dictionnary.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: unmugviolet <unmugviolet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/09 13:05:24 by unmugviolet      ###   ########.fr       */
+/*   Updated: 2025/04/11 16:29:10 by fureimu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define PERM_DENIED "minishell: %s: permission denied\n"
 # define STX_ERR "minishell: syntax error near unexpected token '%s'\n"
 # define STX_ERR_N "minishell: syntax error near unexpected token '\\n'\n"
+# define EOF_HD_ERR "\nminishell: warning: here-document at line 1 delimited by \
+end-of-file (wanted `%s')\n"
 # define STX_FLM_ERR "miniflemme: syntax error near unexpected token '%s'\n"
 
 /*--------------------------------COLORS--------------------------------------*/
