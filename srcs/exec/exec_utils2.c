@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:09:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/10 17:42:48 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 09:21:25 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
 		ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
 	while (true)
 	{
-		if (g_exit_heredoc)
+		if (g_in_heredoc)
 			return ;
 		ft_fprintf(1, "heredoc> ");
 		line = get_next_line(0);
@@ -72,7 +72,7 @@ void	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
 	close(data->pipe_fd[1]);
 	if (ft_get_next_word(exec))
 		ft_get_next_word(exec)->in_fd = data->pipe_fd[0];
-	g_exit_heredoc = 0; 
+	g_in_heredoc = 0; 
 }
 // Tu t'emmerdes pour rien la !!
 // Moi j'aurais pas fait comme ca !
