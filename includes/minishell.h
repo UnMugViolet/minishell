@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/10 17:27:02 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 09:21:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_data
 
 typedef struct sigaction	t_sigaction;
 
-extern int g_exit_heredoc;
+extern int g_in_heredoc;
 
 /* ---------------------------------INIT-------------------------------- */
 
