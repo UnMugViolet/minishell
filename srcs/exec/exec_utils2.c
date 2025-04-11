@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:09:44 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/11 17:04:14 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/04/11 18:20:29 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_check_print_fd(int fd)
+{
+	if (fd == -1)
+		ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
+}
+
+static int	hd_err(t_data *data, char *line, char *limiter, size_t limiter_len)
+{
+	if (!line)
+	{
+		close(data->pipe_fd[0]);
+		close(data->pipe_fd[1]);
+		return (ft_fprintf(1, EOF_HD_ERR, limiter), 1);
+	}
+	else if ((!ft_strncmp(line, limiter, limiter_len)
+			&& line[limiter_len] == '\n'))
+		return (free(line), 1);
+	return (0);
+}
 
 /*
 	Bulk wait for all the child processes to finish and update the last exit
@@ -47,8 +67,9 @@ void	ft_wait_and_update_status(t_data *data)
 */
 int	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
 {
-	char	*line;
-	size_t	const limiter_len = ft_strlen(limiter);
+	int				return_value;	
+	char			*line;
+	size_t const	limiter_len = ft_strlen(limiter);
 
 	g_sigint_received = 0;
 	if (data->pipe_fd[0] != -1)
@@ -59,21 +80,16 @@ int	ft_exec_heredoc(t_data *data, t_exec *exec, char *limiter)
 	{
 		ft_fprintf(1, "heredoc> ");
 		line = get_next_line(0);
-		if (!line)
-			return (free(line),close(data->pipe_fd[0]), close(data->pipe_fd[1]), ft_fprintf(1, EOF_HD_ERR, limiter), 1);
-		if ((!ft_strncmp(line, limiter, limiter_len)
-				&& line[limiter_len] == '\n'))
-		{
-			free(line);
+		return_value = hd_err(data, line, limiter, limiter_len);
+		if (return_value)
 			break ;
-		}
 		ft_putstr_fd(line, data->pipe_fd[1]);
 		free(line);
 	}
 	close(data->pipe_fd[1]);
 	if (ft_get_next_word(exec))
 		ft_get_next_word(exec)->in_fd = data->pipe_fd[0];
-	return (0);
+	return (return_value);
 }
 // Tu t'emmerdes pour rien la !!
 // Moi j'aurais pas fait comme ca !

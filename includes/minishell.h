@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/11 17:06:00 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/04/11 18:05:23 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_data
 
 typedef struct sigaction	t_sigaction;
 
-extern volatile int g_sigint_received;
+extern volatile int			g_sigint_received;
 
 /* ---------------------------------INIT-------------------------------- */
 
@@ -166,6 +166,7 @@ void						ft_wait_and_update_status(t_data *data);
 int							ft_handle_redirection(t_data *data, t_exec *exec);
 int							ft_exec_heredoc(t_data *data, t_exec *exec,
 								char *limiter);
+void						ft_check_print_fd(int fd);
 
 /* --------------------------------ERRORS-------------------------------- */
 
