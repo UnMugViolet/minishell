@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:11:18 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/11 12:02:08 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/04/11 18:47:21 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_attach_fd_to_exec(int fd, t_exec *exec)
 		if (exec->type == RIGHT_BRACKET || exec->type == DBL_RIGHT_BRACKET)
 			exec->next->out_fd = fd;
 		else if (exec->type == LEFT_BRACKET)
-			exec->next->in_fd = fd;
+			ft_get_next_word(exec)->in_fd = fd;
 	}
 }
 
@@ -114,22 +114,19 @@ int	ft_handle_redirection(t_data *data, t_exec *exec)
 	if (exec->type == RIGHT_BRACKET)
 	{
 		fd = open(exec->cmd[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd == -1)
-			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
+		ft_check_print_fd(fd);
 		ft_attach_fd_to_exec(fd, exec);
 	}
 	else if (exec->type == LEFT_BRACKET)
 	{
 		fd = open(exec->cmd[1], O_RDONLY);
-		if (fd == -1)
-			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
+		ft_check_print_fd(fd);
 		ft_attach_fd_to_exec(fd, exec);
 	}
 	else if (exec->type == DBL_RIGHT_BRACKET)
 	{
 		fd = open(exec->cmd[1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (fd == -1)
-			ft_fprintf(ERR_OUT, STDRD_ERR_SINGLE, strerror(errno));
+		ft_check_print_fd(fd);
 		ft_attach_fd_to_exec(fd, exec);
 	}
 	else if (exec->type == DBL_LEFT_BRACKET)
