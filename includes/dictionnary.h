@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:30:32 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/11 17:52:06 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 12:04:35 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define PERM_DENIED "minishell: %s: permission denied\n"
 # define STX_ERR "minishell: syntax error near unexpected token '%s'\n"
 # define STX_ERR_N "minishell: syntax error near unexpected token '\\n'\n"
-# define EOF_HD_ERR "\nminishell: warning: here-document at line 1 delimited by \
-end-of-file (wanted `%s')\n"
+# define EOF_HD_ERR "\nminishell: warning: here-document at line 1 delimited \
+by end-of-file (wanted `%s')\n"
 # define STX_FLM_ERR "miniflemme: syntax error near unexpected token '%s'\n"
 
 /*--------------------------------COLORS--------------------------------------*/
