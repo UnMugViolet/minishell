@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:39:19 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/11 18:05:23 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 12:03:11 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void						ft_update_env_var(t_data *data, char *variable,
 								char *new_value);
 char						*ft_get_env_var_adress(t_data *data,
 								char *variable);
+void						ft_toggle_quotes(char c, bool *in_sgl,
+								bool *in_dbl);
 
 /* -------------------------------PARSING------------------------------- */
 
@@ -181,7 +183,7 @@ void						display_usage(void);
 void						ft_free_lex(t_lex *lex);
 void						ft_free_exec(t_exec *exec);
 
-/* -------------------------PRINTS TO-DO REMOVE LATER---------------------- */
+/* -------------------------------PRINTS UTILS--------------------------- */
 
 void						ft_print_lex(t_lex *lex);
 void						ft_print_exec(t_exec *exec);

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:33:29 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/11 18:48:40 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 11:27:27 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,23 @@
 
 void	ft_close_fds(t_data *data)
 {
+	t_exec	*tmp;
+
+	tmp = data->exec;
+	while (tmp)
+	{
+		if (tmp->in_fd != STDIN_FILENO)
+		{
+			close(tmp->in_fd);
+			tmp->in_fd = STDIN_FILENO;
+		}
+		if (tmp->out_fd != STDOUT_FILENO)
+		{
+			close(tmp->out_fd);
+			tmp->out_fd = STDOUT_FILENO;
+		}
+		tmp = tmp->next;
+	}
 	if (data->pipe_fd[0] != -1)
 		close(data->pipe_fd[0]);
 	if (data->pipe_fd[1] != -1)
@@ -40,6 +57,7 @@ static void	ft_conditional_free(void *ptr, void (*func)(void *))
 */
 void	ft_exit_clean(t_data *data, int error_code, bool write)
 {
+	ft_close_fds(data);
 	ft_free_array_str(data->env);
 	ft_free_array_str(data->paths);
 	ft_free_array_str(data->metachar);
@@ -49,7 +67,6 @@ void	ft_exit_clean(t_data *data, int error_code, bool write)
 	ft_conditional_free(data->exec, (void (*)(void *))ft_free_exec);
 	ft_conditional_free(data->last_exit_value, free);
 	rl_clear_history();
-	ft_close_fds(data);
 	if (write)
 		ft_fprintf(1, "exit\n");
 	close(data->og_stdin);

@@ -6,7 +6,7 @@
 /*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:24:45 by pjaguin           #+#    #+#             */
-/*   Updated: 2025/04/03 17:29:11 by pjaguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 09:31:03 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ void	ft_print_exec(t_exec *exec)
 		{
 			ft_printf("Chain nbr: %i\n", ++i);
 			ft_print_array_str_fd(tmp->cmd, 1);
-			ft_printf("Full Command: %s\n",
-				tmp->full_cmd ? tmp->full_cmd : "NULL");
+			if (tmp->full_cmd)
+				ft_printf("Full Command: %s\n", tmp->full_cmd);
+			else
+				ft_printf("Full Command: NULL\n");
 			ft_printf("In fd: %i\n", tmp->in_fd);
 			ft_printf("Outfile: %i\n", tmp->out_fd);
 			ft_printf("Type: %i\n\n", tmp->type);
