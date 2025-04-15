@@ -8,3 +8,4 @@ sudo apt install libx11-dev
 sudo apt install libreadline-dev
 ```
 work not done 
+work almost done
