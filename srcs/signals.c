@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fureimu <fureimu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pjaguin <pjaguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:52:21 by unmugviolet       #+#    #+#             */
-/*   Updated: 2025/04/11 16:48:00 by fureimu          ###   ########.fr       */
+/*   Updated: 2025/04/15 16:37:21 by pjaguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_handle_signal(int signal)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (signal == SIGTERM)
+	else if (signal == SIGTERM || signal == SIGQUIT)
 	{
 		ft_fprintf(STDOUT_FILENO, "\n");
 		ft_exit_clean(NULL, 1, false);
