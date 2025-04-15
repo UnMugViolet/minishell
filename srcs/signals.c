@@ -36,7 +36,8 @@ static void	ft_disable_echoctl(void)
 */
 static void	ft_handle_signal(int signal)
 {
-	if (!g_sigint_received && signal == SIGINT)
+	printf("%i", signal);
+	if (!g_sigint_received && (signal == SIGINT || signal == SIGQUIT))
 		g_sigint_received = 1;
 	if (signal == SIGINT || signal == SIGCHLD)
 	{
@@ -45,7 +46,7 @@ static void	ft_handle_signal(int signal)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (signal == SIGTERM)
+	else if (signal == SIGTERM || signal == SIGQUIT)
 	{
 		ft_fprintf(STDOUT_FILENO, "\n");
 		ft_exit_clean(NULL, 1, false);
