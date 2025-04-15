@@ -7,4 +7,4 @@ sudo apt install make
 sudo apt install libx11-dev
 sudo apt install libreadline-dev
 ```
-work done
+work almost done
